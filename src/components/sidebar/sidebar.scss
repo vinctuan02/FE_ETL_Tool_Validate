@@ -3,8 +3,10 @@
     top: 0;
     left: 0;
     height: 100vh;
-    width: 320px;
+    width: 300px;
     background-color: #fff;
+    margin: 20px;
+    border-radius: 10px;
 
     &__logo {
         display: grid;
@@ -12,7 +14,8 @@
         height: 120px;
         font-size: 1.5rem;
         font-weight: 700;
-        font-family: 'Mochiy Pop P one', sans-serif;
+        // font-family: 'Mochiy Pop P one', sans-serif;
+        font-family: 'Roboto', sans-serif;
     }
 
     &__menu {
@@ -23,7 +26,7 @@
             align-items: center;
             place-content: flex-start;
             padding: 1rem 3rem;
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-weight: 500;
             color: #555555;
             transition: color 0.3s ease-in-out;

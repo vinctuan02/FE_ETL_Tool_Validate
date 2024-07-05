@@ -1,0 +1,31 @@
+.container-app-layout {
+    padding: 20px 0px 0px 335px;
+
+    .container-header-outlet {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        // border: 1px solid red !important;
+        // height: 1000px;
+        padding: 0 0 10px;
+        // background: #fff;
+        // border-radius: 10px;
+        margin-right: 15px;
+
+        .container-header {
+            // height: 70px;
+            // border: 1px solid red !important;
+            // background: #fff;
+            border-radius: 10px;
+            // padding: 10px;
+        }
+
+        .container-outlet {
+            // border: 1px solid red !important;
+            background-color: #fff;
+            // height: 1000px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    }
+}

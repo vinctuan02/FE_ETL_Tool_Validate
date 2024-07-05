@@ -1,0 +1,24 @@
+.container-update-report {
+    .body-edit {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .form-group {
+            display: flex;
+            align-items: baseline;
+
+            input {
+                margin-left: 10px;
+                flex: 1;
+                border: none;
+                border-bottom: solid 1px #6c757d;
+            }
+        }
+    }
+
+    button:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed !important;
+    }
+}
