@@ -21,7 +21,7 @@ const ModalDelete = (props) => {
     }, [data])
 
 
-    const handleConfirm = async () => {
+    const handleDelete = async () => {
 
         const report = { report_id: data.report_id, reportName: nameReport, fileName: fileName, status: 'true' }
 
@@ -54,6 +54,7 @@ const ModalDelete = (props) => {
                             <input
                                 type="text"
                                 // onChange={(event) => handleChangeFileName(event)}
+                                // bug fix disable change input
                                 defaultValue={fileName || ''}
                             />
                         </div>
@@ -68,9 +69,9 @@ const ModalDelete = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
-                        variant="primary" onClick={handleConfirm}
+                        variant="danger" onClick={handleDelete}
                     >
-                        Confirm
+                        Delete
                     </Button>
                 </Modal.Footer>
             </Modal>

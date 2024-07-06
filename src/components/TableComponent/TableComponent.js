@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
 
 const TableComponent = (props) => {
 
-    const { handleShowModalUpdate, handleShowModalDelete, data, hasAction = false } = props
+    const { handleShowModalUpdate, handleShowModalDelete,
+        handleShowReportDetails, setReportCurent,
+        data, hasAction = false, hasBorder = false
+    } = props
+
+    const [selectedRecord, setSelectedRecord] = useState(null);
 
     if (!data || !data.length) {
         return <div>Dữ liệu không hợp lệ</div>;
@@ -19,8 +24,23 @@ const TableComponent = (props) => {
         handleShowModalDelete(item)
     }
 
+    const handleCellClick = (item, key) => {
+        // console.log(`Clicked on ${key} of record:`, item);
+
+        if (handleShowReportDetails) {
+            handleShowReportDetails(item)
+        }
+
+        if(setReportCurent){
+            setReportCurent(item)
+        }
+
+        // setSelectedRecord(item);
+        // Thực hiện các hành động khác khi click vào từng trường của bản ghi
+    };
+
     return (
-        <Table hover>
+        <Table bordered={hasBorder} hover>
             {/* <table className="db-table"> */}
             <thead>
                 <tr>
@@ -37,11 +57,22 @@ const TableComponent = (props) => {
                 {data.map((rowData, index) => (
                     <tr key={index}>
                         {keys.map((key, index) => (
-                            <td key={index} >{rowData[key]}</td>
+                            <td
+                                onClick={() => handleCellClick(rowData, key)}
+                                style={{
+                                    cursor: 'pointer',
+                                    backgroundColor: selectedRecord === rowData ? '#f0f0f0' : 'inherit'
+                                }}
+                                key={index}
+                            // onClick={() => handleRowClick(rowData)}
+                            >{rowData[key]}</td>
                         ))}
                         {
                             hasAction &&
-                            <td style={{ width: '250px' }}>
+                            <td style={{
+                                width: '250px',
+                                backgroundColor: selectedRecord === rowData ? '#f0f0f0' : 'inherit'
+                            }}>
                                 <button
                                     className='btn btn-warning mx-3'
                                     onClick={() => handleClickEdit(rowData)}
@@ -50,6 +81,17 @@ const TableComponent = (props) => {
                                     className='btn btn-danger mx-3'
                                     onClick={() => handleClickDelete(rowData)}
                                 ><i className='bx bx-trash'></i></button>
+                            </td>
+                        }
+
+                        {
+                            false &&
+                            <td style={{ width: '250px' }}>
+                                <button
+                                    className='btn btn-warning mx-3'
+                                    onClick={() => handleClickEdit(rowData)}
+                                ><i className='bx bx-code-alt'></i>
+                                </button>
                             </td>
                         }
                     </tr>

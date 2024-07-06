@@ -5,10 +5,8 @@ import AppLayout from './components/Layout/AppLayout';
 import InputPage from './pages/InputPage/InputPage';
 import OtherPage from './pages/OtherPage/OtherPage';
 import CreateInput from './pages/CreateInputPage/CreateInput';
-import DataPage from './pages/DataPage/DataPage';
-import DescribePage from './pages/DescribePage/DescribePage';
 import { ToastContainer } from 'react-toastify';
-import ComparePage from './pages/ComparePage/ComparePage';
+import ReportInfoPage from './pages/ReportInfoPage/ReportInfoPage';
 
 function App() {
     return (
@@ -19,9 +17,7 @@ function App() {
                         <Route index element={<InputPage />} />
                         <Route path='/input' element={<InputPage />} />
                         <Route path='/create-input' element={<CreateInput />} />
-                        <Route path='/compare' element={<ComparePage />} />
-                        <Route path='/data' element={<DataPage />} />
-                        <Route path='/describe' element={<DescribePage />} />
+                        <Route path='/report-info' element={<ReportInfoPage />} />
                         <Route path='/other' element={<OtherPage />} />
                     </Route>
                 </Routes>

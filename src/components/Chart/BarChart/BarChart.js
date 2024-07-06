@@ -10,8 +10,8 @@ const MyBarChart = () => (
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="dataSource" fill="#6C9F6A" radius={[10, 10, 0, 0]} />
-            <Bar dataKey="dataSink" fill="#6097A4" radius={[10, 10, 0, 0]} />
+            <Bar dataKey="dataSource" fill="#F7AE1B" radius={[0, 0, 0, 0]} />
+            <Bar dataKey="dataSink" fill="#56E596" radius={[0, 0, 0, 0]} />
         </BarChart>
     </ResponsiveContainer>
 );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TableComponent from '../TableComponent/TableComponent';
 import './ModalPreviewInput.scss'
-import { getReportByReportNameAxios, postCreateReport } from '../../services/ReportService';
+import { bulkCreateReportDetails, getReportByReportNameAxios, postCreateReport } from '../../services/ReportService';
 import { toast } from 'react-toastify';
 
 const { Modal, Button } = require("react-bootstrap")
@@ -31,13 +31,19 @@ const ModalPreviewInput = (props) => {
     }, [nameFileReport])
 
 
-    const handleCompare = async () => {
-
+    const handleInsert = async () => {
         const report = { reportName: nameReport, fileName: nameFileReport, status: 'true' }
-
         const response = await postCreateReport(report)
 
-        if (response.code === 0) {
+        const arrayReportDetails = data.map((item) => ({
+            ...item,
+            report_id: response.data.report_id
+        }));
+
+        const responseBulkCreate = await bulkCreateReportDetails(arrayReportDetails)
+
+
+        if (response.code === 0 && responseBulkCreate.code === 0) {
             toast.success(response.message)
             getReports()
         }
@@ -66,10 +72,10 @@ const ModalPreviewInput = (props) => {
                         value={nameReport}
                     ></input>
                     <Button
-                        variant="primary" onClick={handleCompare}
+                        variant="primary" onClick={handleInsert}
                         disabled={isDisableButton}
                     >
-                        Compare
+                        Insert
                     </Button>
                 </Modal.Footer>
             </Modal>

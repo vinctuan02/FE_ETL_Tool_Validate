@@ -10,7 +10,11 @@ const AppLayout = () => {
                 <Sidebar />
                 <div className="container-header-outlet">
                     <div className="container-header">
-                        <Header />
+                        <div className="header">
+                            <Header />
+                        </div>
+                    </div>
+                    <div style={{ height: '70px' }}>
                     </div>
                     <div className="container-outlet">
                         <Outlet />

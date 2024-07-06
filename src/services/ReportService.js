@@ -1,7 +1,11 @@
 import axios from './customizeAxios'
 
-const getReportsAxios = () => {
-    return axios.get(`report/get-reports`)
+
+// report
+const getReportsAxios = (keySearch) => {
+    return axios.get(`report/get-reports`, {
+        params: keySearch
+    })
 }
 
 const getReportByReportNameAxios = (reportName) => {
@@ -20,12 +24,20 @@ const deleteReport = (report) => {
     return axios.delete(`report/delete-report/${report.report_id}`)
 }
 
+// report detail
+const getReportDetailsBy_report_id = (report_id) => {
+    return axios.get(`/report-details/get-details-by-report_id/${report_id}`)
+}
+
 const countRecordsTB = (input) => {
     return axios.get(`get-count-record-tb`, {
         params: input
     })
 }
 
+const bulkCreateReportDetails = (arrayReportDetails) => {
+    return axios.post(`/report-details/bulk-create-details`, arrayReportDetails)
+}
 
 export {
     getReportsAxios,
@@ -33,5 +45,9 @@ export {
     postCreateReport,
     putUpdateReport,
     deleteReport,
+
+    getReportDetailsBy_report_id,
+    bulkCreateReportDetails,
+
     countRecordsTB
 }

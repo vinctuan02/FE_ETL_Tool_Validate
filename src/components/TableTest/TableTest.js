@@ -74,14 +74,14 @@ const TableTest = ({ data1 }) => {
     const keys = Object.keys(data[0]);
 
     return (
-        <Table striped bordered hover>
+        <Table hover>
             {/* <table className="db-table"> */}
             <thead>
                 <tr align="center">
                     {keys.map((key, index) => (
                         <th key={index}>{key}</th>
                     ))}
-                    <th>Action</th>
+                    {/* <th>Action</th> */}
                 </tr>
             </thead>
             <tbody>
@@ -90,7 +90,7 @@ const TableTest = ({ data1 }) => {
                         {keys.map((key) => (
                             <td >{rowData[key]}</td>
                         ))}
-                        <td style={{ width: '250px' }}>
+                        {/* <td style={{ width: '250px' }}>
                             <button
                                 className='btn btn-warning mx-3'
                             // onClick={() => handleClickEdit(item)}
@@ -99,7 +99,7 @@ const TableTest = ({ data1 }) => {
                                 className='btn btn-danger mx-3'
                             // onClick={() => handleClickDelete(item)}
                             >Delete</button>
-                        </td>
+                        </td> */}
                     </tr>
                 ))}
             </tbody>

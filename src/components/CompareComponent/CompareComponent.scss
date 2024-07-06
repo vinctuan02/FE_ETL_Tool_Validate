@@ -1,0 +1,30 @@
+.container-compare-component {
+    .title-compare-component {
+        /* Style cho tiêu đề */
+    }
+
+    .body-compare {
+        .header-body-compare {
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            /* Style cho phần header của body-compare */
+            div {
+                /* Style cho các div bên trong header-body-compare */
+            }
+        }
+
+        .body-body-compare {
+            display: flex;
+            flex-direction: row;
+
+            /* Style cho phần body của body-compare */
+            div {
+                /* Style cho các div con với width 700px */
+            }
+        }
+    }
+
+}

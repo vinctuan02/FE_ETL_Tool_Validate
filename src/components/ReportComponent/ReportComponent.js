@@ -1,0 +1,181 @@
+import React, { useEffect, useState } from 'react'
+import './ReportComponent.scss'
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import TableComponent from '../../components/TableComponent/TableComponent';
+import { toast } from 'react-toastify';
+import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
+import ModalPreviewInput from '../../components/ModalPreviewInput/ModalPreviewInput';
+import { getReportsAxios } from '../../services/ReportService';
+import ModalUpdate from '../../components/ModalUpdate/ModalUpdate';
+import ModalDelete from '../../components/ModalDelete/ModalDelete';
+import ModalPreviewReportDetails from '../ModalPreviewReportDetails/ModalPreviewReportDetails';
+
+
+const ReportComponent = (props) => {
+
+    const { hasAction = false, hasBorder,setReportCurent } = props
+
+    // danh sách reports
+    const [listReports, setListReports] = useState([])
+
+    // thông tin reports để lưu vào db
+    const [dataReport, setDataReport] = useState({})
+    const [nameFileReport, setNameFileReport] = useState('')
+
+    const [isShowModalPreviewInput, setIsShowModalPreviewInput] = useState(false)
+    const [isShowModalUpdate, setIsShowModalUpdate] = useState(false)
+    const [isShowModalDelete, setIsShowModalDelete] = useState(false)
+    const [isShowModalPreviewReportDetails, setIsShowModalPreviewReportDetails] = useState(false)
+
+    const [dataReportDetails, setDataReportDetails] = useState({})
+
+    const [keySearch, setKeySearch] = useState('')
+
+    useEffect(() => {
+        getReports()
+    }, [])
+
+    useEffect(() => {
+        getReports()
+    }, [keySearch])
+
+    const getReports = async () => {
+        // console.log("fetch");
+        let res = await getReportsAxios({ keySearch: keySearch })
+        if (res && res.data) {
+            setListReports(res.data)
+        }
+    }
+
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+
+        setNameFileReport(file.name)
+
+        if (file.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+            toast.error("Please select a file in CSV or XLSX format");
+            return;
+        }
+
+        if (file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+                let keys = Object.keys(worksheet[0])
+
+                // if (keys[0] !== 'schemaName' || keys[1] !== 'dataSourceName' || keys[2] !== 'dataSinkName') {
+                //     console.log(worksheet);
+                //     worksheet.map((item) => {
+                //         console.log(item);
+                //     })
+                // }
+                setDataReport(worksheet)
+                setIsShowModalPreviewInput(true)
+            };
+            reader.readAsArrayBuffer(file);
+        }
+    };
+
+    const handleOnChangeKeySearch = (event) => {
+        setKeySearch(event.target.value)
+    }
+
+    const handleClose = () => {
+        setIsShowModalPreviewInput(false)
+        setIsShowModalUpdate(false)
+        setIsShowModalDelete(false)
+        setIsShowModalPreviewReportDetails(false)
+        setDataReport({})
+    }
+
+    const handleShowModalUpdate = (item) => {
+        setDataReport(item)
+        setIsShowModalUpdate(true)
+    }
+
+    const handleShowModalDelete = (item) => {
+        setDataReport(item)
+        setIsShowModalDelete(true)
+    }
+
+    const handleShowReportDetails = (item) => {
+        setDataReportDetails(item)
+        setIsShowModalPreviewReportDetails(true)
+    }
+
+
+    return (
+        <div className='container-input-page'>
+            <div className='title'>
+                List reports
+            </div>
+            <div className='container-search-import'>
+                <div className='col-4 my-3'>
+                    <input
+                        className='search'
+                        placeholder='Search report by name ...'
+                        value={keySearch}
+                        onChange={(event) => handleOnChangeKeySearch(event)}
+                    />
+                </div>
+                <div className='import'>
+                    <label
+                        htmlFor='test' className='btn btn-success'
+                    >
+                        <i className="fa-solid fa-download"></i> Import
+                    </label>
+                    <input
+                        id='test' type='file' hidden
+                        onChange={handleFileUpload}
+                    ></input>
+                </div>
+            </div>
+            <div className='container-table-reports'>
+                <TableComponent
+                    data={listReports} hasAction={hasAction}
+                    handleShowModalUpdate={handleShowModalUpdate}
+                    handleShowModalDelete={handleShowModalDelete}
+                    handleShowReportDetails={handleShowReportDetails}
+                    setReportCurent={setReportCurent}
+                />
+            </div>
+
+            <ModalPreviewInput
+                show={isShowModalPreviewInput}
+                hasAction={false}
+                handleClose={handleClose}
+                data={dataReport}
+                nameFileReport={nameFileReport}
+                getReports={getReports}
+            />
+
+            <ModalUpdate
+                show={isShowModalUpdate}
+                handleClose={handleClose}
+                data={dataReport}
+                getReports={getReports}
+            />
+
+            <ModalDelete
+                show={isShowModalDelete}
+                handleClose={handleClose}
+                data={dataReport}
+                getReports={getReports}
+            />
+
+            <ModalPreviewReportDetails
+                show={isShowModalPreviewReportDetails}
+                handleClose={handleClose}
+                data={dataReportDetails}
+                hasBorder={hasBorder}
+            />
+        </div>
+    )
+}
+
+export default ReportComponent
