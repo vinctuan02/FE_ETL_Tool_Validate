@@ -19,9 +19,6 @@ const AppLayout = () => {
                     <div className="container-outlet">
                         <Outlet />
                     </div>
-                    {/* <div className="container-footer"> */}
-                    {/* <Outlet /> */}
-                    {/* </div> */}
                 </div>
             </div>
         </>

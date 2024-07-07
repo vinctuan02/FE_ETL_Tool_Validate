@@ -12,11 +12,14 @@ const ReportInfoPage = () => {
     const [isShowModalReport, setIsShowModalReport] = useState(false)
 
     const [reportCurrent, setReportCurent] = useState('')
+    const [reportDetailsCurrent, setReportDetailsCurrent] = useState('')
 
 
     useEffect(() => {
-        console.log("reportCurrent: ", reportCurrent);
-    }, [reportCurrent])
+        if (reportDetailsCurrent) {
+            console.log(reportDetailsCurrent);
+        }
+    }, [reportDetailsCurrent])
 
     const DataComponent = () => <div>Data Component</div>;
     const DescribeComponent = () => <div>Describe Component</div>;
@@ -37,8 +40,8 @@ const ReportInfoPage = () => {
         setIsShowModalReport(false)
         if (reportCurrent) {
             let res = await getReportDetailsBy_report_id(reportCurrent.report_id)
+            setReportDetailsCurrent(res.data)
         }
-        // console.log(reportCurrent);
     }
 
     return (
@@ -74,7 +77,11 @@ const ReportInfoPage = () => {
             </div>
             <div className='body-info'>
                 {/* <TableTest /><div> */}
-                {selectedButton === 'compare' && <CompareComponent />}
+                {selectedButton === 'compare' &&
+                    <CompareComponent
+                        reportDetailsCurrent={reportDetailsCurrent}
+                    />
+                }
                 {selectedButton === 'data' && <DataComponent />}
                 {selectedButton === 'describe' && <DescribeComponent />}
             </div>
