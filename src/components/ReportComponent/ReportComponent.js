@@ -15,8 +15,8 @@ const ReportComponent = (props) => {
         keySearch,
         handleOnChangeKeySearch
     } = useContext(AppContext)
-
-    const { hasAction = false } = props
+    
+    const { hasAction, hasShowRowInfo } = props
 
     useEffect(() => {
         getReports()
@@ -84,6 +84,7 @@ const ReportComponent = (props) => {
                 <TableComponent
                     data={listReports} hasAction={hasAction}
                     hasSelectRow={true}
+                    hasShowRowInfo={hasShowRowInfo}
                 />
             </div>
         </div>

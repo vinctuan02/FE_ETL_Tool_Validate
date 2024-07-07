@@ -1,24 +1,29 @@
 import { Button, Modal } from "react-bootstrap";
 import './ModalReport.scss'
 import ReportComponent from "../ReportComponent/ReportComponent";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext";;
 
 const ModalReport = (props) => {
 
-    const { setReportCurent, handleOke, handleClose, show, hasAction = false } = props
+    const { isShowModalReport, handleCloseModal, currentSelect } = useContext(AppContext)
+
+
+    const handleClickCompare = () => {
+
+        handleCloseModal()
+    }
 
     return (
         <div>
-            <Modal className='container-modal-report' show={show} onHide={handleClose}>
+            <Modal className='container-modal-report' show={isShowModalReport} onHide={handleCloseModal}>
                 <Modal.Body>
-                    <ReportComponent
-                        hasAction={hasAction}
-                        setReportCurent={setReportCurent}
-                    />
+                    <ReportComponent />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
                         variant="primary"
-                        onClick={handleOke}
+                        onClick={handleClickCompare}
                     >
                         Oke
                     </Button>

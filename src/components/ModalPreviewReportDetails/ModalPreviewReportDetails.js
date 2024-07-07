@@ -29,24 +29,6 @@ const ModalPreviewReportDetails = (props) => {
 
 
     const handleCompare = async () => {
-        // const report = { reportName: nameReport, fileName: nameFileReport, status: 'true' }
-        // const response = await postCreateReport(report)
-
-        // const arrayReportDetails = data.map((item) => ({
-        //     ...item,
-        //     report_id: response.data.report_id
-        // }));
-
-        // const responseBulkCreate = await bulkCreateReportDetails(arrayReportDetails)
-
-
-        // if (response.code === 0 && responseBulkCreate.code === 0) {
-        //     toast.success(response.message)
-        //     getReports()
-        // }
-
-        // console.log("report name: ", reportName);
-
         handleCloseModal()
     }
 

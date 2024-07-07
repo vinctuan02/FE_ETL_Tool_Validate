@@ -1,7 +1,4 @@
 .container-compare-component {
-    .title-compare-component {
-        /* Style cho tiêu đề */
-    }
 
     .body-compare {
         .header-body-compare {
@@ -19,6 +16,26 @@
         .body-body-compare {
             display: flex;
             flex-direction: row;
+
+            gap: 30px;
+
+            // border: solid red 1px;
+
+            .body-bar-char {
+                // border: solid 2px;
+                width: 50%;
+                height: 380px;
+
+                border-radius: 4px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+                padding-bottom: 50px;
+
+                .bar-char {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
 
             /* Style cho phần body của body-compare */
             div {

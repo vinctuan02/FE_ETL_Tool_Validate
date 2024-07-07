@@ -1,16 +1,26 @@
 import React, { useContext, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { AppContext } from '../../context/AppContext';
+import { ReportInfoContext } from '../../context/ReportInfoContext';
 
 const TableComponent = (props) => {
 
-    const { data, hasAction = false, hasBorder = false, hasSelectRow = false } = props
+    const { data, hasAction = false,
+        hasBorder = false,
+        hasSelectRow = false,
+        hasShowRowInfo = false
+    } = props
 
     const {
         handleShowModalUpdate,
         handleShowModalDelete,
         handleShowReportDetails,
+        setCurrentSelect
     } = useContext(AppContext)
+
+    const {
+
+    } = useContext(ReportInfoContext)
 
     const [selectedRecord, setSelectedRecord] = useState(null);
 
@@ -32,7 +42,12 @@ const TableComponent = (props) => {
         // console.log(`Clicked on ${key} of record:`, item);
 
         if (hasSelectRow) {
-            handleShowReportDetails(item)
+            if (hasShowRowInfo) {
+                handleShowReportDetails(item)
+            }
+            if (setCurrentSelect) {
+                setCurrentSelect(item)
+            }
             setSelectedRecord(item);
         }
         // Thực hiện các hành động khác khi click vào từng trường của bản ghi

@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import LinesChart from '../../components/Chart/LinesChart/LinesChart'
 import MyBarChart from '../../components/Chart/BarChart/BarChart'
 import './CompareComponent.scss'
-import { countRecordsTB } from '../../services/ReportService'
+import { countRecordsTB, getReportDetailsBy_report_id } from '../../services/ReportService'
+import { AppContext } from '../../context/AppContext'
 
 const CompareComponent = (props) => {
-    const { reportDetailsCurrent = [] } = props
-
     const [dataChart, setDataChart] = useState([])
+    const {
+        currentSelect, isShowModalReport,
+        reportDetailsCurrent, setReportDetailsCurrent
+    } = useContext(AppContext)
 
-    // reportDetailsCurrent && console.log("reportDetailsCurrent: ", reportDetailsCurrent);
-
-
-    const details = [
-        { detail_id: 25, report_id: 39, schemaName: 'vinc02', dataSourceName: 'facebook', dataSinkName: 'users2' },
-        { detail_id: 26, report_id: 39, schemaName: 'vinc02', dataSourceName: 'facebook', dataSinkName: 'users3' },
-        { detail_id: 27, report_id: 39, schemaName: 'vinc02', dataSourceName: 'facebook', dataSinkName: 'users4' },
-        { detail_id: 28, report_id: 39, schemaName: 'vinc02', dataSourceName: 'facebook', dataSinkName: 'youtube' }
-    ];
+    useEffect(() => {
+        const fetchData = async () => {
+            if (currentSelect && currentSelect.report_id && isShowModalReport === false) {
+                const res = await getReportDetailsBy_report_id(currentSelect?.report_id)
+                setReportDetailsCurrent(res.data)
+            }
+        }
+        fetchData()
+    }, [currentSelect, isShowModalReport])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,12 +29,6 @@ const CompareComponent = (props) => {
         };
         fetchData();
     }, [reportDetailsCurrent]);
-
-    // const data = [
-    //     { name: 'Schema1', dataSource: 4000, dataSink: 2400 },
-    //     { name: 'Schema1', dataSource: 3000, dataSink: 1398 },
-    //     { name: 'Schema1', dataSource: 2000, dataSink: 9800 },
-    // ]
 
     let countRecord = async (nameDB, nameTB) => {
         let input = { nameDB, nameTB }
@@ -69,16 +66,22 @@ const CompareComponent = (props) => {
         <div className='container-compare-component'>
             <div className='body-compare'>
                 <div className='body-body-compare'>
-                    <div >
+                    <div className='body-bar-char'>
                         <div>Total records</div>
-                        <MyBarChart
-                            reportDetailsCurrent={reportDetailsCurrent}
-                            data={dataChart}
-                        />
+                        <div className='bar-char'>
+                            <MyBarChart
+                                // reportDetailsCurrent={reportDetailsCurrent}
+                                data={dataChart}
+                            />
+                        </div>
                     </div>
-                    <div >
+                    <div className='body-bar-char'>
                         <div>Total sum of []</div>
-                        {/* <MyBarChart /> */}
+                        <div className='bar-char'>
+                            <MyBarChart
+                                data={dataChart}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

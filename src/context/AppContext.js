@@ -18,9 +18,15 @@ export const AppProvider = ({ children }) => {
     const [isShowModalPreviewReportDetails, setIsShowModalPreviewReportDetails] = useState(false)
     const [dataPreviewReportDetails, setDataPreviewReportDetails] = useState()
 
+    const [isShowModalReport, setIsShowModalReport] = useState(false)
+
     const [listReports, setListReports] = useState([])
 
     const [keySearch, setKeySearch] = useState('')
+
+    const [currentSelect, setCurrentSelect] = useState({})
+
+    const [reportDetailsCurrent, setReportDetailsCurrent] = useState()
 
     useEffect(() => {
         getReports()
@@ -38,6 +44,7 @@ export const AppProvider = ({ children }) => {
         setIsShowModalUpdate(false)
         setIsShowModalDelete(false)
         setIsShowModalPreviewReportDetails(false)
+        setIsShowModalReport(false)
     }
 
     const handleCloseModal = (keyModal = 'all') => {
@@ -47,6 +54,7 @@ export const AppProvider = ({ children }) => {
                 setIsShowModalUpdate(false)
                 setIsShowModalDelete(false)
                 setIsShowModalPreviewReportDetails(false)
+                setIsShowModalReport(false)
                 break;
             case 'previewInput':
                 setIsShowModalPreviewInput(false)
@@ -71,6 +79,10 @@ export const AppProvider = ({ children }) => {
         setIsShowModalPreviewReportDetails(true)
     }
 
+    let handleOpenModalReport = () => {
+        setIsShowModalReport(true)
+    }
+
     const handleOnChangeKeySearch = (event) => {
         setKeySearch(event.target.value)
     }
@@ -89,9 +101,15 @@ export const AppProvider = ({ children }) => {
         isShowModalPreviewReportDetails, setIsShowModalPreviewReportDetails,
         handleShowReportDetails, dataPreviewReportDetails,
 
+        isShowModalReport, setIsShowModalReport,
+        handleOpenModalReport,
+
         listReports, getReports,
         keySearch,
         handleOnChangeKeySearch,
+
+        currentSelect, setCurrentSelect,
+        reportDetailsCurrent, setReportDetailsCurrent,
 
         handleClose,
         handleCloseModal

@@ -11,6 +11,7 @@ import ModalPreviewInput from './components/ModalPreviewInput/ModalPreviewInput'
 import ModalUpdate from './components/ModalUpdate/ModalUpdate';
 import ModalDelete from './components/ModalDelete/ModalDelete';
 import ModalPreviewReportDetails from './components/ModalPreviewReportDetails/ModalPreviewReportDetails';
+import ModalReport from './components/ModalReport/ModalReport';
 
 function App() {
     return (
@@ -30,7 +31,8 @@ function App() {
             <ModalPreviewInput />
             <ModalUpdate />
             <ModalDelete />
-            <ModalPreviewReportDetails/>
+            <ModalPreviewReportDetails />
+            <ModalReport />
 
 
             <ToastContainer
