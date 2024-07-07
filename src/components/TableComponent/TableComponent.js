@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Table } from 'react-bootstrap';
+import { AppContext } from '../../context/AppContext';
 
 const TableComponent = (props) => {
 
-    const { handleShowModalUpdate, handleShowModalDelete,
-        handleShowReportDetails, setReportCurent,
-        data, hasAction = false, hasBorder = false
-    } = props
+    const { data, hasAction = false, hasBorder = false, hasSelectRow = false } = props
+
+    const {
+        handleShowModalUpdate,
+        handleShowModalDelete,
+        handleShowReportDetails,
+    } = useContext(AppContext)
 
     const [selectedRecord, setSelectedRecord] = useState(null);
 
@@ -27,21 +31,15 @@ const TableComponent = (props) => {
     const handleCellClick = (item, key) => {
         // console.log(`Clicked on ${key} of record:`, item);
 
-        if (handleShowReportDetails) {
+        if (hasSelectRow) {
             handleShowReportDetails(item)
+            setSelectedRecord(item);
         }
-
-        if(setReportCurent){
-            setReportCurent(item)
-        }
-
-        // setSelectedRecord(item);
         // Thực hiện các hành động khác khi click vào từng trường của bản ghi
     };
 
     return (
         <Table bordered={hasBorder} hover>
-            {/* <table className="db-table"> */}
             <thead>
                 <tr>
                     {keys.map((key, index) => (
@@ -97,7 +95,6 @@ const TableComponent = (props) => {
                     </tr>
                 ))}
             </tbody>
-            {/* </table> */}
         </Table>
 
     );

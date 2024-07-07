@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import TableComponent from '../TableComponent/TableComponent';
 import './ModalPreviewInput.scss'
 import { bulkCreateReportDetails, getReportByReportNameAxios, postCreateReport } from '../../services/ReportService';
 import { toast } from 'react-toastify';
+import { AppContext } from '../../context/AppContext';
 
 const { Modal, Button } = require("react-bootstrap")
 
 const ModalPreviewInput = (props) => {
-
-    const { handleClose, show, data, nameFileReport, getReports } = props
+    const { isShowModalPreviewInput, handleCloseModal, nameFileReport = '', dataReport, getReports } = useContext(AppContext)
 
     const [nameReport, setNameReport] = useState('')
     const [isDisableButton, setIsDisableButton] = useState(false)
@@ -35,7 +35,7 @@ const ModalPreviewInput = (props) => {
         const report = { reportName: nameReport, fileName: nameFileReport, status: 'true' }
         const response = await postCreateReport(report)
 
-        const arrayReportDetails = data.map((item) => ({
+        const arrayReportDetails = dataReport.map((item) => ({
             ...item,
             report_id: response.data.report_id
         }));
@@ -48,7 +48,7 @@ const ModalPreviewInput = (props) => {
             getReports()
         }
 
-        handleClose()
+        handleCloseModal()
     }
 
     const handleOnChangeInputNameReport = (event) => {
@@ -57,12 +57,12 @@ const ModalPreviewInput = (props) => {
 
     return (
         <>
-            <Modal className='container-preview-input' show={show} onHide={handleClose}>
+            <Modal className='container-preview-input' show={isShowModalPreviewInput} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Import report</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <TableComponent data={data} />
+                    <TableComponent data={dataReport} />
                 </Modal.Body>
                 <Modal.Footer>
                     <label className="">Save report as name: </label>

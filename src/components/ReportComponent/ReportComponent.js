@@ -1,57 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './ReportComponent.scss'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import TableComponent from '../../components/TableComponent/TableComponent';
 import { toast } from 'react-toastify';
-import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
-import ModalPreviewInput from '../../components/ModalPreviewInput/ModalPreviewInput';
-import { getReportsAxios } from '../../services/ReportService';
-import ModalUpdate from '../../components/ModalUpdate/ModalUpdate';
-import ModalDelete from '../../components/ModalDelete/ModalDelete';
-import ModalPreviewReportDetails from '../ModalPreviewReportDetails/ModalPreviewReportDetails';
+import { AppContext } from '../../context/AppContext';
 
 
 const ReportComponent = (props) => {
 
-    const { hasAction = false, hasBorder,setReportCurent } = props
+    const {
+        setIsShowModalPreviewInput, setDataReport, setNameFileReport,
+        getReports, listReports,
+        keySearch,
+        handleOnChangeKeySearch
+    } = useContext(AppContext)
 
-    // danh sách reports
-    const [listReports, setListReports] = useState([])
-
-    // thông tin reports để lưu vào db
-    const [dataReport, setDataReport] = useState({})
-    const [nameFileReport, setNameFileReport] = useState('')
-
-    const [isShowModalPreviewInput, setIsShowModalPreviewInput] = useState(false)
-    const [isShowModalUpdate, setIsShowModalUpdate] = useState(false)
-    const [isShowModalDelete, setIsShowModalDelete] = useState(false)
-    const [isShowModalPreviewReportDetails, setIsShowModalPreviewReportDetails] = useState(false)
-
-    const [dataReportDetails, setDataReportDetails] = useState({})
-
-    const [keySearch, setKeySearch] = useState('')
+    const { hasAction = false } = props
 
     useEffect(() => {
         getReports()
     }, [])
 
-    useEffect(() => {
-        getReports()
-    }, [keySearch])
-
-    const getReports = async () => {
-        // console.log("fetch");
-        let res = await getReportsAxios({ keySearch: keySearch })
-        if (res && res.data) {
-            setListReports(res.data)
-        }
-    }
-
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
-
-        setNameFileReport(file.name)
 
         if (file.type !== "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
             toast.error("Please select a file in CSV or XLSX format");
@@ -74,40 +46,13 @@ const ReportComponent = (props) => {
                 //         console.log(item);
                 //     })
                 // }
+                setNameFileReport(file.name)
                 setDataReport(worksheet)
                 setIsShowModalPreviewInput(true)
             };
             reader.readAsArrayBuffer(file);
         }
     };
-
-    const handleOnChangeKeySearch = (event) => {
-        setKeySearch(event.target.value)
-    }
-
-    const handleClose = () => {
-        setIsShowModalPreviewInput(false)
-        setIsShowModalUpdate(false)
-        setIsShowModalDelete(false)
-        setIsShowModalPreviewReportDetails(false)
-        setDataReport({})
-    }
-
-    const handleShowModalUpdate = (item) => {
-        setDataReport(item)
-        setIsShowModalUpdate(true)
-    }
-
-    const handleShowModalDelete = (item) => {
-        setDataReport(item)
-        setIsShowModalDelete(true)
-    }
-
-    const handleShowReportDetails = (item) => {
-        setDataReportDetails(item)
-        setIsShowModalPreviewReportDetails(true)
-    }
-
 
     return (
         <div className='container-input-page'>
@@ -138,42 +83,9 @@ const ReportComponent = (props) => {
             <div className='container-table-reports'>
                 <TableComponent
                     data={listReports} hasAction={hasAction}
-                    handleShowModalUpdate={handleShowModalUpdate}
-                    handleShowModalDelete={handleShowModalDelete}
-                    handleShowReportDetails={handleShowReportDetails}
-                    setReportCurent={setReportCurent}
+                    hasSelectRow={true}
                 />
             </div>
-
-            <ModalPreviewInput
-                show={isShowModalPreviewInput}
-                hasAction={false}
-                handleClose={handleClose}
-                data={dataReport}
-                nameFileReport={nameFileReport}
-                getReports={getReports}
-            />
-
-            <ModalUpdate
-                show={isShowModalUpdate}
-                handleClose={handleClose}
-                data={dataReport}
-                getReports={getReports}
-            />
-
-            <ModalDelete
-                show={isShowModalDelete}
-                handleClose={handleClose}
-                data={dataReport}
-                getReports={getReports}
-            />
-
-            <ModalPreviewReportDetails
-                show={isShowModalPreviewReportDetails}
-                handleClose={handleClose}
-                data={dataReportDetails}
-                hasBorder={hasBorder}
-            />
         </div>
     )
 }

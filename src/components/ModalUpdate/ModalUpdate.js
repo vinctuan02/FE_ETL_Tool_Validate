@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import './ModalUpdate.scss'
 import { getReportByReportNameAxios, putUpdateReport } from '../../services/ReportService';
 import { toast } from 'react-toastify';
+import { AppContext } from '../../context/AppContext';
 
 const { Modal, Button } = require("react-bootstrap")
 
 const ModalUpdate = (props) => {
 
-    const { handleClose, show, data, getReports } = props
+    const { handleCloseModal, dataUpdate, isShowModalUpdate, getReports } = useContext(AppContext)
 
     const [nameReport, setNameReport] = useState('')
     const [fileName, setFileName] = useState('')
@@ -20,7 +21,7 @@ const ModalUpdate = (props) => {
         const fetchData = async () => {
             const data = await getReportByReportNameAxios(nameReport)
 
-            if (show && data && data.isExist) {
+            if (isShowModalUpdate && data && data.isExist) {
                 data.isExist === 'true' && toast.error("Report name is exist")
                 setIsDisableButton(data.isExist === 'true' ? true : false)
             }
@@ -30,15 +31,15 @@ const ModalUpdate = (props) => {
     }, [nameReport])
 
     useEffect(() => {
-        setNameReport(data.reportName)
-        setFileName(data.fileName)
-        setStatus(data.status)
-    }, [data])
+        setNameReport(dataUpdate?.reportName)
+        setFileName(dataUpdate?.fileName)
+        setStatus(dataUpdate?.status)
+    }, [dataUpdate])
 
 
     const handleConfirm = async () => {
 
-        const report = { report_id: data.report_id, reportName: nameReport, fileName: fileName, status: 'true' }
+        const report = { report_id: dataUpdate.report_id, reportName: nameReport, fileName: fileName, status: 'true' }
 
         const response = await putUpdateReport(report)
 
@@ -47,7 +48,7 @@ const ModalUpdate = (props) => {
             getReports()
         }
 
-        handleClose()
+        handleCloseModal()
     }
 
     const handleChangeReportName = (event) => {
@@ -55,7 +56,7 @@ const ModalUpdate = (props) => {
     }
 
     const handleChangeFileName = (event) => {
-        setFileName(event.target.value)
+        // setFileName()
     }
     const handleChangeStatus = (event) => {
         setStatus(event.target.value)
@@ -63,7 +64,7 @@ const ModalUpdate = (props) => {
 
     return (
         <>
-            <Modal className='container-update-report' show={show} onHide={handleClose}>
+            <Modal className='container-update-report' show={isShowModalUpdate} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Report</Modal.Title>
                 </Modal.Header>
@@ -81,8 +82,8 @@ const ModalUpdate = (props) => {
                             <div className="form-label">File name: </div>
                             <input
                                 type="text"
-                                // onChange={(event) => handleChangeFileName(event)}
-                                defaultValue={fileName || ''}
+                                onChange={(event) => handleChangeFileName(event)}
+                                value={fileName || ''}
                             />
                         </div>
                         <div className="form-group">

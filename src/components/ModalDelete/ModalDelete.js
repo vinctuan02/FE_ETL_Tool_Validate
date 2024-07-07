@@ -1,29 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import './ModalDelete.scss'
 import { deleteReport, getReportByReportNameAxios, putUpdateReport } from '../../services/ReportService';
 import { toast } from 'react-toastify';
+import { AppContext } from '../../context/AppContext';
 
 const { Modal, Button } = require("react-bootstrap")
 
 const ModalDelete = (props) => {
-
-    const { handleClose, show, data, getReports } = props
+    const { handleCloseModal, dataDelete, isShowModalDelete, getReports } = useContext(AppContext)
 
     const [nameReport, setNameReport] = useState('')
     const [fileName, setFileName] = useState('')
     const [status, setStatus] = useState('')
 
     useEffect(() => {
-        setNameReport(data.reportName)
-        setFileName(data.fileName)
-        setStatus(data.status)
-    }, [data])
+        setNameReport(dataDelete?.reportName)
+        setFileName(dataDelete?.fileName)
+        setStatus(dataDelete?.status)
+    }, [dataDelete])
 
 
     const handleDelete = async () => {
 
-        const report = { report_id: data.report_id, reportName: nameReport, fileName: fileName, status: 'true' }
+        const report = { report_id: dataDelete.report_id, reportName: nameReport, fileName: fileName, status: 'true' }
 
         const response = await deleteReport(report)
 
@@ -31,12 +31,12 @@ const ModalDelete = (props) => {
             toast.success("Delete report oke")
             getReports()
         }
-        handleClose()
+        handleCloseModal()
     }
 
     return (
         <>
-            <Modal className='container-update-report' show={show} onHide={handleClose}>
+            <Modal className='container-update-report' show={isShowModalDelete} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Delete Report</Modal.Title>
                 </Modal.Header>

@@ -8,7 +8,7 @@ const InputPage = () => {
         <>
             <div className='container-input-page'>
                 <ReportComponent
-                    hasAction={true}
+                hasAction={true}
                 />
             </div>
         </>

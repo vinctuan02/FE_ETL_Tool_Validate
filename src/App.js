@@ -7,6 +7,10 @@ import OtherPage from './pages/OtherPage/OtherPage';
 import CreateInput from './pages/CreateInputPage/CreateInput';
 import { ToastContainer } from 'react-toastify';
 import ReportInfoPage from './pages/ReportInfoPage/ReportInfoPage';
+import ModalPreviewInput from './components/ModalPreviewInput/ModalPreviewInput';
+import ModalUpdate from './components/ModalUpdate/ModalUpdate';
+import ModalDelete from './components/ModalDelete/ModalDelete';
+import ModalPreviewReportDetails from './components/ModalPreviewReportDetails/ModalPreviewReportDetails';
 
 function App() {
     return (
@@ -22,6 +26,13 @@ function App() {
                     </Route>
                 </Routes>
             </BrowserRouter>
+
+            <ModalPreviewInput />
+            <ModalUpdate />
+            <ModalDelete />
+            <ModalPreviewReportDetails/>
+
+
             <ToastContainer
                 position="top-right"
                 autoClose={3000}

@@ -1,25 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import TableComponent from '../TableComponent/TableComponent';
 import './ModalPreviewReportDetails.scss'
-import { bulkCreateReportDetails, getReportByReportNameAxios, getReportDetailsBy_report_id, postCreateReport } from '../../services/ReportService';
-import { toast } from 'react-toastify';
+import { getReportDetailsBy_report_id } from '../../services/ReportService';
+import { AppContext } from '../../context/AppContext';
 
 const { Modal, Button } = require("react-bootstrap")
 
 const ModalPreviewReportDetails = (props) => {
 
-    const { handleClose, show, data } = props
+    const { handleCloseModal, dataPreviewReportDetails, isShowModalPreviewReportDetails } = useContext(AppContext)
 
     const [reportName, setReportName] = useState('')
     const [dataReportDetails, setDataReportDetails] = useState({})
-    // const [isDisableButton, setIsDisableButton] = useState(false)
 
-    const report_id = data.report_id
+    const report_id = dataPreviewReportDetails?.report_id
 
     useEffect(() => {
-        setReportName(data.reportName)
+        setReportName(dataPreviewReportDetails?.reportName)
         fetchReportDetails(report_id)
-    }, [data])
+    }, [dataPreviewReportDetails])
 
     const fetchReportDetails = async (id) => {
         if (id) {
@@ -48,17 +47,19 @@ const ModalPreviewReportDetails = (props) => {
 
         // console.log("report name: ", reportName);
 
-        handleClose()
+        handleCloseModal()
     }
 
     return (
         <>
-            <Modal className='container-preview-report-details' show={show} onHide={handleClose}>
+            <Modal className='container-preview-report-details' show={isShowModalPreviewReportDetails} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Report: {reportName} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <TableComponent data={dataReportDetails} hasBorder={true} />
+                    <TableComponent
+                        data={dataReportDetails} hasBorder={true}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
