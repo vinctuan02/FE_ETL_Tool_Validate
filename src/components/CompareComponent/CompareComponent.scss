@@ -1,17 +1,22 @@
 .container-compare-component {
 
     .body-compare {
-        .header-body-compare {
+        // .header-body-compare {
 
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+        //     display: flex;
+        //     flex-direction: row;
+        //     justify-content: space-between;
 
-            /* Style cho phần header của body-compare */
-            div {
-                /* Style cho các div bên trong header-body-compare */
-            }
-        }
+        //     /* Style cho phần header của body-compare */
+        //     div {
+        //         /* Style cho các div bên trong header-body-compare */
+        //     }
+        // }
+
+
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
 
         .body-body-compare {
             display: flex;
@@ -29,12 +34,20 @@
                 border-radius: 4px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 padding: 10px;
+                padding-left: -10px;
                 padding-bottom: 50px;
+                transition: transform 0.3s ease-in-out;
 
                 .bar-char {
                     width: 100%;
                     height: 100%;
                 }
+            }
+
+            .body-bar-char:hover {
+                transform: scale(1.01);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                /* Tăng kích thước lên 5% khi hover */
             }
 
             /* Style cho phần body của body-compare */

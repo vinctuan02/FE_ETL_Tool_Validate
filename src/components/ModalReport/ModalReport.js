@@ -10,7 +10,6 @@ const ModalReport = (props) => {
 
 
     const handleClickCompare = () => {
-
         handleCloseModal()
     }
 

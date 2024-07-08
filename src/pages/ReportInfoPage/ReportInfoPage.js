@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import { getReportDetailsBy_report_id } from '../../services/ReportService';
 import { AppContext } from '../../context/AppContext';
 import { ReportInfoContext, ReportProvider } from '../../context/ReportInfoContext';
+import SelectComponent from '../../components/SelectComponent/SelectComponent';
 
 const ReportInfoPage = () => {
 
@@ -54,11 +55,21 @@ const ReportInfoPage = () => {
                         </button>
                     </div>
 
-                    <div>
+                    <div className='select-report'>
+                        <div>
+                            {/* <SelectComponent className='select-table' /> */}
+                        </div>
                         <Button
                             variant="success"
                             onClick={(handleOpenModalReport)}
-                        >List Reports <i className='bx bx-chevron-down'></i></Button>
+                        >
+                            {currentSelect && currentSelect.reportName ? (
+                                <span>Report: {currentSelect.reportName}</span>
+                            ) : (
+                                <span>List Reports</span>
+                            )}
+                            <i className='bx bx-chevron-down'></i>
+                        </Button>
                     </div>
                 </div>
                 <div className='body-info'>

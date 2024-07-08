@@ -1,0 +1,33 @@
+.date-picker-container {
+    display: flex;
+    // align-items: left;
+    // justify-content: left;
+    // margin-bottom: 20px;
+    justify-content: flex-end;
+    gap: 10px;
+    /* Khoảng cách giữa các thẻ */
+
+    label {
+        margin-right: 5px;
+    }
+
+    .react-datepicker-wrapper {
+        width: auto;
+    }
+
+    .react-datepicker__input-container input {
+        width: 80px;
+        height: 25px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #333;
+        cursor: pointer;
+    }
+}
+
+.react-datepicker-popper {
+    z-index: 10000;
+    /* Đảm bảo DatePicker xuất hiện trên cùng */
+}

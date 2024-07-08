@@ -6,7 +6,18 @@
         .nav-info {
             .btn-info1 {
                 padding: 7px 20px !important;
+                transition: transform 0.3s ease-in-out;
             }
+
+            .btn-info1:hover {
+                transform: scale(1.05);
+                /* Tăng kích thước lên 5% khi hover */
+            }
+        }
+
+        .select-report{
+            display: flex;
+            flex-direction: row;
         }
     }
 
