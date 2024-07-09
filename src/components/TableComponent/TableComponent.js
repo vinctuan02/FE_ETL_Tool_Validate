@@ -46,6 +46,7 @@ const TableComponent = (props) => {
                 handleShowReportDetails(item)
             }
             if (setCurrentSelect) {
+                // console.log('set current select', item);
                 setCurrentSelect(item)
             }
             setSelectedRecord(item);

@@ -1,6 +1,19 @@
 import axios from './customizeAxios'
 
 
+// tables
+const countRecordsTB = (input) => {
+    return axios.get(`get-count-record-tb`, {
+        params: input
+    })
+}
+
+const getTable = (input) => {
+    return axios.get(`get-table`, {
+        params: input
+    })
+}
+
 // report
 const getReportsAxios = (keySearch) => {
     return axios.get(`report/get-reports`, {
@@ -29,12 +42,6 @@ const getReportDetailsBy_report_id = (report_id) => {
     return axios.get(`/report-details/get-details-by-report_id/${report_id}`)
 }
 
-const countRecordsTB = (input) => {
-    return axios.get(`get-count-record-tb`, {
-        params: input
-    })
-}
-
 const bulkCreateReportDetails = (arrayReportDetails) => {
     return axios.post(`/report-details/bulk-create-details`, arrayReportDetails)
 }
@@ -49,5 +56,6 @@ export {
     getReportDetailsBy_report_id,
     bulkCreateReportDetails,
 
-    countRecordsTB
+    countRecordsTB,
+    getTable
 }

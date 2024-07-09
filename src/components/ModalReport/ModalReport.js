@@ -17,7 +17,9 @@ const ModalReport = (props) => {
         <div>
             <Modal className='container-modal-report' show={isShowModalReport} onHide={handleCloseModal}>
                 <Modal.Body>
-                    <ReportComponent />
+                    <ReportComponent
+                        hasShowRowInfo={true}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button

@@ -15,45 +15,63 @@
 
 
         display: flex;
-        flex-direction: column;
-        gap: 40px;
+        flex-direction: row;
+        gap: 30px;
 
-        .body-body-compare {
+        .left {
+            // border: 1px solid red;
+            width: 60%;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
+            gap: 20px;
+            margin-left: 10px;
 
-            gap: 30px;
-
-            // border: solid red 1px;
-
-            .body-bar-char {
-                // border: solid 2px;
-                width: 50%;
-                height: 380px;
-
-                border-radius: 4px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            .row {
                 padding: 10px;
-                padding-left: -10px;
-                padding-bottom: 50px;
+                // border: 1px solid red;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 transition: transform 0.3s ease-in-out;
 
-                .bar-char {
-                    width: 100%;
-                    height: 100%;
+                .title {
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: #333;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    margin-bottom: 10px;
                 }
+
+                .body {}
             }
 
-            .body-bar-char:hover {
+            .row:hover {
                 transform: scale(1.01);
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                /* Tăng kích thước lên 5% khi hover */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        .right {
+            width: 40%;
+
+            // border: 1px solid red;
+            padding: 10px;
+
+            margin-right: 5px;
+
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+            .title {
+                font-size: 16px;
+                font-weight: bold;
+                color: #333;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
             }
 
-            /* Style cho phần body của body-compare */
-            div {
-                /* Style cho các div con với width 700px */
-            }
+            .body {}
         }
     }
 

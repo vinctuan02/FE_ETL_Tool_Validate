@@ -4,19 +4,21 @@ import { countRecordsTB, getReportDetailsBy_report_id } from '../../services/Rep
 import { AppContext } from '../../context/AppContext'
 import ColumnChart from '../Chart/ColumnChart/ColumnChart'
 import SplineChart from '../Chart/SplineChart/SplineChart'
+import TableComponent from '../TableComponent/TableComponent'
 
 const CompareComponent = (props) => {
     // const [dataChart, setDataChart] = useState([])
 
     const [dataColumnChart, setDataColumnChart] = useState({})
+    const [arrSourceSink, setArrSourceSink] = useState()
 
     const {
         currentSelect, isShowModalReport,
-        reportDetailsCurrent, setReportDetailsCurrent
+        reportDetailsCurrent, setReportDetailsCurrent,
     } = useContext(AppContext)
 
     const fetchReportDetails = async () => {
-        if (currentSelect && currentSelect.report_id && isShowModalReport === false) {
+        if (currentSelect && currentSelect.report_id) {
             const res = await getReportDetailsBy_report_id(currentSelect?.report_id)
             setReportDetailsCurrent(res.data)
         }
@@ -73,6 +75,24 @@ const CompareComponent = (props) => {
         return count
     }
 
+    const removeFields = (data, fields) => {
+        if (data) {
+            return data.map(item => {
+                let newItem = { ...item }; // Tạo một bản sao của đối tượng
+                fields.forEach(field => {
+                    delete newItem[field]; // Xóa các trường không mong muốn từ bản sao
+                });
+                return newItem; // Trả về bản sao đã chỉnh sửa
+            });
+        }
+    };
+
+    const fieldsToRemove = ["detail_id", "report_id"];
+
+    useEffect(() => {
+        setArrSourceSink(removeFields(reportDetailsCurrent, fieldsToRemove))
+    }, [reportDetailsCurrent])
+
     // useEffect(() => {
     //     console.log("dataApexChart: ", dataApexChart);
     // }, [dataApexChart])
@@ -99,55 +119,58 @@ const CompareComponent = (props) => {
     return (
         <div className='container-compare-component'>
             <div className='body-compare'>
-                {/* dong 1 */}
-                <div className='body-body-compare'>
-                    <div className='body-bar-char'>
-                        <div className='bar-char'>
+                <div className='left'>
+                    {/* <div className='body-body-compare'>
+                        <div className='body-bar-char'>
+                            <div className='title'>
+                            </div>
+                            <div className='chart bar-char'>
+                                <ColumnChart
+                                    data={dataColumnChart}
+                                    title={'Total record'}
+                                />
+                            </div>
+                        </div>
+                        <div className='body-bar-char'>
+                            <div className='bar-char'>
+                                <ColumnChart
+                                    data={dataColumnChart}
+                                    title={'Total sum column'}
+                                />
+                            </div>
+                        </div>
+                    </div> */}
+                    <div className='row'>
+                        <div className='title'>Record Count</div>
+                        <div className='body'>
                             <ColumnChart
                                 data={dataColumnChart}
-                                title={'Total record'}
                             />
                         </div>
                     </div>
-                    <div className='body-bar-char'>
-                        <div className='bar-char'>
+
+                    <div className='row'>
+                        <div className='title'>Sum of column</div>
+                        <div className='body'>
                             <ColumnChart
                                 data={dataColumnChart}
-                                title={'Total sum column'}
                             />
                         </div>
                     </div>
                 </div>
-
-                {/* dong 2 */}
-                <div className='body-body-compare'>
-                    <div className='body-bar-char'>
-                        <div className='bar-char'>
-                            <SplineChart />
-                        </div>
+                <div className='right'>
+                    <div className='title'>
+                        Report: {currentSelect.reportName}
                     </div>
-                    <div className='body-bar-char'>
-                        <div className='bar-char'>
-                            <SplineChart />
-                        </div>
+                    <div className='body'>
+                        <TableComponent
+                            data={arrSourceSink}
+                        />
                     </div>
                 </div>
             </div>
 
-            {/* <div>
-                <div>Component2</div>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <div >
-                        <div>Total records</div>
-                        <LinesChart />
-                    </div>
-                    <div>
-                        <div>Total sum of []</div>
-                        <LinesChart />
-                    </div>
-                </div>
-            </div> */}
-        </div>
+        </div >
     )
 }
 

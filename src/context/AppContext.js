@@ -28,6 +28,13 @@ export const AppProvider = ({ children }) => {
 
     const [reportDetailsCurrent, setReportDetailsCurrent] = useState()
 
+    const [arrDataSelectInput, setArrDataSelectInput] = useState()
+
+    const [currentSelectTB, setCurrentSelectTB] = useState()
+
+    useEffect(() => {
+    },[currentSelect])
+
     useEffect(() => {
         getReports()
     }, [keySearch])
@@ -87,6 +94,27 @@ export const AppProvider = ({ children }) => {
         setKeySearch(event.target.value)
     }
 
+    const convertToDataInputSelect = (data) => {
+        if (data && data.length > 0) {
+            const arr = [{ value: {}, label: 'Select an option' }]
+            data.forEach((item, index) => {
+                arr.push({
+                    value: { schemaName: item.schemaName, dataSourceName: item.dataSourceName, dataSinkName: item.dataSinkName },
+                    label: `Table: ${item.dataSourceName} - ${item.dataSinkName}`
+                })
+            })
+            setArrDataSelectInput(arr)
+        }
+    }
+
+    useEffect(() => {
+        convertToDataInputSelect(reportDetailsCurrent)
+    }, [reportDetailsCurrent])
+
+    useEffect(() => {
+        // console.log("currentSelectTB: ", currentSelectTB);
+    }, [currentSelectTB])
+
     const value = {
         isShowModalPreviewInput, setIsShowModalPreviewInput,
         dataReport, setDataReport,
@@ -110,6 +138,10 @@ export const AppProvider = ({ children }) => {
 
         currentSelect, setCurrentSelect,
         reportDetailsCurrent, setReportDetailsCurrent,
+
+        arrDataSelectInput,
+        currentSelectTB, setCurrentSelectTB,
+
 
         handleClose,
         handleCloseModal

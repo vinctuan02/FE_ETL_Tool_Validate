@@ -34,7 +34,7 @@ const ColumnChart = (props) => {
                 categories: [],
             },
             yaxis: {
-                title: { text: title },
+                // title: { text: title },
             },
             fill: {
                 opacity: 1,

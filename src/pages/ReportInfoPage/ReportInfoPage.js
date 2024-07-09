@@ -6,10 +6,11 @@ import { getReportDetailsBy_report_id } from '../../services/ReportService';
 import { AppContext } from '../../context/AppContext';
 import { ReportInfoContext, ReportProvider } from '../../context/ReportInfoContext';
 import SelectComponent from '../../components/SelectComponent/SelectComponent';
+import DataComponent from '../../components/DataComponent/DataComponent';
 
 const ReportInfoPage = () => {
 
-    const { isShowModalReport, setIsShowModalReport, handleOpenModalReport, currentSelect } = useContext(AppContext)
+    const { handleOpenModalReport, currentSelect, arrDataSelectInput, setCurrentSelectTB } = useContext(AppContext)
 
     const [selectedButton, setSelectedButton] = useState('compare')
     // const [isShowModalReport, setIsShowModalReport] = useState(false)
@@ -23,12 +24,15 @@ const ReportInfoPage = () => {
     //     }
     // }, [reportDetailsCurrent])
 
-    const DataComponent = () => <div>Data Component</div>;
     const DescribeComponent = () => <div>Describe Component</div>;
 
     const handleButtonClick = (buttonName) => {
         setSelectedButton(buttonName);
     };
+
+    const handleChangeSelect = (event) => {
+        setCurrentSelectTB(JSON.parse(event.target.value));
+    }
 
     return (
         <ReportProvider>
@@ -56,8 +60,14 @@ const ReportInfoPage = () => {
                     </div>
 
                     <div className='select-report'>
-                        <div>
-                            {/* <SelectComponent className='select-table' /> */}
+                        <div className='select-table'>
+                            {
+                                arrDataSelectInput &&
+                                < SelectComponent
+                                    data={arrDataSelectInput}
+                                    handleChangeSelect={handleChangeSelect}
+                                />
+                            }
                         </div>
                         <Button
                             variant="success"
@@ -77,7 +87,9 @@ const ReportInfoPage = () => {
                     {selectedButton === 'compare' &&
                         <CompareComponent />
                     }
-                    {selectedButton === 'data' && <DataComponent />}
+                    {selectedButton === 'data' &&
+                        <DataComponent />
+                    }
                     {selectedButton === 'describe' && <DescribeComponent />}
                 </div>
             </div>

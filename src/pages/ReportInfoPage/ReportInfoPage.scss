@@ -15,9 +15,18 @@
             }
         }
 
-        .select-report{
+        .select-report {
             display: flex;
             flex-direction: row;
+            gap: 10px;
+
+
+            transition: transform 0.3s ease-in-out;
+
+            .select-table {
+                // border: 1px solid red;
+                // padding: 7px !important;
+            }
         }
     }
 

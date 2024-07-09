@@ -13,7 +13,7 @@ const SplineChart = () => {
         data: [31, 40, 28, 51, 42, 60, 50, 30, 40]
     }, {
         name: 'Book',
-        data: [11, 32, 45, 32, 34, 20, 41, 30, 50]
+        data: [11, 32, 45, 32, 34, 20, 41, 35, 50]
     }];
 
     const allCategories = [
@@ -64,7 +64,7 @@ const SplineChart = () => {
 
     return (
         <div>
-            <div className="date-picker-container">
+            {/* <div className="date-picker-container">
                 <DatePicker
                     selected={startDate}
                     // onChange={date => setStartDate(date)}
@@ -84,7 +84,7 @@ const SplineChart = () => {
                     placeholderText="End Date"
                     dateFormat="yyyy-MM-dd"
                 />
-            </div>
+            </div> */}
             <div id="chart">
                 <ReactApexChart options={chartOptions} series={seriesData} type="area" height={350} />
             </div>

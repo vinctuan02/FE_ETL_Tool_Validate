@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import './SelectComponent.scss'
 
 const SelectComponent = (props) => {
-
-    const { data } = props
-
-    const options = [
-        { value: '1', label: 'One' },
-        { value: '2', label: 'Two' },
-        { value: '3', label: 'Three' }
-    ];
+    const { data, handleChangeSelect } = props
 
     return (
-        <select className="form-select" aria-label="Default select example">
-            {options.map((option, index) => (
-                <option key={index} value={option.value}>
-                    {option.label}
+        <select className="form-select"
+            aria-label="Default select example"
+            onChange={(event) => handleChangeSelect(event)}
+        >
+            {data && data.map((item, index) => (
+                <option key={index} value={JSON.stringify(item.value)}>
+                    {item.label}
                 </option>
             ))}
         </select>
