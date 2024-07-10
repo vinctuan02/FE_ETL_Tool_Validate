@@ -15,7 +15,7 @@ const ReportComponent = (props) => {
         keySearch,
         handleOnChangeKeySearch
     } = useContext(AppContext)
-    
+
     const { hasAction, hasShowRowInfo } = props
 
     useEffect(() => {
@@ -72,7 +72,7 @@ const ReportComponent = (props) => {
                     <label
                         htmlFor='test' className='btn btn-success'
                     >
-                        <i className="fa-solid fa-download"></i> Import
+                        <i class="fa-solid fa-download"></i> Import
                     </label>
                     <input
                         id='test' type='file' hidden

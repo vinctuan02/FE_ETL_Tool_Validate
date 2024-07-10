@@ -75,20 +75,32 @@ const DataComponent = () => {
 
     return (
         <div className='container-data'>
-            <div className='data data-0'>
-                <div className='table-data'>
-                    <div className="title-button">
+            <div className='row'>
+                <div className='left title-body'>
+                    <div className="title">
                         <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
                     </div>
-                    <div className="table">
+                    <div className="body">
                         <SplineChart
-                        // data={tableSource}
+                            // data={tableSource}
+                            type={'area'}
+                        />
+                    </div>
+                </div>
+                <div className='right title-body'>
+                    <div className="title">
+                        <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
+                    </div>
+                    <div className="body">
+                        <SplineChart
+                            // data={tableSource}
+                            type={'bar'}
                         />
                     </div>
                 </div>
             </div>
-            <div className='data data-1'>
-                <div className='table-data'>
+            <div className='row '>
+                <div className='title-table'>
                     <div className="title-button">
                         <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
                         <div className="button">
@@ -107,14 +119,14 @@ const DataComponent = () => {
                     </div>
                 </div>
             </div>
-            <div className='data data-2'>
-                <div className='table-data'>
+            <div className='row '>
+                <div className='title-table'>
                     <div className="title-button">
                         <div className="title">Table: {currentSelectTB?.dataSinkName}</div>
                         <div className="button">
                             <Button
                                 variant="success"
-                                onClick={() => handleExport(tableSink, `${currentSelectTB.dataSinkName}.xlsx`)}
+                                onClick={() => handleExport(tableSource, `${currentSelectTB.dataSinkName}.xlsx`)}
                             >
                                 Export
                             </Button>

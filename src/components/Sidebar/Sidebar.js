@@ -5,25 +5,25 @@ import './Sidebar.scss';
 const sidebarNavItems = [
     {
         display: 'Open Report',
-        icon: <i className='bx bx-cloud-upload'></i>, // Icon để nhập dữ liệu
+        icon: <i class="fa-regular fa-folder"></i>, // Icon để nhập dữ liệu
         to: '/',
         section: 'input'
     },
     {
         display: 'Create Report',
-        icon: <i className='bx bx-edit'></i>, // Icon để nhập dữ liệu
+        icon: <i class="fa-regular fa-pen-to-square"></i>, // Icon để nhập dữ liệu
         to: '/create-input',
         section: 'create-input'
     },
     {
         display: 'Report Info',
-        icon: <i className='bx bx-bar-chart-alt-2'></i>, // Icon để so sánh dữ liệu
+        icon: <i class="fa-regular fa-chart-bar"></i>, // Icon để so sánh dữ liệu
         to: '/report-info',
         section: 'report-info'
     },
     {
         display: 'Other',
-        icon: <i className='bx bx-cog'></i>, // Icon khác
+        icon: <i class="fa-solid fa-gears"></i>, // Icon khác
         to: '/other',
         section: 'other'
     }

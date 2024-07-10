@@ -74,11 +74,11 @@ const ReportInfoPage = () => {
                             onClick={(handleOpenModalReport)}
                         >
                             {currentSelect && currentSelect.reportName ? (
-                                <span>Report: {currentSelect.reportName}</span>
+                                <span>Report: {currentSelect.reportName} </span>
                             ) : (
                                 <span>List Reports</span>
                             )}
-                            <i className='bx bx-chevron-down'></i>
+                            <i class="fa-solid fa-angle-down"></i>
                         </Button>
                     </div>
                 </div>

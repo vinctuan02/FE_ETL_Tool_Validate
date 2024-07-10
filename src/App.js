@@ -1,5 +1,4 @@
 import './App.scss';
-import 'boxicons/css/boxicons.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppLayout from './components/Layout/AppLayout';
 import InputPage from './pages/InputPage/InputPage';
@@ -16,7 +15,7 @@ import ModalReport from './components/ModalReport/ModalReport';
 function App() {
     return (
         <>
-            <BrowserRouter>
+
                 <Routes>
                     <Route path='/' element={<AppLayout />}>
                         <Route index element={<InputPage />} />
@@ -26,7 +25,7 @@ function App() {
                         <Route path='/other' element={<OtherPage />} />
                     </Route>
                 </Routes>
-            </BrowserRouter>
+               
 
             <ModalPreviewInput />
             <ModalUpdate />

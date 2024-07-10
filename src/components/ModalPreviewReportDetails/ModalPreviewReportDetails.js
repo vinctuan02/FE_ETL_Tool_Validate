@@ -4,9 +4,12 @@ import './ModalPreviewReportDetails.scss'
 import { getReportDetailsBy_report_id } from '../../services/ReportService';
 import { AppContext } from '../../context/AppContext';
 
+import { useNavigate } from 'react-router-dom';
+
 const { Modal, Button } = require("react-bootstrap")
 
 const ModalPreviewReportDetails = (props) => {
+    const navigate = useNavigate()
 
     const { handleCloseModal, dataPreviewReportDetails, isShowModalPreviewReportDetails } = useContext(AppContext)
 
@@ -30,6 +33,8 @@ const ModalPreviewReportDetails = (props) => {
 
     const handleCompare = async () => {
         handleCloseModal()
+        navigate('/report-info');
+        // window.location.href = 'http://10.10.12.15:3000/report-info';
     }
 
     return (

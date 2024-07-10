@@ -4,16 +4,19 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './SplineChart.scss';
 
-const SplineChart = () => {
+const SplineChart = (props) => {
+
+    const { type } = props
+
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
     const seriesData = [{
         name: 'Author',
-        data: [31, 40, 28, 51, 42, 60, 50, 30, 40]
+        data: [31, 40, 28, 51, 42]
     }, {
         name: 'Book',
-        data: [11, 32, 45, 32, 34, 20, 41, 35, 50]
+        data: [11, 32, 45, 32, 34]
     }];
 
     const allCategories = [
@@ -22,10 +25,6 @@ const SplineChart = () => {
         "2024-07-03T00:00:00.000Z",
         "2024-07-04T00:00:00.000Z",
         "2024-07-05T00:00:00.000Z",
-        "2024-07-06T00:00:00.000Z",
-        "2024-07-07T00:00:00.000Z",
-        "2024-07-08T00:00:00.000Z",
-        "2024-07-09T00:00:00.000Z",
         // "2024-07-10T00:00:00.000Z"
     ];
 
@@ -49,7 +48,7 @@ const SplineChart = () => {
             curve: 'smooth'
         },
         yaxis: {
-            title: { text: 'Total records by date' },
+            // title: { text: 'Total records by date' },
         },
         xaxis: {
             type: 'datetime',
@@ -86,7 +85,7 @@ const SplineChart = () => {
                 />
             </div> */}
             <div id="chart">
-                <ReactApexChart options={chartOptions} series={seriesData} type="area" height={350} />
+                <ReactApexChart options={chartOptions} series={seriesData} type={type} width='100%' height={350} />
             </div>
             <div id="html-dist"></div>
         </div>

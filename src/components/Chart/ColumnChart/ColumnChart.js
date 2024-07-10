@@ -22,7 +22,11 @@ const ColumnChart = (props) => {
                 },
             },
             plotOptions: {
-                bar: { horizontal: false, columnWidth: '55%', endingShape: 'rounded', },
+                bar: {
+                    horizontal: false, columnWidth: '45%', endingShape: 'rounded',
+                    borderRadius: 6, // Bo tròn các cột
+                    borderRadiusApplication: 'end' // Bo tròn phía trên
+                },
             },
             dataLabels: {
                 enabled: false,

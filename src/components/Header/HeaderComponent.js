@@ -6,9 +6,9 @@ const Header = () => {
         <div className='container-header-component'>
             <input className='search' type="text" placeholder="Search..." />
             <div className='container-header-icon'>
-                <i className='bx bx-adjust'></i>
-                <i className='bx bxs-user-circle person-icon'></i>
-                <i className="bx bx-cog setting-icon"></i>
+                <i class="fa-solid fa-circle-half-stroke"></i>
+                <i class="fa-regular fa-circle-user"></i>
+                <i class="fa-solid fa-bars"></i>
             </div>
         </div>
     )

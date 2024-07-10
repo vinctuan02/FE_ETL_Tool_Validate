@@ -77,17 +77,22 @@ const CompareComponent = (props) => {
 
     const removeFields = (data, fields) => {
         if (data) {
-            return data.map(item => {
-                let newItem = { ...item }; // Tạo một bản sao của đối tượng
+            return data.map((item, index) => {
+                let newItem = {}; // Tạo một đối tượng mới
+                newItem.index = index + 1; // Thêm trường stt vào đối tượng mới
+    
+                let tempItem = { ...item }; // Tạo một bản sao của đối tượng gốc
                 fields.forEach(field => {
-                    delete newItem[field]; // Xóa các trường không mong muốn từ bản sao
+                    delete tempItem[field]; // Xóa các trường không mong muốn từ bản sao
                 });
-                return newItem; // Trả về bản sao đã chỉnh sửa
+    
+                newItem = { ...newItem, ...tempItem }; // Gộp đối tượng mới với các trường còn lại
+                return newItem; // Trả về đối tượng mới đã chỉnh sửa
             });
         }
     };
 
-    const fieldsToRemove = ["detail_id", "report_id"];
+    const fieldsToRemove = ["detail_id", "report_id", "schemaName"];
 
     useEffect(() => {
         setArrSourceSink(removeFields(reportDetailsCurrent, fieldsToRemove))

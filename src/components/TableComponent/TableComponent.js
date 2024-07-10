@@ -90,11 +90,11 @@ const TableComponent = (props) => {
                                 <button
                                     className='btn btn-warning mx-3'
                                     onClick={() => handleClickEdit(rowData)}
-                                ><i className='bx bx-edit'></i></button>
+                                ><i class="far fa-edit"></i></button>
                                 <button
                                     className='btn btn-danger mx-3'
                                     onClick={() => handleClickDelete(rowData)}
-                                ><i className='bx bx-trash'></i></button>
+                                ><i class="fa-regular fa-trash-can"></i></button>
                             </td>
                         }
 

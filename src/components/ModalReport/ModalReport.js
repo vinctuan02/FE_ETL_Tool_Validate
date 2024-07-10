@@ -18,7 +18,7 @@ const ModalReport = (props) => {
             <Modal className='container-modal-report' show={isShowModalReport} onHide={handleCloseModal}>
                 <Modal.Body>
                     <ReportComponent
-                        hasShowRowInfo={true}
+                        hasShowRowInfo={false}
                     />
                 </Modal.Body>
                 <Modal.Footer>
@@ -26,7 +26,7 @@ const ModalReport = (props) => {
                         variant="primary"
                         onClick={handleClickCompare}
                     >
-                        Oke
+                        Compare
                     </Button>
                 </Modal.Footer>
             </Modal>
