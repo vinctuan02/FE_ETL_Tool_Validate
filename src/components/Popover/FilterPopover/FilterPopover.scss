@@ -1,0 +1,99 @@
+.popover {
+    position: relative;
+
+    .container-filter-popover {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px;
+
+        .r {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+
+            .button {
+                display: flex;
+                gap: 10px;
+
+                button {
+                    padding: 2px 5px;
+                    font-size: 13px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    background-color: transparent;
+                }
+
+                button.active {
+                    background-color: #277246;
+                    color: white;
+                }
+            }
+
+            .limit {
+                display: flex;
+                align-items: center;
+
+                label {
+                    margin-right: 5px;
+                }
+
+                input[type="number"] {
+                    max-width: 40px;
+                    border: none;
+                    border-bottom: 1px solid #ccc;
+                    outline: none;
+                    text-align: center;
+                    font-size: 15px;
+                }
+            }
+
+            .field-name,
+            .field-value {
+                display: flex;
+                align-items: center;
+
+                label {
+                    margin-right: 5px;
+                }
+
+                input {
+                    border: none;
+                    border-bottom: 1px solid #ccc;
+                    outline: none;
+                    font-size: 15px;
+                }
+            }
+        }
+
+        .select-range-container {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            width: 250px;
+
+            .select-range-buttons {
+                display: flex;
+                flex-direction: row;
+
+                button {
+                    flex: 1;
+                }
+            }
+
+            .body-info {
+                // border: 1px solid red;
+                margin-top: 10px;
+            }
+        }
+
+        .find-button-container {
+            display: flex;
+            align-self: flex-end;
+        }
+    }
+}

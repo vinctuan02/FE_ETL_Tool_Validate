@@ -154,14 +154,14 @@ const CompareComponent = (props) => {
                         </div>
                     </div>
 
-                    <div className='row'>
+                    {/* <div className='row'>
                         <div className='title'>Sum of column</div>
                         <div className='body'>
                             <ColumnChart
                                 data={dataColumnChart}
                             />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className='right'>
                     <div className='title'>

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../../context/AppContext"
-import { getTable } from "../../services/ReportService"
 import TableComponent from "../TableComponent/TableComponent"
 import { Button } from 'react-bootstrap';
 import './DataComponent.scss'
@@ -12,25 +11,9 @@ import SplineChart from "../Chart/SplineChart/SplineChart";
 
 const DataComponent = () => {
 
-    const { currentSelectTB, currentSelect, isShowModalReport, setReportDetailsCurrent } = useContext(AppContext)
-    const [tableSource, setTableSource] = useState()
-    const [tableSink, setTableSink] = useState()
-
-    const getTB = async () => {
-        const inputSource = { nameDB: currentSelectTB.schemaName, nameTB: currentSelectTB.dataSourceName }
-        const resSource = await getTable(inputSource)
-
-        setTableSource(resSource.data)
-
-        const inputSink = { nameDB: currentSelectTB.schemaName, nameTB: currentSelectTB.dataSinkName }
-        const resSink = await getTable(inputSink)
-
-        setTableSink(resSink.data)
-    }
-
-    useEffect(() => {
-        currentSelectTB && getTB()
-    }, [currentSelectTB])
+    const { currentSelectTB, currentSelect, isShowModalReport,
+        setReportDetailsCurrent, tableSource, tableSink
+    } = useContext(AppContext)
 
     const fetchReportDetails = async () => {
         if (currentSelect && currentSelect.report_id) {

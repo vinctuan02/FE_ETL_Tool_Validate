@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getReportsAxios } from "../services/ReportService";
+import { getReportsAxios, getTable } from "../services/ReportService";
 
 export const AppContext = createContext({})
 
@@ -32,8 +32,50 @@ export const AppProvider = ({ children }) => {
 
     const [currentSelectTB, setCurrentSelectTB] = useState()
 
+    const [tableSource, setTableSource] = useState()
+    const [tableSink, setTableSink] = useState()
+
+    const [isASC, setIsASC] = useState(true);
+    const [limit, setLimit] = useState(10);
+
+    const [fieldName, setFieldName] = useState('')
+    const [fieldValue, setFieldValue] = useState('')
+
+    const [filter, setFilter] = useState()
+
+    const getTB = async () => {
+        if (currentSelectTB) {
+            const inputSource = { nameDB: currentSelectTB.schemaName, nameTB: currentSelectTB.dataSourceName }
+            const resSource = await getTable(inputSource, filter)
+
+            setTableSource(resSource.data)
+
+            const inputSink = { nameDB: currentSelectTB.schemaName, nameTB: currentSelectTB.dataSinkName }
+            const resSink = await getTable(inputSink, filter)
+
+            setTableSink(resSink.data)
+        }
+    }
+
+
     useEffect(() => {
-    },[currentSelect])
+        currentSelectTB && getTB()
+    }, [filter])
+
+
+    useEffect(() => {
+        setFilter({ isASC, limit, fieldName, fieldValue })
+    }, [isASC, limit, fieldName, fieldValue])
+
+
+    const toggleASCDESC = () => {
+        setIsASC(!isASC);
+    };
+
+    useEffect(() => {
+        currentSelectTB && getTB()
+        // console.log(currentSelectTB);
+    }, [currentSelectTB])
 
     useEffect(() => {
         getReports()
@@ -144,7 +186,16 @@ export const AppProvider = ({ children }) => {
 
 
         handleClose,
-        handleCloseModal
+        handleCloseModal,
+
+        tableSource, tableSink,
+
+        isASC, setIsASC,
+        limit, setLimit,
+        toggleASCDESC,
+
+        fieldName, setFieldName, fieldValue, setFieldValue,
+        getTB
     }
 
     return <AppContext.Provider value={value}>

@@ -11,10 +11,12 @@ import ModalUpdate from './components/ModalUpdate/ModalUpdate';
 import ModalDelete from './components/ModalDelete/ModalDelete';
 import ModalPreviewReportDetails from './components/ModalPreviewReportDetails/ModalPreviewReportDetails';
 import ModalReport from './components/ModalReport/ModalReport';
+import ModalFilter from './components/Popover/FilterPopover/FilterPopover';
 
 function App() {
     return (
         <>
+            <BrowserRouter>
 
                 <Routes>
                     <Route path='/' element={<AppLayout />}>
@@ -25,26 +27,27 @@ function App() {
                         <Route path='/other' element={<OtherPage />} />
                     </Route>
                 </Routes>
-               
-
-            <ModalPreviewInput />
-            <ModalUpdate />
-            <ModalDelete />
-            <ModalPreviewReportDetails />
-            <ModalReport />
 
 
-            <ToastContainer
-                position="top-right"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+                <ModalPreviewInput />
+                <ModalUpdate />
+                <ModalDelete />
+                <ModalPreviewReportDetails />
+                <ModalReport />
+
+
+                <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
+            </BrowserRouter >
         </>
     );
 }

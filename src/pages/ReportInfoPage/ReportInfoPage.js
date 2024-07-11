@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import './ReportInfoPage.scss'
 import CompareComponent from '../../components/CompareComponent/CompareComponent'
 import { Button } from 'react-bootstrap';
-import { getReportDetailsBy_report_id } from '../../services/ReportService';
 import { AppContext } from '../../context/AppContext';
-import { ReportInfoContext, ReportProvider } from '../../context/ReportInfoContext';
+import { ReportProvider } from '../../context/ReportInfoContext';
 import SelectComponent from '../../components/SelectComponent/SelectComponent';
 import DataComponent from '../../components/DataComponent/DataComponent';
+import ModalComponent from '../../components/Popover/FilterPopover/FilterPopover';
+import FilterPopover from '../../components/Popover/FilterPopover/FilterPopover';
 
 const ReportInfoPage = () => {
 
@@ -30,9 +31,7 @@ const ReportInfoPage = () => {
         setSelectedButton(buttonName);
     };
 
-    const handleChangeSelect = (event) => {
-        setCurrentSelectTB(JSON.parse(event.target.value));
-    }
+
 
     return (
         <ReportProvider>
@@ -60,14 +59,13 @@ const ReportInfoPage = () => {
                     </div>
 
                     <div className='select-report'>
-                        <div className='select-table'>
+
+                        <div>
                             {
                                 arrDataSelectInput &&
-                                < SelectComponent
-                                    data={arrDataSelectInput}
-                                    handleChangeSelect={handleChangeSelect}
-                                />
+                                <FilterPopover />
                             }
+
                         </div>
                         <Button
                             variant="success"
@@ -78,7 +76,7 @@ const ReportInfoPage = () => {
                             ) : (
                                 <span>List Reports</span>
                             )}
-                            <i class="fa-solid fa-angle-down"></i>
+                            <i className="fa-solid fa-angle-down"></i>
                         </Button>
                     </div>
                 </div>

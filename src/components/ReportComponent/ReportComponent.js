@@ -72,7 +72,7 @@ const ReportComponent = (props) => {
                     <label
                         htmlFor='test' className='btn btn-success'
                     >
-                        <i class="fa-solid fa-download"></i> Import
+                        <i className="fa-solid fa-download"></i> Import
                     </label>
                     <input
                         id='test' type='file' hidden

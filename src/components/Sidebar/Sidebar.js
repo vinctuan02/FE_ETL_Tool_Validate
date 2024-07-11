@@ -5,25 +5,25 @@ import './Sidebar.scss';
 const sidebarNavItems = [
     {
         display: 'Open Report',
-        icon: <i class="fa-regular fa-folder"></i>, // Icon để nhập dữ liệu
+        icon: <i className="fa-regular fa-folder"></i>, // Icon để nhập dữ liệu
         to: '/',
         section: 'input'
     },
     {
         display: 'Create Report',
-        icon: <i class="fa-regular fa-pen-to-square"></i>, // Icon để nhập dữ liệu
+        icon: <i className="fa-regular fa-pen-to-square"></i>, // Icon để nhập dữ liệu
         to: '/create-input',
         section: 'create-input'
     },
     {
         display: 'Report Info',
-        icon: <i class="fa-regular fa-chart-bar"></i>, // Icon để so sánh dữ liệu
+        icon: <i className="fa-regular fa-chart-bar"></i>, // Icon để so sánh dữ liệu
         to: '/report-info',
         section: 'report-info'
     },
     {
         display: 'Other',
-        icon: <i class="fa-solid fa-gears"></i>, // Icon khác
+        icon: <i className="fa-solid fa-gears"></i>, // Icon khác
         to: '/other',
         section: 'other'
     }

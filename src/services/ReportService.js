@@ -8,7 +8,15 @@ const countRecordsTB = (input) => {
     })
 }
 
-const getTable = (input) => {
+const getTable = (nameTB, filter) => {
+    // console.log(input);
+
+    
+    const input = {...nameTB, ...filter}
+
+    console.log("gettable: ", input);
+
+    // console.log(input);
     return axios.get(`get-table`, {
         params: input
     })
