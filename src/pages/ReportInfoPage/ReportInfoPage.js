@@ -4,10 +4,8 @@ import CompareComponent from '../../components/CompareComponent/CompareComponent
 import { Button } from 'react-bootstrap';
 import { AppContext } from '../../context/AppContext';
 import { ReportProvider } from '../../context/ReportInfoContext';
-import SelectComponent from '../../components/SelectComponent/SelectComponent';
 import DataComponent from '../../components/DataComponent/DataComponent';
-import ModalComponent from '../../components/Popover/FilterPopover/FilterPopover';
-import FilterPopover from '../../components/Popover/FilterPopover/FilterPopover';
+import FilterPopper from '../../components/Popper/FilterPopper/FilterPopper';
 
 const ReportInfoPage = () => {
 
@@ -63,7 +61,7 @@ const ReportInfoPage = () => {
                         <div>
                             {
                                 arrDataSelectInput &&
-                                <FilterPopover />
+                                <FilterPopper />
                             }
 
                         </div>

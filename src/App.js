@@ -11,7 +11,6 @@ import ModalUpdate from './components/ModalUpdate/ModalUpdate';
 import ModalDelete from './components/ModalDelete/ModalDelete';
 import ModalPreviewReportDetails from './components/ModalPreviewReportDetails/ModalPreviewReportDetails';
 import ModalReport from './components/ModalReport/ModalReport';
-import ModalFilter from './components/Popover/FilterPopover/FilterPopover';
 
 function App() {
     return (

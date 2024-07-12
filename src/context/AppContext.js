@@ -40,6 +40,10 @@ export const AppProvider = ({ children }) => {
 
     const [fieldName, setFieldName] = useState('')
     const [fieldValue, setFieldValue] = useState('')
+    
+    const [startValue, setStartValue] = useState('')
+
+    const [endValue, setEndValue] = useState('')
 
     const [filter, setFilter] = useState()
 
@@ -64,8 +68,8 @@ export const AppProvider = ({ children }) => {
 
 
     useEffect(() => {
-        setFilter({ isASC, limit, fieldName, fieldValue })
-    }, [isASC, limit, fieldName, fieldValue])
+        setFilter({ isASC, limit, fieldName, fieldValue, startValue, endValue })
+    }, [isASC, limit, fieldName, fieldValue, startValue, endValue])
 
 
     const toggleASCDESC = () => {
@@ -195,6 +199,7 @@ export const AppProvider = ({ children }) => {
         toggleASCDESC,
 
         fieldName, setFieldName, fieldValue, setFieldValue,
+        startValue, setStartValue, endValue, setEndValue,
         getTB
     }
 

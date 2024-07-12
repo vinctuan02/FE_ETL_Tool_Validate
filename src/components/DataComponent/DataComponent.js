@@ -58,30 +58,6 @@ const DataComponent = () => {
 
     return (
         <div className='container-data'>
-            <div className='row'>
-                <div className='left title-body'>
-                    <div className="title">
-                        <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
-                    </div>
-                    <div className="body">
-                        <SplineChart
-                            // data={tableSource}
-                            type={'area'}
-                        />
-                    </div>
-                </div>
-                <div className='right title-body'>
-                    <div className="title">
-                        <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
-                    </div>
-                    <div className="body">
-                        <SplineChart
-                            // data={tableSource}
-                            type={'bar'}
-                        />
-                    </div>
-                </div>
-            </div>
             <div className='row '>
                 <div className='title-table'>
                     <div className="title-button">
@@ -118,6 +94,31 @@ const DataComponent = () => {
                     <div className="table">
                         <TableComponent
                             data={tableSink}
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className='row'>
+                <div className='left title-body'>
+                    <div className="title">
+                        <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
+                    </div>
+                    <div className="body">
+                        <SplineChart
+                            // data={tableSource}
+                            type={'area'}
+                        />
+                    </div>
+                </div>
+                <div className='right title-body'>
+                    <div className="title">
+                        <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
+                    </div>
+                    <div className="body">
+                        <SplineChart
+                            // data={tableSource}
+                            type={'bar'}
                         />
                     </div>
                 </div>
