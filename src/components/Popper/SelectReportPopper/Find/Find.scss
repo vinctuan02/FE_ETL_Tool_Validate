@@ -1,0 +1,19 @@
+.container-find {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .r {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+
+        .label {}
+
+        .input {
+            border: none;
+            border-bottom: 1px solid #ccc;
+
+        }
+    }
+}

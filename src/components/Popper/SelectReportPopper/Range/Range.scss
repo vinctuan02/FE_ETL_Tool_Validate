@@ -1,0 +1,21 @@
+.container-range {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .field-row,
+    .value-row {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+
+        .label {}
+
+        .input {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            width: auto;
+        }
+    }
+}

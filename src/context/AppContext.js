@@ -24,13 +24,13 @@ export const AppProvider = ({ children }) => {
 
     const [keySearch, setKeySearch] = useState('')
 
-    const [currentSelect, setCurrentSelect] = useState({})
+    const [currentSelect, setCurrentSelect] = useState({}) // report
 
     const [reportDetailsCurrent, setReportDetailsCurrent] = useState()
 
     const [arrDataSelectInput, setArrDataSelectInput] = useState()
 
-    const [currentSelectTB, setCurrentSelectTB] = useState()
+    const [currentSelectTB, setCurrentSelectTB] = useState() // tb of report
 
     const [tableSource, setTableSource] = useState()
     const [tableSink, setTableSink] = useState()
@@ -40,7 +40,7 @@ export const AppProvider = ({ children }) => {
 
     const [fieldName, setFieldName] = useState('')
     const [fieldValue, setFieldValue] = useState('')
-    
+
     const [startValue, setStartValue] = useState('')
 
     const [endValue, setEndValue] = useState('')
@@ -62,9 +62,9 @@ export const AppProvider = ({ children }) => {
     }
 
 
-    useEffect(() => {
-        currentSelectTB && getTB()
-    }, [filter])
+    // useEffect(() => {
+    //     currentSelectTB && getTB()
+    // }, [filter])
 
 
     useEffect(() => {
@@ -77,9 +77,9 @@ export const AppProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        currentSelectTB && getTB()
+        getTB()
         // console.log(currentSelectTB);
-    }, [currentSelectTB])
+    }, [currentSelectTB, filter])
 
     useEffect(() => {
         getReports()
@@ -142,7 +142,8 @@ export const AppProvider = ({ children }) => {
 
     const convertToDataInputSelect = (data) => {
         if (data && data.length > 0) {
-            const arr = [{ value: {}, label: 'Select an option' }]
+            // const arr = [{ value: {}, label: 'Select an option' }]
+            const arr = []
             data.forEach((item, index) => {
                 arr.push({
                     value: { schemaName: item.schemaName, dataSourceName: item.dataSourceName, dataSinkName: item.dataSinkName },
@@ -156,10 +157,6 @@ export const AppProvider = ({ children }) => {
     useEffect(() => {
         convertToDataInputSelect(reportDetailsCurrent)
     }, [reportDetailsCurrent])
-
-    useEffect(() => {
-        // console.log("currentSelectTB: ", currentSelectTB);
-    }, [currentSelectTB])
 
     const value = {
         isShowModalPreviewInput, setIsShowModalPreviewInput,

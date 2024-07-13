@@ -6,6 +6,7 @@ import { AppContext } from '../../context/AppContext';
 import { ReportProvider } from '../../context/ReportInfoContext';
 import DataComponent from '../../components/DataComponent/DataComponent';
 import FilterPopper from '../../components/Popper/FilterPopper/FilterPopper';
+import SelectReportPopper from '../../components/Popper/SelectReportPopper/SelectReportPopper';
 
 const ReportInfoPage = () => {
 
@@ -65,7 +66,11 @@ const ReportInfoPage = () => {
                             }
 
                         </div>
-                        <Button
+
+                        <div>
+                            <SelectReportPopper />
+                        </div>
+                        {/* <Button
                             variant="success"
                             onClick={(handleOpenModalReport)}
                         >
@@ -75,7 +80,7 @@ const ReportInfoPage = () => {
                                 <span>List Reports</span>
                             )}
                             <i className="fa-solid fa-angle-down"></i>
-                        </Button>
+                        </Button> */}
                     </div>
                 </div>
                 <div className='body-info'>

@@ -1,8 +1,8 @@
 import { Button, Modal } from "react-bootstrap";
 import './ModalReport.scss'
-import ReportComponent from "../ReportComponent/ReportComponent";
 import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";;
+import { AppContext } from "../../../context/AppContext";
+import ReportComponent from "../../ReportComponent/ReportComponent";
 
 const ModalReport = (props) => {
 

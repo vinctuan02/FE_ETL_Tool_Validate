@@ -14,7 +14,7 @@ const ColumnChart = (props) => {
                 type: 'bar',
                 height: 350,
                 toolbar: {
-                    show: true,
+                    show: false,
                     tools: {
                         download: true, selection: false, zoom: false,
                         zoomin: false, zoomout: false, pan: false, reset: false

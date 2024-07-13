@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
-import TableComponent from '../TableComponent/TableComponent';
 import './ModalPreviewReportDetails.scss'
-import { getReportDetailsBy_report_id } from '../../services/ReportService';
-import { AppContext } from '../../context/AppContext';
 
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../../../context/AppContext';
+import TableComponent from '../../TableComponent/TableComponent';
+import { getReportDetailsBy_report_id } from '../../../services/ReportService';
 
 const { Modal, Button } = require("react-bootstrap")
 

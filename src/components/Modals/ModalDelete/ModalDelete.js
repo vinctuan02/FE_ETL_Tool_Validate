@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
-
 import './ModalDelete.scss'
-import { deleteReport, getReportByReportNameAxios, putUpdateReport } from '../../services/ReportService';
 import { toast } from 'react-toastify';
-import { AppContext } from '../../context/AppContext';
+import { AppContext } from '../../../context/AppContext';
+import { deleteReport } from '../../../services/ReportService';
 
 const { Modal, Button } = require("react-bootstrap")
 

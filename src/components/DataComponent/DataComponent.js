@@ -11,8 +11,9 @@ import SplineChart from "../Chart/SplineChart/SplineChart";
 
 const DataComponent = () => {
 
-    const { currentSelectTB, currentSelect, isShowModalReport,
-        setReportDetailsCurrent, tableSource, tableSink
+    const { currentSelectTB, setCurrentSelectTB, currentSelect, isShowModalReport,
+        setReportDetailsCurrent, tableSource, tableSink,
+        arrDataSelectInput
     } = useContext(AppContext)
 
     const fetchReportDetails = async () => {
@@ -21,6 +22,13 @@ const DataComponent = () => {
             setReportDetailsCurrent(res.data)
         }
     }
+
+    useEffect(() => {
+        if (arrDataSelectInput && arrDataSelectInput[0]?.value) {
+            // setCurrentSelectTB(arrDataSelectInput[0].value);
+        }
+
+    }, [currentSelect])
 
     useEffect(() => {
         fetchReportDetails()
@@ -55,9 +63,37 @@ const DataComponent = () => {
         exportToExcel(data, fileName)
     }
 
+    // useEffect(() => {
+    //     console.log("tableSource: ", tableSource);
+    //     console.log("tableSink: ", tableSink);
+    // }, [tableSource, tableSink])
 
     return (
         <div className='container-data'>
+            <div className='row'>
+                <div className='left title-body'>
+                    <div className="title">
+                        <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
+                    </div>
+                    <div className="body">
+                        <SplineChart
+                            // data={tableSource}
+                            type={'area'}
+                        />
+                    </div>
+                </div>
+                <div className='right title-body'>
+                    <div className="title">
+                        <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
+                    </div>
+                    <div className="body">
+                        <SplineChart
+                            // data={tableSource}
+                            type={'bar'}
+                        />
+                    </div>
+                </div>
+            </div>
             <div className='row '>
                 <div className='title-table'>
                     <div className="title-button">
@@ -99,30 +135,7 @@ const DataComponent = () => {
                 </div>
             </div>
 
-            <div className='row'>
-                <div className='left title-body'>
-                    <div className="title">
-                        <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
-                    </div>
-                    <div className="body">
-                        <SplineChart
-                            // data={tableSource}
-                            type={'area'}
-                        />
-                    </div>
-                </div>
-                <div className='right title-body'>
-                    <div className="title">
-                        <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
-                    </div>
-                    <div className="body">
-                        <SplineChart
-                            // data={tableSource}
-                            type={'bar'}
-                        />
-                    </div>
-                </div>
-            </div>
+
         </div>
     )
 }

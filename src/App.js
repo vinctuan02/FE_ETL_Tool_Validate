@@ -6,11 +6,12 @@ import OtherPage from './pages/OtherPage/OtherPage';
 import CreateInput from './pages/CreateInputPage/CreateInput';
 import { ToastContainer } from 'react-toastify';
 import ReportInfoPage from './pages/ReportInfoPage/ReportInfoPage';
-import ModalPreviewInput from './components/ModalPreviewInput/ModalPreviewInput';
-import ModalUpdate from './components/ModalUpdate/ModalUpdate';
-import ModalDelete from './components/ModalDelete/ModalDelete';
-import ModalPreviewReportDetails from './components/ModalPreviewReportDetails/ModalPreviewReportDetails';
-import ModalReport from './components/ModalReport/ModalReport';
+import ModalPreviewInput from './components/Modals/ModalPreviewInput/ModalPreviewInput';
+import ModalUpdate from './components/Modals/ModalUpdate/ModalUpdate';
+import ModalDelete from './components/Modals/ModalDelete/ModalDelete';
+import ModalPreviewReportDetails from './components/Modals/ModalPreviewReportDetails/ModalPreviewReportDetails';
+import ModalReport from './components/Modals/ModalReport/ModalReport';
+
 
 function App() {
     return (

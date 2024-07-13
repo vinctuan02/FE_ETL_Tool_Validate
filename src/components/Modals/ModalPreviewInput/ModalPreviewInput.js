@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import TableComponent from '../TableComponent/TableComponent';
 import './ModalPreviewInput.scss'
-import { bulkCreateReportDetails, getReportByReportNameAxios, postCreateReport } from '../../services/ReportService';
 import { toast } from 'react-toastify';
-import { AppContext } from '../../context/AppContext';
+import { AppContext } from '../../../context/AppContext';
+import { bulkCreateReportDetails, getReportByReportNameAxios, postCreateReport } from '../../../services/ReportService';
+import TableComponent from '../../TableComponent/TableComponent';
 
 const { Modal, Button } = require("react-bootstrap")
 
