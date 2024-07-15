@@ -3,13 +3,18 @@
     // display: inline-block;
     // width: auto;
     .modal-dialog {
-        max-width: 50%;
+        max-width: 100%;
+        // width: auto !important;
+        display: inline-block;
+        // margin: 1.75rem auto;  // Đảm bảo modal căn giữa theo chiều ngang
+        margin-left: 25%;
+        margin-top: 100px;
     }
 
-    // .modal {
-    //     --bs-modal-width: auto;
-    //     /* Override giá trị mặc định */
-    //     width: auto;
-    //     max-width: none;
-    // }
+    .modal {
+        --bs-modal-width: auto;
+        /* Override giá trị mặc định */
+        width: auto;
+        max-width: none;
+    }
 }

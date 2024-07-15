@@ -1,101 +1,61 @@
-import React, { useContext, useEffect, useState } from 'react'
-import './ReportInfoPage.scss'
-import CompareComponent from '../../components/CompareComponent/CompareComponent'
-import { Button } from 'react-bootstrap';
+import React, { useContext, useState } from 'react';
+import './ReportInfoPage.scss';
 import { AppContext } from '../../context/AppContext';
 import { ReportProvider } from '../../context/ReportInfoContext';
-import DataComponent from '../../components/DataComponent/DataComponent';
 import FilterPopper from '../../components/Popper/FilterPopper/FilterPopper';
 import SelectReportPopper from '../../components/Popper/SelectReportPopper/SelectReportPopper';
+import DataComponent from '../../components/Components/DataComponent/DataComponent';
+import CompareComponent from '../../components/Components/CompareComponent/CompareComponent';
+import { Button } from '@mui/material';
+
 
 const ReportInfoPage = () => {
-
-    const { handleOpenModalReport, currentSelect, arrDataSelectInput, setCurrentSelectTB } = useContext(AppContext)
-
-    const [selectedButton, setSelectedButton] = useState('compare')
-    // const [isShowModalReport, setIsShowModalReport] = useState(false)
-
-    // const [reportDetailsCurrent, setReportDetailsCurrent] = useState('')
-
-
-    // useEffect(() => {
-    //     if (reportDetailsCurrent) {
-    //         console.log(reportDetailsCurrent);
-    //     }
-    // }, [reportDetailsCurrent])
-
-    const DescribeComponent = () => <div>Describe Component</div>;
+    const { currentSelect, arrDataSelectInput } = useContext(AppContext);
+    const [selectedButton, setSelectedButton] = useState('compare');
 
     const handleButtonClick = (buttonName) => {
         setSelectedButton(buttonName);
     };
-
-
 
     return (
         <ReportProvider>
             <div className='container-report-info'>
                 <div className='header-report-info'>
                     <div className='nav-info'>
-                        <button
-                            className={`btn-info1 btn ${selectedButton === 'compare' ? 'btn-primary' : ''}`}
+                        <Button
+                            variant={selectedButton === 'compare' ? 'contained' : 'text'}
+                            // color={selectedButton === 'compare' ? 'outlined' : 'outlined'}
+                            // variant={'default'}
                             onClick={() => handleButtonClick('compare')}
+                            className='btn-info1'
                         >
-                            Compare
-                        </button>
-                        <button
-                            className={`btn-info1 btn ${selectedButton === 'data' ? 'btn-primary' : ''}`}
+                            Overview
+                        </Button>
+                        <Button
+                            variant={selectedButton === 'data' ? 'contained' : 'text'}
+                            // color={selectedButton === 'data' ? 'outlined' : 'outlined'}
                             onClick={() => handleButtonClick('data')}
+                            className='btn-info1'
                         >
-                            Data
-                        </button>
-                        <button
-                            className={`btn-info1 btn ${selectedButton === 'describe' ? 'btn-primary' : ''}`}
-                            onClick={() => handleButtonClick('describe')}
-                        >
-                            Describe
-                        </button>
+                            Detail
+                        </Button>
                     </div>
-
                     <div className='select-report'>
-
                         <div>
-                            {
-                                arrDataSelectInput &&
-                                <FilterPopper />
-                            }
-
+                            {arrDataSelectInput && <FilterPopper />}
                         </div>
-
                         <div>
                             <SelectReportPopper />
                         </div>
-                        {/* <Button
-                            variant="success"
-                            onClick={(handleOpenModalReport)}
-                        >
-                            {currentSelect && currentSelect.reportName ? (
-                                <span>Report: {currentSelect.reportName} </span>
-                            ) : (
-                                <span>List Reports</span>
-                            )}
-                            <i className="fa-solid fa-angle-down"></i>
-                        </Button> */}
                     </div>
                 </div>
                 <div className='body-info'>
-                    {/* <TableTest /><div> */}
-                    {selectedButton === 'compare' &&
-                        <CompareComponent />
-                    }
-                    {selectedButton === 'data' &&
-                        <DataComponent />
-                    }
-                    {selectedButton === 'describe' && <DescribeComponent />}
+                    {selectedButton === 'compare' && <CompareComponent />}
+                    {selectedButton === 'data' && <DataComponent />}
                 </div>
             </div>
         </ReportProvider>
-    )
-}
+    );
+};
 
-export default ReportInfoPage
+export default ReportInfoPage;

@@ -1,18 +1,17 @@
-
 import React, { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import Popper from '@mui/material/Popper';
 import Box from '@mui/material/Box';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import ReportComponent from '../../ReportComponent/ReportComponent';
 import { AppContext } from '../../../context/AppContext';
-import './SelectReportPopper.scss'
+import './SelectReportPopper.scss';
+import ReportComponent from '../../Components/ReportComponent/ReportComponent';
 
 const SelectReportPopper = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [pinned, setPinned] = useState(false); // State for pinning the Popper
 
-    const { currentSelect } = useContext(AppContext)
+    const { currentSelect } = useContext(AppContext);
 
     const handleClick = (event) => {
         setAnchorEl(anchorEl ? null : event.currentTarget); // Toggle Popper
@@ -32,7 +31,7 @@ const SelectReportPopper = () => {
     const id = open ? 'filter-popper' : undefined;
 
     return (
-        <div className='popper' style={{ position: 'relative' }}>
+        <div className="popper" style={{ position: 'relative' }}>
             <Button aria-describedby={id} variant="contained" onClick={handleClick}>
                 {currentSelect && currentSelect.reportName ? (
                     <span>Report: {currentSelect.reportName} </span>
@@ -59,19 +58,22 @@ const SelectReportPopper = () => {
                     },
                 ]}
                 style={{
-                    zIndex: 1 // Directly setting z-index in Popper's style
+                    zIndex: 9999, // Directly setting z-index in Popper's style
                 }}
             >
                 <ClickAwayListener onClickAway={handleClickAway}>
-                    <Box sx={{
-                        p: 2, bgcolor: 'background.paper',
-                        border: 1, borderColor: 'grey.300',
-                        borderRadius: 2,
-                        position: 'relative', // Ensure relative positioning for children
-                    }}>
+                    <Box
+                        sx={{
+                            p: 2,
+                            bgcolor: 'background.paper',
+                            border: 1,
+                            borderColor: 'grey.300',
+                            borderRadius: 2,
+                            position: 'relative', // Ensure relative positioning for children
+                        }}
+                    >
                         {/* Pin button */}
                         <Button
-                            // variant="contained"
                             onClick={handlePin}
                             style={{
                                 position: 'absolute',
@@ -80,24 +82,22 @@ const SelectReportPopper = () => {
                                 zIndex: 2, // Ensure the pin button is above other content
                             }}
                         >
-                            {pinned ? <i className="fas fa-thumbtack" style={{ fontSize: '16px' }}></i> : <i className="fas fa-thumbtack" style={{ color: "#ccc", fontSize: '16px' }}></i>}
+                            {pinned ? (
+                                <i className="fas fa-thumbtack" style={{ fontSize: '16px' }}></i>
+                            ) : (
+                                <i className="fas fa-thumbtack" style={{ color: '#ccc', fontSize: '16px' }}></i>
+                            )}
                         </Button>
 
-                        <div className='r1'>
-                            <ReportComponent
-                                hasShowRowInfo={false}
-                            />
+                        <div className="r1">
+                            <ReportComponent hasShowRowInfo={false} />
                         </div>
 
-                        <div className='r1'>
-                            <Button
-                                // variant="contained"
-                                onClick={handleClick}
-                            >
-                                Chose
+                        <div className="r1">
+                            <Button variant="contained" onClick={handleClick}>
+                                Choose
                             </Button>
                         </div>
-
                     </Box>
                 </ClickAwayListener>
             </Popper>
@@ -106,4 +106,3 @@ const SelectReportPopper = () => {
 };
 
 export default SelectReportPopper;
-

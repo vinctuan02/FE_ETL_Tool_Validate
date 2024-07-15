@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Table } from 'react-bootstrap';
-import { AppContext } from '../../context/AppContext';
-import { ReportInfoContext } from '../../context/ReportInfoContext';
+import { AppContext } from '../../../context/AppContext';
+import { ReportInfoContext } from '../../../context/ReportInfoContext';
 
 const TableComponent = (props) => {
 
@@ -46,7 +46,7 @@ const TableComponent = (props) => {
                 handleShowReportDetails(item)
             }
             if (setCurrentSelect) {
-                // console.log('set current select', item);
+                console.log('set current select', item);
                 setCurrentSelect(item)
             }
             setSelectedRecord(item);
@@ -95,17 +95,6 @@ const TableComponent = (props) => {
                                     className='btn btn-danger mx-3'
                                     onClick={() => handleClickDelete(rowData)}
                                 ><i className="fa-regular fa-trash-can"></i></button>
-                            </td>
-                        }
-
-                        {
-                            false &&
-                            <td style={{ width: '250px' }}>
-                                <button
-                                    className='btn btn-warning mx-3'
-                                    onClick={() => handleClickEdit(rowData)}
-                                ><i className='bx bx-code-alt'></i>
-                                </button>
                             </td>
                         }
                     </tr>

@@ -1,13 +1,16 @@
 import { createContext, useEffect, useState } from "react";
-import { getReportsAxios, getTable } from "../services/ReportService";
+import { getNameTablesOfSchema, getReportsAxios, getTable } from "../services/ReportService";
 
 export const AppContext = createContext({})
 
 export const AppProvider = ({ children }) => {
 
+
+    // modal
     const [isShowModalPreviewInput, setIsShowModalPreviewInput] = useState(false)
     const [dataReport, setDataReport] = useState([])
     const [nameFileReport, setNameFileReport] = useState('')
+    const [nameReport, setNameReport] = useState('')
 
     const [isShowModalUpdate, setIsShowModalUpdate] = useState(false)
     const [dataUpdate, setDataUpdate] = useState([])
@@ -28,10 +31,11 @@ export const AppProvider = ({ children }) => {
 
     const [reportDetailsCurrent, setReportDetailsCurrent] = useState()
 
-    const [arrDataSelectInput, setArrDataSelectInput] = useState()
+    const [arrDataSelectInput, setArrDataSelectInput] = useState() // arr schema-tb
 
-    const [currentSelectTB, setCurrentSelectTB] = useState() // tb of report
+    const [currentSelectTB, setCurrentSelectTB] = useState() // tb in report
 
+    //data component
     const [tableSource, setTableSource] = useState()
     const [tableSink, setTableSink] = useState()
 
@@ -47,14 +51,25 @@ export const AppProvider = ({ children }) => {
 
     const [filter, setFilter] = useState()
 
+
+    // create input page
+    const [arrTBSoureToCreateReport, setArrTBSoureToCreateReport] = useState([])
+    const [arrTBSinkToCreateReport, setArrTBSinkToCreateReport] = useState([])
+    const [arrToCreateReport, setArrToCreateReport] = useState([])
+    const [nameSchemaSource, setNameSchemaSource] = useState('')
+    const [nameSchemaSink, setNameSchemaSink] = useState('')
+    const [allTBSource, setAllTBSource] = useState([])
+    const [allTBSink, setAllTBSink] = useState([])
+    const [isBlockBtn, setIsBlockBtn] = useState(true)
+
     const getTB = async () => {
         if (currentSelectTB) {
-            const inputSource = { nameDB: currentSelectTB.schemaName, nameTB: currentSelectTB.dataSourceName }
+            const inputSource = { nameDB: currentSelectTB.schemaSourceName, nameTB: currentSelectTB.dataSourceName }
             const resSource = await getTable(inputSource, filter)
 
             setTableSource(resSource.data)
 
-            const inputSink = { nameDB: currentSelectTB.schemaName, nameTB: currentSelectTB.dataSinkName }
+            const inputSink = { nameDB: currentSelectTB.schemaSinkName, nameTB: currentSelectTB.dataSinkName }
             const resSink = await getTable(inputSink, filter)
 
             setTableSink(resSink.data)
@@ -87,17 +102,10 @@ export const AppProvider = ({ children }) => {
 
     const getReports = async () => {
         let res = await getReportsAxios({ keySearch: keySearch })
+        // let res = await getReportsAxios()
         if (res && res.data) {
             setListReports(res.data)
         }
-    }
-
-    const handleClose = () => {
-        setIsShowModalPreviewInput(false)
-        setIsShowModalUpdate(false)
-        setIsShowModalDelete(false)
-        setIsShowModalPreviewReportDetails(false)
-        setIsShowModalReport(false)
     }
 
     const handleCloseModal = (keyModal = 'all') => {
@@ -108,6 +116,10 @@ export const AppProvider = ({ children }) => {
                 setIsShowModalDelete(false)
                 setIsShowModalPreviewReportDetails(false)
                 setIsShowModalReport(false)
+
+                setDataReport([])
+                setNameReport('')
+
                 break;
             case 'previewInput':
                 setIsShowModalPreviewInput(false)
@@ -115,6 +127,11 @@ export const AppProvider = ({ children }) => {
             default:
             // code block
         }
+    }
+
+    const handleShowModalPreviewInput = (data) => {
+        setDataReport(data)
+        setIsShowModalPreviewInput(true)
     }
 
     const handleShowModalUpdate = (item) => {
@@ -146,7 +163,12 @@ export const AppProvider = ({ children }) => {
             const arr = []
             data.forEach((item, index) => {
                 arr.push({
-                    value: { schemaName: item.schemaName, dataSourceName: item.dataSourceName, dataSinkName: item.dataSinkName },
+                    value: {
+                        schemaSourceName: item.schemaSourceName,
+                        schemaSinkName: item.schemaSinkName,
+                        dataSourceName: item.dataSourceName,
+                        dataSinkName: item.dataSinkName
+                    },
                     label: `Table: ${item.dataSourceName} - ${item.dataSinkName}`
                 })
             })
@@ -158,10 +180,83 @@ export const AppProvider = ({ children }) => {
         convertToDataInputSelect(reportDetailsCurrent)
     }, [reportDetailsCurrent])
 
+
+    // create input page
+    const renderArrObjecstReport = () => {
+        let arrObjects = []
+
+        if (arrTBSoureToCreateReport.length === arrTBSinkToCreateReport.length) {
+            setIsBlockBtn(false)
+            for (let i = 0; i < arrTBSoureToCreateReport.length; i++) {
+                const objectReport = {
+                    schemaSourceName: nameSchemaSource,
+                    schemaSinkName: nameSchemaSink,
+                    dataSourceName: arrTBSoureToCreateReport[i].name,
+                    dataSinkName: arrTBSinkToCreateReport[i].name
+                }
+                arrObjects.push(objectReport)
+
+                setArrToCreateReport(arrObjects)
+            }
+        }
+        return arrObjects
+    }
+
+    useEffect(() => {
+        if (arrTBSoureToCreateReport && arrTBSoureToCreateReport.length > 0) {
+            renderArrObjecstReport()
+        }
+        else {
+            setIsBlockBtn(true)
+        }
+    }, [arrTBSoureToCreateReport])
+
+    useEffect(() => {
+        if (arrTBSinkToCreateReport && arrTBSinkToCreateReport.length > 0) {
+            renderArrObjecstReport()
+        }
+        else {
+            setIsBlockBtn(true)
+        }
+    }, [arrTBSinkToCreateReport])
+
+    useEffect(() => {
+        getAllTBSource()
+    }, [nameSchemaSource])
+
+    const getAllTBSource = async () => {
+        let res
+        if (nameSchemaSource) {
+            res = await getNameTablesOfSchema({ nameDB: nameSchemaSource })
+        }
+
+        if (res && res.data) {
+            setAllTBSource(res.data)
+        }
+    }
+
+    useEffect(() => {
+        getAllTBSink()
+    }, [nameSchemaSink])
+
+    const getAllTBSink = async () => {
+        let res
+        if (nameSchemaSink) {
+            res = await getNameTablesOfSchema({ nameDB: nameSchemaSink })
+        }
+
+        if (res && res.data) {
+            setAllTBSink(res.data)
+        }
+    }
+
+
+
+
     const value = {
         isShowModalPreviewInput, setIsShowModalPreviewInput,
-        dataReport, setDataReport,
-        nameFileReport, setNameFileReport,
+        dataReport, setDataReport, handleShowModalPreviewInput,
+        nameFileReport, setNameFileReport, nameReport, setNameReport,
 
         handleShowModalUpdate, isShowModalUpdate,
         setIsShowModalUpdate, dataUpdate,
@@ -185,8 +280,6 @@ export const AppProvider = ({ children }) => {
         arrDataSelectInput,
         currentSelectTB, setCurrentSelectTB,
 
-
-        handleClose,
         handleCloseModal,
 
         tableSource, tableSink,
@@ -197,7 +290,15 @@ export const AppProvider = ({ children }) => {
 
         fieldName, setFieldName, fieldValue, setFieldValue,
         startValue, setStartValue, endValue, setEndValue,
-        getTB
+        getTB,
+
+        //create input
+        arrTBSoureToCreateReport, setArrTBSoureToCreateReport,
+        arrTBSinkToCreateReport, setArrTBSinkToCreateReport,
+        nameSchemaSource, setNameSchemaSource,
+        nameSchemaSink, setNameSchemaSink, arrToCreateReport,
+        allTBSource, setAllTBSource, allTBSink, setAllTBSink,
+        isBlockBtn, setIsBlockBtn
     }
 
     return <AppContext.Provider value={value}>

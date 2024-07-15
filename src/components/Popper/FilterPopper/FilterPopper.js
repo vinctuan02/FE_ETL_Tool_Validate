@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import './FilterPopper.scss';
 import { AppContext } from '../../../context/AppContext';
-import SelectComponent from '../../SelectComponent/SelectComponent';
+import SelectComponent from '../../Components/SelectComponent/SelectComponent';
 import FindRangeComponent from './FindRangeComponent/FindRangeComponent';
 
 const FilterPopper = () => {
@@ -129,14 +129,15 @@ const FilterPopper = () => {
                             </div>
                             <div className='r'>
                                 <div className='button'>
-                                    <button
+                                    <Button
                                         className={isASC ? 'active' : ''}
+                                        // color="success"
                                         onClick={toggleASCDESC}
-                                    >ASC</button>
-                                    <button
+                                    >ASC</Button>
+                                    <Button
                                         className={!isASC ? 'active' : ''}
                                         onClick={toggleASCDESC}
-                                    >DESC</button>
+                                    >DESC</Button>
                                 </div>
                                 <div className='limit'>
                                     <label>{`Limit: `}</label>
@@ -170,13 +171,20 @@ const FilterPopper = () => {
                             <div className='r'>
                                 <FindRangeComponent />
                             </div>
-                            <div className='r' style={{ display: 'flex', alignSelf: 'flex-end' }}>
+                            <div className='r'>
                                 <Button
-                                    color="success"
-                                    variant="contained"
+                                    // color="success"
+                                    // variant="contained"
                                     onClick={handleFind}
                                 >
-                                    Find
+                                    All Reports
+                                </Button>
+                                <Button
+                                    // color="success"
+                                    // variant="contained"
+                                    onClick={handleFind}
+                                >
+                                    Error Report
                                 </Button>
                             </div>
                         </div>

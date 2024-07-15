@@ -3,15 +3,22 @@ import './ModalPreviewInput.scss'
 import { toast } from 'react-toastify';
 import { AppContext } from '../../../context/AppContext';
 import { bulkCreateReportDetails, getReportByReportNameAxios, postCreateReport } from '../../../services/ReportService';
-import TableComponent from '../../TableComponent/TableComponent';
+import TableComponent from '../../Tables/TableComponent/TableComponent';
+import { useNavigate } from 'react-router-dom';
+
 
 const { Modal, Button } = require("react-bootstrap")
 
 const ModalPreviewInput = (props) => {
-    const { isShowModalPreviewInput, handleCloseModal, nameFileReport = '', dataReport, getReports } = useContext(AppContext)
 
-    const [nameReport, setNameReport] = useState('')
-    const [isDisableButton, setIsDisableButton] = useState(false)
+    const navigate = useNavigate()
+
+    const { isShowModalPreviewInput, handleCloseModal,
+        nameFileReport = '.xlsx', dataReport, getReports,
+        nameReport, setNameReport, setCurrentSelect
+    } = useContext(AppContext)
+
+    const [isDisableButton, setIsDisableButton] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,6 +27,10 @@ const ModalPreviewInput = (props) => {
             if (data && data.isExist) {
                 data.isExist === 'true' && toast.error("Report name is exist")
                 setIsDisableButton(data.isExist === 'true' ? true : false)
+            }
+
+            if (!nameReport) {
+                setIsDisableButton(true)
             }
 
         }
@@ -32,8 +43,16 @@ const ModalPreviewInput = (props) => {
 
 
     const handleInsert = async () => {
-        const report = { reportName: nameReport, fileName: nameFileReport, status: 'true' }
+
+        const report = {
+            reportName: nameReport,
+            fileName: nameFileReport === '' ? 'by tool' : nameFileReport,
+            status: 'true'
+        }
+
         const response = await postCreateReport(report)
+
+        setCurrentSelect(response.data)
 
         const arrayReportDetails = dataReport.map((item) => ({
             ...item,
@@ -42,12 +61,12 @@ const ModalPreviewInput = (props) => {
 
         const responseBulkCreate = await bulkCreateReportDetails(arrayReportDetails)
 
-
         if (response.code === 0 && responseBulkCreate.code === 0) {
             toast.success(response.message)
             getReports()
         }
 
+        navigate('/report-info')
         handleCloseModal()
     }
 

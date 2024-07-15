@@ -1,0 +1,35 @@
+// TableSelect.scss
+.table-container {
+    width: 100%;
+    outline: none;
+    /* Loại bỏ viền xung quanh khi focus */
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    border-radius: 10px;
+
+    th,
+    td {
+        border-bottom: 1px solid #ddd;
+        /* Dòng kẻ ngang giữa các hàng */
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+        /* Loại bỏ dòng kẻ ngang cho hàng cuối cùng */
+    }
+
+    tbody tr.selected {
+        background-color: #f1f1f1;
+        /* Màu nền khi hàng được chọn */
+    }
+}

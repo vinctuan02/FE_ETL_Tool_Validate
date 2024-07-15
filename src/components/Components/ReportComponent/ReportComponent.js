@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './ReportComponent.scss'
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import TableComponent from '../../components/TableComponent/TableComponent';
 import { toast } from 'react-toastify';
 import * as XLSX from 'xlsx';
-import { AppContext } from '../../context/AppContext';
+import TableComponent from '../../Tables/TableComponent/TableComponent';
+import { AppContext } from '../../../context/AppContext';
+import CreateReportPopper from '../../Popper/CreateReportPopper/CreateReportPopper';
+import { Button } from '@mui/material';
 
 
 const ReportComponent = (props) => {
 
     const {
-        setIsShowModalPreviewInput, setDataReport, setNameFileReport,
+        handleShowModalPreviewInput, setNameFileReport,
         getReports, listReports,
         keySearch,
         handleOnChangeKeySearch
@@ -38,7 +40,7 @@ const ReportComponent = (props) => {
                 const sheetName = workbook.SheetNames[0];
                 const worksheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
 
-                let keys = Object.keys(worksheet[0])
+                // let keys = Object.keys(worksheet[0])
 
                 // if (keys[0] !== 'schemaName' || keys[1] !== 'dataSourceName' || keys[2] !== 'dataSinkName') {
                 //     console.log(worksheet);
@@ -47,8 +49,7 @@ const ReportComponent = (props) => {
                 //     })
                 // }
                 setNameFileReport(file.name)
-                setDataReport(worksheet)
-                setIsShowModalPreviewInput(true)
+                handleShowModalPreviewInput(worksheet)
             };
             reader.readAsArrayBuffer(file);
         }
@@ -60,7 +61,7 @@ const ReportComponent = (props) => {
                 List reports
             </div>
             <div className='container-search-import'>
-                <div className='col-4 my-3'>
+                <div className='left col-4 my-3'>
                     <input
                         className='search'
                         placeholder='Search report by name ...'
@@ -68,16 +69,33 @@ const ReportComponent = (props) => {
                         onChange={(event) => handleOnChangeKeySearch(event)}
                     />
                 </div>
-                <div className='import'>
-                    <label
-                        htmlFor='test' className='btn btn-success'
-                    >
-                        <i className="fa-solid fa-download"></i> Import
-                    </label>
-                    <input
-                        id='test' type='file' hidden
-                        onChange={handleFileUpload}
-                    ></input>
+
+                <div className='right'>
+                    <div>
+                        <CreateReportPopper />
+                    </div>
+                    <div className='import'>
+                        <input
+                            id='test'
+                            type='file'
+                            hidden
+                            onChange={handleFileUpload}
+                        />
+                        <Button
+                            variant="contained"
+                            component="label"
+                            color="success"
+                            htmlFor='test'
+                        >
+                            Import
+                            <input
+                                id='test'
+                                type='file'
+                                hidden
+                                onChange={handleFileUpload}
+                            />
+                        </Button>
+                    </div>
                 </div>
             </div>
             <div className='container-table-reports'>

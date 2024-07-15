@@ -1,76 +1,73 @@
-// import React, { useContext, useEffect, useState } from 'react'
-// import './OtherPage.scss'
-// import { AppContext } from '../../context/AppContext';
-// import Find from '../../components/FilterSubComponent/Sub1/Find';
+import React, { useState } from 'react';
+import { FormGroup, FormControlLabel, Checkbox, Box, Typography } from '@mui/material';
 
-// const OtherPage = () => {
-
-//     const { handleOpenModalReport, currentSelect, arrDataSelectInput, setCurrentSelectTB } = useContext(AppContext)
-
-//     const [selectedButton, setSelectedButton] = useState('sub1')
-//     // const [isShowModalReport, setIsShowModalReport] = useState(false)
-
-//     // const [reportDetailsCurrent, setReportDetailsCurrent] = useState('')
-
-
-//     // useEffect(() => {
-//     //     if (reportDetailsCurrent) {
-//     //         console.log(reportDetailsCurrent);
-//     //     }
-//     // }, [reportDetailsCurrent])
-
-//     const DescribeComponent = () => <div>Describe Component</div>;
-
-//     const handleButtonClick = (buttonName) => {
-//         setSelectedButton(buttonName);
-//     };
-
-
-
-//     return (
-//         <div className='container-sub-filter'>
-//             <div className='r'>
-//                 <div className='nav-sub'>
-//                     <button
-//                         className={`btn-info1 btn ${selectedButton === 'sub1' ? 'btn-primary' : ''}`}
-//                         onClick={() => handleButtonClick('sub1')}
-//                     >
-//                         Find
-//                     </button>
-//                     <button
-//                         className={`btn-info1 btn ${selectedButton === 'sub2' ? 'btn-primary' : ''}`}
-//                         onClick={() => handleButtonClick('sub2')}
-//                     >
-//                         Range
-//                     </button>
-//                 </div>
-//             </div>
-//             <div className='r'>
-//                 <div className='body-sub'>
-//                     {/* <TableTest /><div> */}
-//                     {selectedButton === 'sub1' &&
-//                         <Find />
-//                     }
-//                     {selectedButton === 'sub2' &&
-//                         <Sub2 />
-//                     }
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default OtherPage
-
-import React from 'react'
+// Dữ liệu giả lập danh sách bảng từ db1 và db2
+const db1Tables = ['users', 'orders', 'products'];
+const db2Tables = ['customers', 'orders', 'inventory'];
 
 const OtherPage = () => {
+  const [selectedPairs, setSelectedPairs] = useState([]);
+
+  const handleCheckboxChange = (tableName, isChecked) => {
+    if (isChecked) {
+      // Nếu bảng đã được chọn, thêm vào danh sách selectedPairs
+      setSelectedPairs([...selectedPairs, { db1: tableName, db2: null }]);
+    } else {
+      // Nếu bảng bị bỏ chọn, loại bỏ khỏi danh sách selectedPairs
+      const updatedPairs = selectedPairs.filter(pair => pair.db1 !== tableName);
+      setSelectedPairs(updatedPairs);
+    }
+  };
+
+  const handleSecondCheckboxChange = (tableName, isChecked) => {
+    const updatedPairs = selectedPairs.map(pair => {
+      if (pair.db1 === tableName) {
+        return { ...pair, db2: isChecked ? tableName : null };
+      }
+      return pair;
+    });
+    setSelectedPairs(updatedPairs);
+  };
+
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <Box sx={{ m: 2 }}>
+      <Typography variant="h6">Select Table Pairs</Typography>
+      <Box>
+        <Typography variant="subtitle1">Database 1 Tables:</Typography>
+        <FormGroup>
+          {db1Tables.map((table) => (
+            <FormControlLabel
+              key={table}
+              control={<Checkbox checked={selectedPairs.some(pair => pair.db1 === table)} onChange={(e) => handleCheckboxChange(table, e.target.checked)} />}
+              label={table}
+            />
+          ))}
+        </FormGroup>
+      </Box>
+      <Box>
+        <Typography variant="subtitle1">Database 2 Tables:</Typography>
+        <FormGroup>
+          {db2Tables.map((table) => (
+            <FormControlLabel
+              key={table}
+              control={<Checkbox checked={selectedPairs.some(pair => pair.db2 === table)} onChange={(e) => handleSecondCheckboxChange(table, e.target.checked)} />}
+              label={table}
+            />
+          ))}
+        </FormGroup>
+      </Box>
+      <Box sx={{ mt: 2 }}>
+        <Typography variant="subtitle1">Selected Table Pairs:</Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          {selectedPairs.map((pair, index) => (
+            <Typography key={index}>
+              {pair.db1} - {pair.db2 || 'Select second table'}
+            </Typography>
+          ))}
+        </Box>
+      </Box>
+    </Box>
+  );
+};
 
-export default OtherPage
-
+export default OtherPage;

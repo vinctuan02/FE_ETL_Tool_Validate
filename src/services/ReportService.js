@@ -48,6 +48,14 @@ const bulkCreateReportDetails = (arrayReportDetails) => {
     return axios.post(`/report-details/bulk-create-details`, arrayReportDetails)
 }
 
+// create report
+const getNameTablesOfSchema = (schemaName) => {
+    // console.log(schemaName);
+    return axios.get(`/get-all-name-tb-of-db`, {
+        params: schemaName
+    })
+}
+
 export {
     getReportsAxios,
     getReportByReportNameAxios,
@@ -59,5 +67,6 @@ export {
     bulkCreateReportDetails,
 
     countRecordsTB,
-    getTable
+    getTable,
+    getNameTablesOfSchema
 }

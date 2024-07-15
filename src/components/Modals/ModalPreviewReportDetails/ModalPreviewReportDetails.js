@@ -3,15 +3,15 @@ import './ModalPreviewReportDetails.scss'
 
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../../context/AppContext';
-import TableComponent from '../../TableComponent/TableComponent';
 import { getReportDetailsBy_report_id } from '../../../services/ReportService';
+import TableComponent from '../../Tables/TableComponent/TableComponent';
 
 const { Modal, Button } = require("react-bootstrap")
 
 const ModalPreviewReportDetails = (props) => {
     const navigate = useNavigate()
 
-    const { handleCloseModal, dataPreviewReportDetails, isShowModalPreviewReportDetails } = useContext(AppContext)
+    const { handleCloseModal, dataPreviewReportDetails, isShowModalPreviewReportDetails,setCurrentSelect } = useContext(AppContext)
 
     const [reportName, setReportName] = useState('')
     const [dataReportDetails, setDataReportDetails] = useState({})

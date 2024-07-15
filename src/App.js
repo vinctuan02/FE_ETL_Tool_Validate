@@ -1,6 +1,5 @@
 import './App.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AppLayout from './components/Layout/AppLayout';
 import InputPage from './pages/InputPage/InputPage';
 import OtherPage from './pages/OtherPage/OtherPage';
 import CreateInput from './pages/CreateInputPage/CreateInput';
@@ -11,6 +10,7 @@ import ModalUpdate from './components/Modals/ModalUpdate/ModalUpdate';
 import ModalDelete from './components/Modals/ModalDelete/ModalDelete';
 import ModalPreviewReportDetails from './components/Modals/ModalPreviewReportDetails/ModalPreviewReportDetails';
 import ModalReport from './components/Modals/ModalReport/ModalReport';
+import AppLayout from './components/Components/Layout/AppLayout';
 
 
 function App() {

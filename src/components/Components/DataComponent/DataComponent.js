@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react"
-import { AppContext } from "../../context/AppContext"
-import TableComponent from "../TableComponent/TableComponent"
+import { AppContext } from "../../../context/AppContext"
 import { Button } from 'react-bootstrap';
 import './DataComponent.scss'
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 
-import { getReportDetailsBy_report_id } from '../../services/ReportService'
-import SplineChart from "../Chart/SplineChart/SplineChart";
+import { getReportDetailsBy_report_id } from '../../../services/ReportService'
+import SplineChart from "../../Chart/SplineChart/SplineChart";
+import TableCompare from "../../Tables/TableCompare/TableCompare";
 
 const DataComponent = () => {
 
@@ -23,12 +23,12 @@ const DataComponent = () => {
         }
     }
 
-    useEffect(() => {
-        if (arrDataSelectInput && arrDataSelectInput[0]?.value) {
-            // setCurrentSelectTB(arrDataSelectInput[0].value);
-        }
+    // useEffect(() => {
+    // if (arrDataSelectInput && arrDataSelectInput[0]?.value) {
+    // setCurrentSelectTB(arrDataSelectInput[0].value);
+    // }
 
-    }, [currentSelect])
+    // }, [currentSelect])
 
     useEffect(() => {
         fetchReportDetails()
@@ -95,44 +95,52 @@ const DataComponent = () => {
                 </div>
             </div>
             <div className='row '>
-                <div className='title-table'>
-                    <div className="title-button">
-                        <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
-                        <div className="button">
-                            <Button
-                                variant="success"
-                                onClick={() => handleExport(tableSource, `${currentSelectTB.dataSourceName}.xlsx`)}
-                            >
-                                Export
-                            </Button>
+                <div className="left-50">
+                    <div className='title-table'>
+                        <div className="title-button">
+                            <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
+                            <div className="button">
+                                <Button
+                                    variant="success"
+                                    onClick={() => handleExport(tableSource, `${currentSelectTB.dataSourceName}.xlsx`)}
+                                >
+                                    Export
+                                </Button>
+                            </div>
+                        </div>
+                        <div className="table">
+                            <TableCompare
+                                data={tableSource}
+                                dataCompare={tableSink}
+                            />
                         </div>
                     </div>
-                    <div className="table">
-                        <TableComponent
-                            data={tableSource}
-                        />
+                </div>
+
+                <div className="right-50">
+                    <div className='title-table'>
+                        <div className="title-button">
+                            <div className="title">Table: {currentSelectTB?.dataSinkName}</div>
+                            <div className="button">
+                                <Button
+                                    variant="success"
+                                    onClick={() => handleExport(tableSource, `${currentSelectTB.dataSinkName}.xlsx`)}
+                                >
+                                    Export
+                                </Button>
+                            </div>
+                        </div>
+                        <div className="table">
+                            <TableCompare
+                                data={tableSink}
+                                dataCompare={tableSource}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
             <div className='row '>
-                <div className='title-table'>
-                    <div className="title-button">
-                        <div className="title">Table: {currentSelectTB?.dataSinkName}</div>
-                        <div className="button">
-                            <Button
-                                variant="success"
-                                onClick={() => handleExport(tableSource, `${currentSelectTB.dataSinkName}.xlsx`)}
-                            >
-                                Export
-                            </Button>
-                        </div>
-                    </div>
-                    <div className="table">
-                        <TableComponent
-                            data={tableSink}
-                        />
-                    </div>
-                </div>
+
             </div>
 
 
