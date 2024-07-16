@@ -4,8 +4,8 @@ import { AppContext } from '../../context/AppContext';
 import { ReportProvider } from '../../context/ReportInfoContext';
 import FilterPopper from '../../components/Popper/FilterPopper/FilterPopper';
 import SelectReportPopper from '../../components/Popper/SelectReportPopper/SelectReportPopper';
-import DataComponent from '../../components/Components/DataComponent/DataComponent';
-import CompareComponent from '../../components/Components/CompareComponent/CompareComponent';
+import DetailComponent from '../../components/Components/DetailComponent/DetailComponent';
+import OverviewComponent from '../../components/Components/OverviewComponent/OverviewComponent';
 import { Button } from '@mui/material';
 
 
@@ -50,8 +50,8 @@ const ReportInfoPage = () => {
                     </div>
                 </div>
                 <div className='body-info'>
-                    {selectedButton === 'compare' && <CompareComponent />}
-                    {selectedButton === 'data' && <DataComponent />}
+                    {selectedButton === 'compare' && <OverviewComponent />}
+                    {selectedButton === 'data' && <DetailComponent />}
                 </div>
             </div>
         </ReportProvider>

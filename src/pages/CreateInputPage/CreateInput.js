@@ -72,7 +72,7 @@ const CreateInput = () => {
                             dataSourceTableSelect && dataSourceTableSelect.length > 0 &&
                             < TableSelect
                                 data={dataSourceTableSelect}
-                                setDataSourceOrSink={setArrTBSoureToCreateReport}
+                                handleSelect={setArrTBSoureToCreateReport}
                             />
                         }
                     </div>
@@ -95,7 +95,7 @@ const CreateInput = () => {
                             dataSinkTableSelect && dataSinkTableSelect.length > 0 &&
                             <TableSelect
                                 data={dataSinkTableSelect}
-                                setDataSourceOrSink={setArrTBSinkToCreateReport}
+                                handleSelect={setArrTBSinkToCreateReport}
                             />
                         }
                     </div>

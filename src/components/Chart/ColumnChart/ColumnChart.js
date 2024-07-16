@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const ColumnChart = (props) => {
-    const { data, title } = props;
+    const { dataInput, categories } = props;
+
+    // const dataInput = [
+    //     { name: 'Table Source', data: [10, 20, 30, 40, 50] },
+    //     { name: 'Table Sink', data: [15, 25, 35, 45, 55] }
+    // ];
 
     const [chartState, setChartState] = useState({
         series: [
-            { name: 'Table Source', data: [], },
-            { name: 'Table Sink', data: [], }
+            { name: 'Table Source', data: [0, 0] },
+            { name: 'Table Sink', data: [0, 0] }
         ],
         options: {
             chart: {
@@ -17,7 +22,7 @@ const ColumnChart = (props) => {
                     show: false,
                     tools: {
                         download: true, selection: false, zoom: false,
-                        zoomin: false, zoomout: false, pan: false, reset: false
+                        zoomin: false, zoomout: false, pan: false, reset: true
                     }
                 },
             },
@@ -29,13 +34,13 @@ const ColumnChart = (props) => {
                 },
             },
             dataLabels: {
-                enabled: false,
+                enabled: true,
             },
             stroke: {
                 show: true, width: 2, colors: ['transparent'],
             },
             xaxis: {
-                categories: [],
+                categories: categories,
             },
             yaxis: {
                 // title: { text: title },
@@ -50,13 +55,21 @@ const ColumnChart = (props) => {
     });
 
     useEffect(() => {
-        if (data && data.length > 0) {
+        if (dataInput && dataInput.length > 0) {
+            console.log("categories1: ", categories);
             setChartState(prevState => ({
                 ...prevState,
-                series: data
+                series: dataInput,
+                options: {
+                    ...prevState.options,
+                    xaxis: {
+                        ...prevState.options.xaxis,
+                        categories: categories,
+                    }
+                }
             }));
         }
-    }, [data]);
+    }, [dataInput, categories]);
 
     return (
         <div>

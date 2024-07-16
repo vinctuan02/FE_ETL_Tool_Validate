@@ -17,22 +17,17 @@ export const AppProvider = ({ children }) => {
 
     const [isShowModalDelete, setIsShowModalDelete] = useState(false)
     const [dataDelete, setDataDelete] = useState([])
-
     const [isShowModalPreviewReportDetails, setIsShowModalPreviewReportDetails] = useState(false)
     const [dataPreviewReportDetails, setDataPreviewReportDetails] = useState()
 
     const [isShowModalReport, setIsShowModalReport] = useState(false)
 
     const [listReports, setListReports] = useState([])
-
     const [keySearch, setKeySearch] = useState('')
 
     const [currentSelect, setCurrentSelect] = useState({}) // report
-
-    const [reportDetailsCurrent, setReportDetailsCurrent] = useState()
-
+    const [reportDetailsCurrent, setReportDetailsCurrent] = useState() // report detail
     const [arrDataSelectInput, setArrDataSelectInput] = useState() // arr schema-tb
-
     const [currentSelectTB, setCurrentSelectTB] = useState() // tb in report
 
     //data component
@@ -62,6 +57,11 @@ export const AppProvider = ({ children }) => {
     const [allTBSink, setAllTBSink] = useState([])
     const [isBlockBtn, setIsBlockBtn] = useState(true)
 
+    // more popper
+    const [arrSourceSinkToCount, setArrSourceSinkToCount] = useState([])
+
+
+//
     const getTB = async () => {
         if (currentSelectTB) {
             const inputSource = { nameDB: currentSelectTB.schemaSourceName, nameTB: currentSelectTB.dataSourceName }
@@ -298,7 +298,10 @@ export const AppProvider = ({ children }) => {
         nameSchemaSource, setNameSchemaSource,
         nameSchemaSink, setNameSchemaSink, arrToCreateReport,
         allTBSource, setAllTBSource, allTBSink, setAllTBSink,
-        isBlockBtn, setIsBlockBtn
+        isBlockBtn, setIsBlockBtn,
+
+        //more popper
+        arrSourceSinkToCount,setArrSourceSinkToCount
     }
 
     return <AppContext.Provider value={value}>

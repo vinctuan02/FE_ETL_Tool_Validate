@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../../../context/AppContext"
 import { Button } from 'react-bootstrap';
-import './DataComponent.scss'
+import './DetailComponent.scss'
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 
@@ -9,7 +9,7 @@ import { getReportDetailsBy_report_id } from '../../../services/ReportService'
 import SplineChart from "../../Chart/SplineChart/SplineChart";
 import TableCompare from "../../Tables/TableCompare/TableCompare";
 
-const DataComponent = () => {
+const DetailComponent = () => {
 
     const { currentSelectTB, setCurrentSelectTB, currentSelect, isShowModalReport,
         setReportDetailsCurrent, tableSource, tableSink,
@@ -148,4 +148,4 @@ const DataComponent = () => {
     )
 }
 
-export default DataComponent
+export default DetailComponent

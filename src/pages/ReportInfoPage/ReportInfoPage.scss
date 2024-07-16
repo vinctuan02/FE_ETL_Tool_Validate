@@ -7,11 +7,11 @@
             .btn-info1 {
                 padding: 7px 20px !important;
                 transition: transform 0.3s ease-in-out;
-                margin-right: 10px; // thêm khoảng cách giữa các nút nếu cần
             }
 
             .btn-info1:hover {
                 transform: scale(1.05);
+                /* Tăng kích thước lên 5% khi hover */
             }
         }
 
@@ -19,6 +19,8 @@
             display: flex;
             flex-direction: row;
             gap: 10px;
+
+
             transition: transform 0.3s ease-in-out;
 
             .select-table {

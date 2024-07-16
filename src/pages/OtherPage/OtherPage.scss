@@ -1,25 +1,5 @@
+/* OtherPage.scss */
 .container-sub-filter {
-    border: 1px solid #ccc;
-    display: flex;
-    flex-direction: column;
-
-    padding: 10px;
-    border-radius: 5px;
-    width: 250px;
-
-    .r {
-
-        .nav-sub {
-            // border: 1px solid;
-        }
-
-        .body-sub {
-            // border: 1px solid;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin-top: 10px;
-            width: auto;
-        }
-    }
-}
+    width: 100%; /* Hoặc giá trị lớn hơn */
+  }
+  

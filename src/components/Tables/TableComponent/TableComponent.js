@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { AppContext } from '../../../context/AppContext';
-import { ReportInfoContext } from '../../../context/ReportInfoContext';
 
 const TableComponent = (props) => {
 
@@ -17,10 +16,6 @@ const TableComponent = (props) => {
         handleShowReportDetails,
         setCurrentSelect
     } = useContext(AppContext)
-
-    const {
-
-    } = useContext(ReportInfoContext)
 
     const [selectedRecord, setSelectedRecord] = useState(null);
 
@@ -46,7 +41,6 @@ const TableComponent = (props) => {
                 handleShowReportDetails(item)
             }
             if (setCurrentSelect) {
-                console.log('set current select', item);
                 setCurrentSelect(item)
             }
             setSelectedRecord(item);
