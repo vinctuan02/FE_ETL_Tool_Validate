@@ -9,7 +9,7 @@ import Table from './Table/Table';
 import Range from './Range/Range';
 
 const OptionChartPopper = (props) => {
-    const {isDisabled} = props
+    const { isDisabled } = props
 
     const items = [
         {
@@ -18,8 +18,23 @@ const OptionChartPopper = (props) => {
             children: <Table />
         },
         {
-            key: 'range',
-            label: 'Range',
+            key: 'tab2',
+            label: 'tab2',
+            children: <Range />
+        },
+        {
+            key: 'tab3',
+            label: 'tab3',
+            children: <Range />
+        },
+        {
+            key: 'tab4',
+            label: 'tab4',
+            children: <Range />
+        },
+        {
+            key: 'tab5',
+            label: 'tab5',
             children: <Range />
         }
     ]
@@ -99,10 +114,17 @@ const OptionChartPopper = (props) => {
 
                         <div className='r2'>
                             <div className='tabs'>
-                                <Tabs defaultActiveKey="find"
+                                <Tabs defaultActiveKey="table"
                                     items={items}
                                     onChange={onChange} />
                             </div>
+                        </div>
+
+                        <div>
+                            {/* <label for="hideEmptyTable">
+                                <input type="checkbox" id="hideEmptyTable" name="hideEmptyTable"/>
+                                    Hide empty table
+                            </label> */}
                         </div>
                     </Box>
                 </ClickAwayListener>

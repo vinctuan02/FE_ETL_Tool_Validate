@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './TableCompare.scss';
 import Popper from '@mui/material/Popper';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import { Button } from '@mui/material';
+import { AppContext } from '../../../context/AppContext';
 
-const TableCompare = ({ data, dataCompare, showRowNumbers = true }) => {
+const TableCompare = (props) => {
+
+    const { data, dataCompare, showRowNumbers = true } = props
+
+    const { handleOpenDraggableWindown } = useContext(AppContext)
+
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedCellData, setSelectedCellData] = useState(null);
 
@@ -53,9 +60,8 @@ const TableCompare = ({ data, dataCompare, showRowNumbers = true }) => {
         }
     };
 
-    const handleClickCellThead = (key, event) => {
-        console.log(key);
-        setAnchorEl(anchorEl ? null : event.currentTarget);
+    const handleClickBtn = (fieldName) => {
+        handleOpenDraggableWindown(fieldName)
     }
 
     return (
@@ -65,10 +71,14 @@ const TableCompare = ({ data, dataCompare, showRowNumbers = true }) => {
                     <tr>
                         {showRowNumbers && <th>#</th>}
                         {keys.map((key, index) => (
-                            <th key={index} 
+                            <th key={index}
                             // onClick={(event) => handleClickCellThead(key, event)}
                             >
-                                {key}
+                                <Button
+                                    onClick={() => handleClickBtn(key)}
+                                >
+                                    {key}
+                                </Button>
                             </th>
                         ))}
                     </tr>
@@ -87,7 +97,7 @@ const TableCompare = ({ data, dataCompare, showRowNumbers = true }) => {
                 </tbody>
             </table>
             {/* Popper */}
-            <Popper
+            {/* <Popper
                 open={Boolean(anchorEl)}
                 anchorEl={anchorEl}
                 placement="bottom"
@@ -110,7 +120,7 @@ const TableCompare = ({ data, dataCompare, showRowNumbers = true }) => {
                 <Paper elevation={3} style={{ padding: '10px' }}>
                     <Typography variant="body2">{selectedCellData}</Typography>
                 </Paper>
-            </Popper>
+            </Popper> */}
         </div>
     );
 };

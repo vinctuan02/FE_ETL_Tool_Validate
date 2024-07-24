@@ -8,6 +8,7 @@ const Table = () => {
     const { reportDetailsCurrent, setArrSourceSinkToCount } = useContext(AppContext)
 
     const handleSelect = (items) => {
+        // console.log("item: ", items);
         setArrSourceSinkToCount(items)
     }
 

@@ -11,7 +11,7 @@ import { Button } from '@mui/material';
 
 const ReportInfoPage = () => {
     const { currentSelect, arrDataSelectInput } = useContext(AppContext);
-    const [selectedButton, setSelectedButton] = useState('compare');
+    const [selectedButton, setSelectedButton] = useState('overview');
 
     const handleButtonClick = (buttonName) => {
         setSelectedButton(buttonName);
@@ -23,18 +23,18 @@ const ReportInfoPage = () => {
                 <div className='header-report-info'>
                     <div className='nav-info'>
                         <Button
-                            variant={selectedButton === 'compare' ? 'contained' : 'text'}
-                            // color={selectedButton === 'compare' ? 'outlined' : 'outlined'}
+                            variant={selectedButton === 'overview' ? 'contained' : 'text'}
+                            // color={selectedButton === 'overview' ? 'outlined' : 'outlined'}
                             // variant={'default'}
-                            onClick={() => handleButtonClick('compare')}
+                            onClick={() => handleButtonClick('overview')}
                             className='btn-info1'
                         >
                             Overview
                         </Button>
                         <Button
-                            variant={selectedButton === 'data' ? 'contained' : 'text'}
-                            // color={selectedButton === 'data' ? 'outlined' : 'outlined'}
-                            onClick={() => handleButtonClick('data')}
+                            variant={selectedButton === 'detail' ? 'contained' : 'text'}
+                            // color={selectedButton === 'detail' ? 'outlined' : 'outlined'}
+                            onClick={() => handleButtonClick('detail')}
                             className='btn-info1'
                         >
                             Detail
@@ -50,8 +50,11 @@ const ReportInfoPage = () => {
                     </div>
                 </div>
                 <div className='body-info'>
-                    {selectedButton === 'compare' && <OverviewComponent />}
-                    {selectedButton === 'data' && <DetailComponent />}
+                    {selectedButton === 'overview' &&
+                        <OverviewComponent
+                            setSelectedButton={setSelectedButton}
+                        />}
+                    {selectedButton === 'detail' && <DetailComponent />}
                 </div>
             </div>
         </ReportProvider>

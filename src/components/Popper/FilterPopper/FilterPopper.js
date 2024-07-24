@@ -36,6 +36,7 @@ const FilterPopper = () => {
     };
 
     const handleChangeSelect = (event) => {
+        console.log(JSON.parse(event.target.value));
         setCurrentSelectTB(JSON.parse(event.target.value));
     };
 

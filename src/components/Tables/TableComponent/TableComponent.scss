@@ -1,31 +1,48 @@
-.MuiTablePagination-toolbar {
-    min-height: 52px;
-    padding-right: 2px;
-    align-items: baseline;
-    display: flex;
-    flex-direction: row;
-}
+// .MuiTablePagination-toolbar {
+//     min-height: 52px;
+//     padding-right: 2px;
+//     align-items: baseline;
+//     display: flex;
+//     flex-direction: row;
+// }
 
-.MuiToolbar-root {
-    min-height: 52px;
-    padding-right: 2px;
-    align-items: baseline;
-    display: flex;
-    flex-direction: row;
-}
+// .MuiToolbar-root {
+//     min-height: 52px;
+//     padding-right: 2px;
+//     align-items: baseline;
+//     display: flex;
+//     flex-direction: row;
+// }
 
-.MuiToolbar-gutters {
-    min-height: 52px;
-    padding-right: 2px;
-    align-items: baseline;
-    display: flex;
-    flex-direction: row;
-}
+// .MuiToolbar-gutters {
+//     min-height: 52px;
+//     padding-right: 2px;
+//     align-items: baseline;
+//     display: flex;
+//     flex-direction: row;
+// }
 
-.MuiToolbar-regular {
-    min-height: 52px;
-    padding-right: 2px;
-    align-items: baseline;
-    display: flex;
-    flex-direction: row;
+// .MuiToolbar-regular {
+//     min-height: 52px;
+//     padding-right: 2px;
+//     align-items: baseline;
+//     display: flex;
+//     flex-direction: row;
+// }
+
+.container-table-component {
+    // border: 1px solid red;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    width: 100%;
+    border-collapse: collapse;
+
+    border-radius: 10px;
+
+    overflow-x: auto;
+    white-space: nowrap;
+
+    max-height: 67vh;
+    // max-width: 60%;
 }

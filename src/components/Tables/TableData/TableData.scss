@@ -1,15 +1,13 @@
-// TableSelect.scss
-.table-container {
-    width: 100%;
-    outline: none;
-    /* Loại bỏ viền xung quanh khi focus */
-}
-
 .table-data {
+
+
     width: 100%;
     border-collapse: collapse;
 
     border-radius: 10px;
+
+    overflow-x: auto;
+    white-space: nowrap;
 
     th,
     td {
@@ -17,19 +15,29 @@
         /* Dòng kẻ ngang giữa các hàng */
         padding: 8px;
         text-align: left;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     th {
         background-color: #f2f2f2;
+        font-weight: bold;
+        cursor: pointer;
     }
 
-    tbody tr:last-child td {
-        border-bottom: none;
-        /* Loại bỏ dòng kẻ ngang cho hàng cuối cùng */
+    td {
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
 
-    tbody tr.selected {
-        background-color: #f1f1f1;
-        /* Màu nền khi hàng được chọn */
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    td.selected {
+        font-weight: bold;
+        background-color: #e1f5fe;
     }
 }

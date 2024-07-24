@@ -1,11 +1,10 @@
 import React from 'react'
-import OptionChartPopper from '../../components/Popper/OptionChartPopper/OptionChartPopper'
-import TableData from '../../components/Tables/TableData/TableData'
+import FormInputJDBC from '../../components/FormInputJDBC/FormInputJDBC'
 
 const OtherPage = () => {
   return (
     <div>
-      <TableData />
+      <FormInputJDBC />
     </div>
   )
 }

@@ -4,6 +4,8 @@ import './TableSelect.scss'; // Import SCSS file for styling
 const TableSelect = (props) => {
     const { data, handleSelect, hasIndex, hiddenFields = [] } = props;
 
+    console.log("data: ", data);
+
     const [selectedRows, setSelectedRows] = useState([]);
     const [selectAll, setSelectAll] = useState(false); // State to manage select all checkbox
     const [lastSelectedIndex, setLastSelectedIndex] = useState(null); // State to store last selected index for shift-click
@@ -11,7 +13,6 @@ const TableSelect = (props) => {
     useEffect(() => {
         const selectedRecords = selectedRows.map(index => data[index]);
         handleSelect(selectedRecords);
-        console.log(selectedRecords);
     }, [selectedRows]);
 
     if (!data || !data.length) {

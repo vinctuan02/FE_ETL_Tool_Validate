@@ -14,7 +14,7 @@ const AppLayout = () => {
                             <Header />
                         </div>
                     </div>
-                    <div style={{ height: '70px' }}>
+                    <div style={{ height: '8vh' }}>
                     </div>
                     <div className="container-outlet">
                         <Outlet />

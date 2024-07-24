@@ -17,7 +17,7 @@ const ColumnChart = (props) => {
         options: {
             chart: {
                 type: 'bar',
-                height: 350,
+                height: 450,
                 toolbar: {
                     show: false,
                     tools: {
@@ -56,7 +56,6 @@ const ColumnChart = (props) => {
 
     useEffect(() => {
         if (dataInput && dataInput.length > 0) {
-            console.log("categories1: ", categories);
             setChartState(prevState => ({
                 ...prevState,
                 series: dataInput,

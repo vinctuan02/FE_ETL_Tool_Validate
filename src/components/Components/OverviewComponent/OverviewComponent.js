@@ -4,9 +4,9 @@ import { countRecordsTB, getReportDetailsBy_report_id } from '../../../services/
 import { AppContext } from '../../../context/AppContext'
 import ColumnChart from '../../Chart/ColumnChart/ColumnChart'
 import OptionChartPopper from '../../Popper/OptionChartPopper/OptionChartPopper'
+import TableComponent from '../../Tables/TableComponent/TableComponent'
 
 const OverviewComponent = (props) => {
-    // const [dataChart, setDataChart] = useState([])
 
     const [dataColumnChart, setDataColumnChart] = useState({})
 
@@ -17,8 +17,12 @@ const OverviewComponent = (props) => {
     const {
         currentSelect, isShowModalReport,
         reportDetailsCurrent, setReportDetailsCurrent,
-        arrSourceSinkToCount
+        arrSourceSinkToCount, setCurrentSelectTB,
     } = useContext(AppContext)
+
+    const {
+        setSelectedButton
+    } = props
 
     useEffect(() => {
         fetchReportDetails()
@@ -26,6 +30,7 @@ const OverviewComponent = (props) => {
 
 
     useEffect(() => {
+        console.log("adgaag: ", reportDetailsCurrent);
         fetchDataColumnChart(reportDetailsCurrent);
     }, [reportDetailsCurrent]);
 
@@ -88,6 +93,11 @@ const OverviewComponent = (props) => {
         return count
     }
 
+    const actionDetail = (item) => {
+        setSelectedButton('detail')
+        setCurrentSelectTB(item)
+    }
+
     return (
         <div className='container-compare-component'>
             <div className='r1'>
@@ -104,6 +114,26 @@ const OverviewComponent = (props) => {
                             categories={arrSourceName}
                             arrSchemaSource={arrSchemaSource}
                             arrSchemaSink={arrSchemaSink}
+                        />
+                    </div>
+                </div>
+
+            </div>
+            <div className='ovr2'>
+                <div className='container-table'>
+                    <div className='title-btn'>
+                        {currentSelect && currentSelect.reportName ? (
+                            <span className='title'>Report: {currentSelect.reportName} </span>
+                        ) : (
+                            <span className='title'>Report</span>
+                        )}
+                    </div>
+                    <div className='table'>
+                        <TableComponent
+                            data={reportDetailsCurrent}
+                            hiddenFields={['detail_id', 'report_id']}
+                            hasDetail={true}
+                            actionDetail={actionDetail}
                         />
                     </div>
                 </div>

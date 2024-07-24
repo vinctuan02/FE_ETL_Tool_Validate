@@ -10,8 +10,15 @@ const countRecordsTB = (input) => {
 
 const getTable = (nameTB, filter) => {
     const input = { ...nameTB, ...filter }
-    // console.log(input);
     return axios.get(`get-table`, {
+        params: input
+    })
+}
+
+const groupByColumn = (input) => {
+    console.log(input);
+
+    return axios.get(`/group-by-column`, {
         params: input
     })
 }
@@ -56,6 +63,24 @@ const getNameTablesOfSchema = (schemaName) => {
     })
 }
 
+const testConnection = (input) => {
+    return axios.get(`/test-connection`, {
+        params: input
+    })
+}
+
+const createConnection = (input) => {
+    return axios.get(`/create-connection`, {
+        params: input
+    })
+}
+
+const getCountRecordTables = (input) => {
+    return axios.get(`/count-record-tables`, {
+        params: input
+    })
+}
+
 export {
     getReportsAxios,
     getReportByReportNameAxios,
@@ -68,5 +93,10 @@ export {
 
     countRecordsTB,
     getTable,
-    getNameTablesOfSchema
+    groupByColumn,
+    getNameTablesOfSchema,
+    testConnection,
+    createConnection,
+
+    getCountRecordTables
 }

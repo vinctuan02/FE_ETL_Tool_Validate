@@ -11,9 +11,16 @@ import ModalDelete from './components/Modals/ModalDelete/ModalDelete';
 import ModalPreviewReportDetails from './components/Modals/ModalPreviewReportDetails/ModalPreviewReportDetails';
 import ModalReport from './components/Modals/ModalReport/ModalReport';
 import AppLayout from './components/Components/Layout/AppLayout';
+import DraggableWindow from './components/DraggableWindow/DraggableWindow';
+import { useContext } from 'react';
+import { AppContext } from './context/AppContext';
+import GroupWindown from './components/DraggableWindow/GroupWindow/GroupWindown';
 
 
 function App() {
+
+    const { isShowDraggableWindow, isShowGroupWindow } = useContext(AppContext)
+
     return (
         <>
             <BrowserRouter>
@@ -47,6 +54,15 @@ function App() {
                     draggable
                     pauseOnHover
                 />
+                {
+                    isShowDraggableWindow &&
+                    <DraggableWindow />
+                }
+
+                {
+                    isShowGroupWindow &&
+                    <GroupWindown />
+                }
             </BrowserRouter >
         </>
     );

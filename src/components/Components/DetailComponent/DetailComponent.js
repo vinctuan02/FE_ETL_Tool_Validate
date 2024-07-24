@@ -8,6 +8,7 @@ import { saveAs } from 'file-saver';
 import { getReportDetailsBy_report_id } from '../../../services/ReportService'
 import SplineChart from "../../Chart/SplineChart/SplineChart";
 import TableCompare from "../../Tables/TableCompare/TableCompare";
+import TableData from "../../Tables/TableData/TableData";
 
 const DetailComponent = () => {
 
@@ -70,7 +71,7 @@ const DetailComponent = () => {
 
     return (
         <div className='container-data'>
-            <div className='row'>
+            {/* <div className='row1'>
                 <div className='left title-body'>
                     <div className="title">
                         <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
@@ -93,9 +94,9 @@ const DetailComponent = () => {
                         />
                     </div>
                 </div>
-            </div>
-            <div className='row '>
-                <div className="left-50">
+            </div> */}
+            <div className='row2'>
+                <div className="left">
                     <div className='title-table'>
                         <div className="title-button">
                             <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
@@ -117,7 +118,7 @@ const DetailComponent = () => {
                     </div>
                 </div>
 
-                <div className="right-50">
+                <div className="right">
                     <div className='title-table'>
                         <div className="title-button">
                             <div className="title">Table: {currentSelectTB?.dataSinkName}</div>

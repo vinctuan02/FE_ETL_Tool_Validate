@@ -1,6 +1,5 @@
 .container-app-layout {
-    padding: 20px 0px 0px 335px;
-
+    padding: 20px 0px 0px 19.2vw;
     .container-header-outlet {
         display: flex;
         gap: 10px;
@@ -22,7 +21,7 @@
             // top: 0;
             // left: 0;
             // border: 1px solid red;
-            width: 75%;
+            width: 80vw;
 
             z-index: 1000;
         }

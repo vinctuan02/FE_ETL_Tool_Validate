@@ -30,7 +30,7 @@ export const AppProvider = ({ children }) => {
     const [arrDataSelectInput, setArrDataSelectInput] = useState() // arr schema-tb
     const [currentSelectTB, setCurrentSelectTB] = useState() // tb in report
 
-    //data component
+    //detail component
     const [tableSource, setTableSource] = useState()
     const [tableSink, setTableSink] = useState()
 
@@ -60,8 +60,15 @@ export const AppProvider = ({ children }) => {
     // more popper
     const [arrSourceSinkToCount, setArrSourceSinkToCount] = useState([])
 
+    //DraggableWindow
+    const [isShowDraggableWindow, setIsShowDraggableWindow] = useState(false)
+    const [nameColumn, setNameColumn] = useState()
 
-//
+    // group windown
+    const [isShowGroupWindow, setIsShowGroupWindow] = useState(false)
+
+
+    //
     const getTB = async () => {
         if (currentSelectTB) {
             const inputSource = { nameDB: currentSelectTB.schemaSourceName, nameTB: currentSelectTB.dataSourceName }
@@ -157,6 +164,11 @@ export const AppProvider = ({ children }) => {
         setKeySearch(event.target.value)
     }
 
+    const handleOpenDraggableWindown = (fieldName) => {
+        setNameColumn(fieldName)
+        setIsShowDraggableWindow(true)
+    }
+
     const convertToDataInputSelect = (data) => {
         if (data && data.length > 0) {
             // const arr = [{ value: {}, label: 'Select an option' }]
@@ -187,12 +199,13 @@ export const AppProvider = ({ children }) => {
 
         if (arrTBSoureToCreateReport.length === arrTBSinkToCreateReport.length) {
             setIsBlockBtn(false)
+            console.log("arrTBSoureToCreateReport: ", arrTBSoureToCreateReport);
             for (let i = 0; i < arrTBSoureToCreateReport.length; i++) {
                 const objectReport = {
                     schemaSourceName: nameSchemaSource,
                     schemaSinkName: nameSchemaSink,
-                    dataSourceName: arrTBSoureToCreateReport[i].name,
-                    dataSinkName: arrTBSinkToCreateReport[i].name
+                    dataSourceName: arrTBSoureToCreateReport[i].table_name,
+                    dataSinkName: arrTBSinkToCreateReport[i].table_name
                 }
                 arrObjects.push(objectReport)
 
@@ -219,6 +232,10 @@ export const AppProvider = ({ children }) => {
             setIsBlockBtn(true)
         }
     }, [arrTBSinkToCreateReport])
+
+    useEffect(() => {
+        console.log("arrToCreateReport: ", arrToCreateReport);
+    }, [arrToCreateReport])
 
     useEffect(() => {
         getAllTBSource()
@@ -301,7 +318,15 @@ export const AppProvider = ({ children }) => {
         isBlockBtn, setIsBlockBtn,
 
         //more popper
-        arrSourceSinkToCount,setArrSourceSinkToCount
+        arrSourceSinkToCount, setArrSourceSinkToCount,
+
+        //DraggableWindow
+        isShowDraggableWindow, setIsShowDraggableWindow,
+        handleOpenDraggableWindown,
+
+        //group windown
+        isShowGroupWindow, setIsShowGroupWindow,
+        nameColumn,
     }
 
     return <AppContext.Provider value={value}>

@@ -14,19 +14,19 @@
     //     }
     // }
 
-    .row {
+    .row1 {
         display: flex;
         flex-direction: row;
 
-        // gap: 15px;
+        gap: 10px;
 
         .left {
             // border: 1px solid red;
             width: 70%;
             padding: 10px;
 
-            margin-left: 10px;
-            margin-right: 10px;
+            // margin-left: 10px;
+            // margin-right: 10px;
 
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -48,8 +48,8 @@
         }
 
         .right {
-            width: 27%;
-            padding-top: 10px;
+            width: 30%;
+            padding: 10px;
             // margin-right: 10px;
             // margin-left: 10px;
 
@@ -73,48 +73,46 @@
             transform: scale(1.01);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
+    }
 
-        .left-50 {
+    .row2 {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        .left,
+        .right {
             width: 50%;
-        }
-
-        .right-50 {
-            width: 50%;
-        }
-
-
-        .title-table {
+            /* Phân chia bằng nhau giữa left và right */
             padding: 10px;
-            // margin-left: 10px;
-            // border: 1px solid red;
-            // width: 98%;
-            // border-radius: 5px;
+            border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            // padding-top: 10px;
 
-            .title-button {
-                // border: 1px solid red;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
+            .title-table {
+                padding: 10px;
+                border-radius: 5px;
+                // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 
-                .title {
-                    font-size: 16px;
-                    font-weight: bold;
-                    color: #333;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                    margin-bottom: 10px;
+                .title-button {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+
+                    .title {
+                        font-size: 16px;
+                        font-weight: bold;
+                        color: #333;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        margin-bottom: 10px;
+                    }
                 }
-            }
 
-            .table {
-                // border: 1px solid red;
-                margin-top: 10px;
+                .table {
+                    margin-top: 10px;
+                }
             }
         }
     }
 
-
-    .row {}
 }

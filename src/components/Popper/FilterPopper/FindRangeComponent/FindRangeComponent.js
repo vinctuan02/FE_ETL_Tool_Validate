@@ -5,8 +5,6 @@ import Find from '../Find/Find';
 import Range from '../Range/Range';
 import Group from '../Group/Group';
 
-const { TabPane } = Tabs;
-
 const FindRangeComponent = () => {
     const [activeKey, setActiveKey] = useState('find');
 
@@ -14,21 +12,29 @@ const FindRangeComponent = () => {
         setActiveKey(key);
     };
 
+    const items = [
+        {
+            key: 'find',
+            label: 'Find',
+            children: <Find />
+        },
+        {
+            key: 'range',
+            label: 'Range',
+            children: <Range />
+        },
+        // {
+        //     key: 'group',
+        //     label: 'Group',
+        //     children: <Group />
+        // }
+    ];
+
     return (
         <div className='container-sub-filter'>
             <div className='r'>
                 <div className='nav-sub'>
-                    <Tabs activeKey={activeKey} onChange={handleTabChange}>
-                        <TabPane tab="Find" key="find">
-                            <Find />
-                        </TabPane>
-                        <TabPane tab="Range" key="range">
-                            <Range />
-                        </TabPane>
-                        <TabPane tab="Group" key="group">
-                            <Group />
-                        </TabPane>
-                    </Tabs>
+                    <Tabs activeKey={activeKey} onChange={handleTabChange} items={items} />
                 </div>
             </div>
         </div>

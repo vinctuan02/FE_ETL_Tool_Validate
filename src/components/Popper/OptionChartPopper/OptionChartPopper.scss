@@ -1,5 +1,6 @@
 .container-option-popper {
     width: auto; // Bạn có thể thay đổi giá trị này tùy theo nhu cầu
+    min-width: 200px;
     max-width: 100%; // Đảm bảo rằng popper không vượt quá chiều rộng của cửa sổ trình duyệt
     padding: 16px;
     background-color: #fff;
