@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import './ModalPreviewInput.scss'
 import { toast } from 'react-toastify';
 import { AppContext } from '../../../context/AppContext';
-import { bulkCreateReportDetails, getReportByReportNameAxios, postCreateReport } from '../../../services/ReportService';
+import { bulkCreateJDBCConnections, bulkCreateReportDetails, getReportByReportNameAxios, postCreateReport } from '../../../services/ReportService';
 import TableComponent from '../../Tables/TableComponent/TableComponent';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,9 +13,11 @@ const ModalPreviewInput = (props) => {
 
     const navigate = useNavigate()
 
-    const { isShowModalPreviewInput, handleCloseModal,
+    const {
+        isShowModalPreviewInput, handleCloseModal,
         nameFileReport = '.xlsx', dataReport, getReports,
-        nameReport, setNameReport, setCurrentSelect
+        nameReport, setNameReport, setCurrentSelect,
+        JDBCSource, JDBCSink
     } = useContext(AppContext)
 
     const [isDisableButton, setIsDisableButton] = useState(true)
@@ -44,6 +46,8 @@ const ModalPreviewInput = (props) => {
 
     const handleInsert = async () => {
 
+
+        // create report
         const report = {
             reportName: nameReport,
             fileName: nameFileReport === '' ? 'by tool' : nameFileReport,
@@ -51,12 +55,26 @@ const ModalPreviewInput = (props) => {
         }
 
         const response = await postCreateReport(report)
+        const report_id = response.data.report_id
 
         setCurrentSelect(response.data)
 
+        //create jdbc connections
+        const arrInfoJDBC = [
+            JDBCSource,
+            JDBCSink
+        ]
+
+        const responseBulkCreateJDBCConnections = await bulkCreateJDBCConnections(arrInfoJDBC)
+        const source_connection_id = responseBulkCreateJDBCConnections.data[0].id
+        const sink_connection_id = responseBulkCreateJDBCConnections.data[1].id
+
+        // create reportdetails
         const arrayReportDetails = dataReport.map((item) => ({
             ...item,
-            report_id: response.data.report_id
+            report_id: report_id,
+            source_connection_id: source_connection_id,
+            sink_connection_id: sink_connection_id
         }));
 
         const responseBulkCreate = await bulkCreateReportDetails(arrayReportDetails)

@@ -21,6 +21,12 @@ const sidebarNavItems = [
         to: '/report-info',
         section: 'report-info'
     },
+    // {
+    //     display: 'Result',
+    //     icon: <i className="fa-solid fa-square-poll-vertical"></i>, // Icon để so sánh dữ liệu
+    //     to: '/result',
+    //     section: 'result'
+    // },
     {
         display: 'Other',
         icon: <i className="fa-solid fa-gears"></i>, // Icon khác

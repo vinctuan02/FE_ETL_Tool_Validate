@@ -15,6 +15,7 @@ import DraggableWindow from './components/DraggableWindow/DraggableWindow';
 import { useContext } from 'react';
 import { AppContext } from './context/AppContext';
 import GroupWindown from './components/DraggableWindow/GroupWindow/GroupWindown';
+import ResultPage from './pages/ResultPage/ResultPage';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                         <Route path='/input' element={<InputPage />} />
                         <Route path='/create-input' element={<CreateInput />} />
                         <Route path='/report-info' element={<ReportInfoPage />} />
+                        <Route path='/result' element={<ResultPage />} />
                         <Route path='/other' element={<OtherPage />} />
                     </Route>
                 </Routes>

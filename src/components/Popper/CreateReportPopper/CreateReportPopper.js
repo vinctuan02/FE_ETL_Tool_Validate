@@ -64,12 +64,6 @@ const CreateReportPopper = () => {
                         </Button>
 
                         <div className='r'>
-                            <h5>
-                                Create report
-                            </h5>
-                        </div>
-
-                        <div className='r'>
                             <CreateInput />
                         </div>
                     </Box>

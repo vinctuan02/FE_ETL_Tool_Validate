@@ -81,6 +81,11 @@ const getCountRecordTables = (input) => {
     })
 }
 
+// jdbc
+const bulkCreateJDBCConnections = (arrayInfoJDBC) => {
+    return axios.post(`/jdbc/bulk-create-jdbc-connections`, arrayInfoJDBC)
+}
+
 export {
     getReportsAxios,
     getReportByReportNameAxios,
@@ -98,5 +103,8 @@ export {
     testConnection,
     createConnection,
 
-    getCountRecordTables
+    getCountRecordTables,
+
+    //jdbc
+    bulkCreateJDBCConnections
 }

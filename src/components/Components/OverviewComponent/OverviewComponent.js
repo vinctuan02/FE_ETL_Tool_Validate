@@ -30,7 +30,6 @@ const OverviewComponent = (props) => {
 
 
     useEffect(() => {
-        console.log("adgaag: ", reportDetailsCurrent);
         fetchDataColumnChart(reportDetailsCurrent);
     }, [reportDetailsCurrent]);
 

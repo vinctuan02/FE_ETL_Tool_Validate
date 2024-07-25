@@ -9,13 +9,13 @@ import TableSelect from '../Tables/TableSelect/TableSelect';
 
 const FormInputJDBC = (props) => {
 
-    const { changeSelectSchema, handleSelect } = props
+    const { changeSelectSchema, handleSelect, saveJDBC } = props
 
-    const [typeDatabase, setTypeDatabase] = useState()
+    const [typeDatabase, setTypeDatabase] = useState('')
     const [host, setHost] = useState('10.10.11.149')
-    const [user, setUser] = useState('root')
+    const [username, setUsername] = useState('root')
     const [password, setPassword] = useState('oracle_4U')
-    const [jdbc, setJDBC] = useState()
+    const [jdbc_url, setJDBC] = useState('')
 
     const [allNameDB, setAllNameDB] = useState([])
     const [selectedOption, setSelectedOption] = useState('');
@@ -32,22 +32,24 @@ const FormInputJDBC = (props) => {
         if (key === 'host') {
             setHost(event.target.value)
         }
-        if (key === 'user') {
-            setUser(event.target.value)
+        if (key === 'username') {
+            setUsername(event.target.value)
         }
         if (key === 'password') {
             setPassword(event.target.value)
         }
-        if (key === 'jdbc') {
+        if (key === 'jdbc_url') {
             setJDBC(event.target.value)
         }
     }
 
     const handleTestConnection = async () => {
         const config = {
+            typeDatabase: typeDatabase,
             host: host,
-            user: user,
-            password: password
+            username: username,
+            password: password,
+            jdbc_url: jdbc_url
         }
         const res = await testConnection(config)
         if (res && res.errCode === 0) {
@@ -59,10 +61,15 @@ const FormInputJDBC = (props) => {
 
     const handleFinish = async () => {
         const config = {
+            typeDatabase: typeDatabase,
             host: host,
-            user: user,
-            password: password
+            username: username,
+            password: password,
+            jdbc_url: jdbc_url
         }
+
+        saveJDBC(config)
+
         const res = await createConnection(config)
         if (res && res.errCode === 0) {
             toast.success(res.message)
@@ -130,10 +137,10 @@ const FormInputJDBC = (props) => {
                 </div>
                 <div className='row r2'>
                     <div className='col-md-6 label-input'>
-                        <label>User</label>
-                        <input placeholder='User'
-                            onChange={(event) => handleOnChangeInput(event, 'user')}
-                            value={user}
+                        <label>Username</label>
+                        <input placeholder='Username'
+                            onChange={(event) => handleOnChangeInput(event, 'username')}
+                            value={username}
                         ></input>
                     </div>
                     <div className='col-md-6 label-input'>
@@ -146,22 +153,22 @@ const FormInputJDBC = (props) => {
                 </div>
                 <div className='row r3'>
                     <div className='col-md-12 label-input'>
-                        <label>JDBC</label>
+                        <label>JDBC url</label>
                         <input placeholder='jdbc:mariadb://localhost:3306/'
-                            onChange={(event) => handleOnChangeInput(event, 'jdbc')}
-                            value={jdbc}
+                            onChange={(event) => handleOnChangeInput(event, 'jdbc_url')}
+                            value={jdbc_url}
                         ></input>
                     </div>
                 </div>
                 <div className='row r4'>
-                    <div className='col-md-8 left'>
+                    <div className='col-md-8 button-form-input-jdbc-left'>
                         <Button
                             // variant='outlined'
                             color='primary'
                             onClick={handleTestConnection}
                         >Test Connection</Button>
                     </div>
-                    <div className='col-md-4 right'>
+                    <div className='col-md-4 button-form-input-jdbc-right'>
                         <Button>Cancel</Button>
                         <Button
                             variant='contained'
@@ -200,7 +207,7 @@ const FormInputJDBC = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className='row r2'>
+                    <div className='row table-form-input-jdbc'>
                         {
                             nameAndRecordTables && nameAndRecordTables.length > 0 &&
                             < TableSelect

@@ -67,6 +67,10 @@ export const AppProvider = ({ children }) => {
     // group windown
     const [isShowGroupWindow, setIsShowGroupWindow] = useState(false)
 
+    // create jdbc
+    const [JDBCSource, setJDBCSource] = useState()
+    const [JDBCSink, setJDBCSink] = useState()
+
 
     //
     const getTB = async () => {
@@ -199,7 +203,6 @@ export const AppProvider = ({ children }) => {
 
         if (arrTBSoureToCreateReport.length === arrTBSinkToCreateReport.length) {
             setIsBlockBtn(false)
-            console.log("arrTBSoureToCreateReport: ", arrTBSoureToCreateReport);
             for (let i = 0; i < arrTBSoureToCreateReport.length; i++) {
                 const objectReport = {
                     schemaSourceName: nameSchemaSource,
@@ -234,7 +237,6 @@ export const AppProvider = ({ children }) => {
     }, [arrTBSinkToCreateReport])
 
     useEffect(() => {
-        console.log("arrToCreateReport: ", arrToCreateReport);
     }, [arrToCreateReport])
 
     useEffect(() => {
@@ -266,7 +268,6 @@ export const AppProvider = ({ children }) => {
             setAllTBSink(res.data)
         }
     }
-
 
 
 
@@ -327,6 +328,10 @@ export const AppProvider = ({ children }) => {
         //group windown
         isShowGroupWindow, setIsShowGroupWindow,
         nameColumn,
+
+
+        // JDBC
+        JDBCSource, setJDBCSource, JDBCSink, setJDBCSink
     }
 
     return <AppContext.Provider value={value}>

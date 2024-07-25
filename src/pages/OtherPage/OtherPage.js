@@ -1,10 +1,11 @@
 import React from 'react'
-import FormInputJDBC from '../../components/FormInputJDBC/FormInputJDBC'
+import CreateInput from '../CreateInputPage/CreateInput'
 
 const OtherPage = () => {
   return (
     <div>
-      <FormInputJDBC />
+      <div>dgsgagsgdgadgas</div>
+      <CreateInput />
     </div>
   )
 }
