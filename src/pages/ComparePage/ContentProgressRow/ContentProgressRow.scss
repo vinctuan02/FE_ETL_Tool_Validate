@@ -1,0 +1,21 @@
+.container-content-progress-column {
+    // border: 1px solid red;
+    // justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: space-between;
+    // overflow: auto;
+
+    .table-source {
+        width: 49%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    .table-sink {
+        width: 49%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+}

@@ -1,11 +1,17 @@
 import React from 'react'
-import CreateInput from '../CreateInputPage/CreateInput'
+
+import ProgressBar from '../ComparePage/ProgressBarRow/ProgressBarRow'
+import Checklist from './CheckList'
+import Alerts from './Alert'
+import MainComponent from './MainComponent'
+import ProgressBarColumn from '../ComparePage/ProgressBarColumn/ProgressBarColumn'
+
+
 
 const OtherPage = () => {
   return (
     <div>
-      <div>dgsgagsgdgadgas</div>
-      <CreateInput />
+      <ProgressBarColumn />
     </div>
   )
 }

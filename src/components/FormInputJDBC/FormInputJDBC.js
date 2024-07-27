@@ -9,16 +9,16 @@ import TableSelect from '../Tables/TableSelect/TableSelect';
 
 const FormInputJDBC = (props) => {
 
-    const { changeSelectSchema, handleSelect, saveJDBC } = props
+    const { changeSelectSchema, handleSelect, saveJDBC, infoJDBC } = props
 
     const [typeDatabase, setTypeDatabase] = useState('')
     const [host, setHost] = useState('10.10.11.149')
-    const [username, setUsername] = useState('root')
+    const [user, setUser] = useState('root')
     const [password, setPassword] = useState('oracle_4U')
     const [jdbc_url, setJDBC] = useState('')
 
     const [allNameDB, setAllNameDB] = useState([])
-    const [selectedOption, setSelectedOption] = useState('');
+    const [selectedSchema, setSelectedOption] = useState('');
 
     const [nameAndRecordTables, setNameAndRecordTables] = useState([])
     const [nameAndRecordTables_notEmpty, setNameAndRecordTables_notEmpty] = useState([])
@@ -32,8 +32,8 @@ const FormInputJDBC = (props) => {
         if (key === 'host') {
             setHost(event.target.value)
         }
-        if (key === 'username') {
-            setUsername(event.target.value)
+        if (key === 'user') {
+            setUser(event.target.value)
         }
         if (key === 'password') {
             setPassword(event.target.value)
@@ -47,7 +47,7 @@ const FormInputJDBC = (props) => {
         const config = {
             typeDatabase: typeDatabase,
             host: host,
-            username: username,
+            user: user,
             password: password,
             jdbc_url: jdbc_url
         }
@@ -63,7 +63,7 @@ const FormInputJDBC = (props) => {
         const config = {
             typeDatabase: typeDatabase,
             host: host,
-            username: username,
+            user: user,
             password: password,
             jdbc_url: jdbc_url
         }
@@ -90,18 +90,18 @@ const FormInputJDBC = (props) => {
 
 
     useEffect(() => {
-        if (selectedOption) {
+        if (selectedSchema) {
             fetchAllNameTable()
         }
-    }, [selectedOption])
+    }, [selectedSchema])
 
     const fetchAllNameTable = async () => {
-        const res = await getCountRecordTables({ nameDB: selectedOption })
+        const res = await getCountRecordTables(selectedSchema, infoJDBC)
         const result = res.data
         setNameAndRecordTables(result)
         const arrFilter = []
         result.map((item, index) => {
-            if (item.table_rows > 0) {
+            if (item.table_rows_estimate > 0) {
                 arrFilter.push(item)
             }
         })
@@ -137,10 +137,10 @@ const FormInputJDBC = (props) => {
                 </div>
                 <div className='row r2'>
                     <div className='col-md-6 label-input'>
-                        <label>Username</label>
-                        <input placeholder='Username'
-                            onChange={(event) => handleOnChangeInput(event, 'username')}
-                            value={username}
+                        <label>User</label>
+                        <input placeholder='User'
+                            onChange={(event) => handleOnChangeInput(event, 'user')}
+                            value={user}
                         ></input>
                     </div>
                     <div className='col-md-6 label-input'>
@@ -187,7 +187,7 @@ const FormInputJDBC = (props) => {
                             <select
                                 id="exampleSelect"
                                 name="options"
-                                value={selectedOption}
+                                value={selectedSchema}
                                 onChange={handleChangeSelectSchema}
                             >
                                 <option value="" disabled>Select a database</option>

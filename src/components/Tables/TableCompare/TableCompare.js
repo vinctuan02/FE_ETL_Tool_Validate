@@ -1,8 +1,5 @@
 import React, { useContext, useState } from 'react';
 import './TableCompare.scss';
-import Popper from '@mui/material/Popper';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import { AppContext } from '../../../context/AppContext';
 

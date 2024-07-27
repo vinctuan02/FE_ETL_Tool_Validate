@@ -1,0 +1,17 @@
+.container-content-progress-column {
+    // width: 50vw;
+    // border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+
+    .table-source {
+        // border: 1px solid;
+        width: 50%;
+    }
+
+    .table-sink {
+        // border: 1px solid;
+        width: 50%;
+    }
+}

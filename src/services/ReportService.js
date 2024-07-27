@@ -2,17 +2,14 @@ import axios from './customizeAxios'
 
 
 // tables
-const countRecordsTB = (input) => {
-    return axios.get(`get-count-record-tb`, {
-        params: input
-    })
+const countRecordsTB = (nameDB, nameTB, infoJDBC) => {
+    const input = { nameDB, nameTB, infoJDBC }
+    return axios.post(`get-count-record-tb`, input)
 }
 
-const getTable = (nameTB, filter) => {
-    const input = { ...nameTB, ...filter }
-    return axios.get(`get-table`, {
-        params: input
-    })
+const getTable = (nameDB, nameTB, filter, infoJDBC) => {
+    const input = { nameDB, nameTB, filter, infoJDBC }
+    return axios.post(`get-table`, input)
 }
 
 const groupByColumn = (input) => {
@@ -56,11 +53,9 @@ const bulkCreateReportDetails = (arrayReportDetails) => {
 }
 
 // create report
-const getNameTablesOfSchema = (schemaName) => {
-    // console.log(schemaName);
-    return axios.get(`/get-all-name-tb-of-db`, {
-        params: schemaName
-    })
+const getNameTablesOfSchema = (nameDB, infoJDBC) => {
+    const input = { nameDB, infoJDBC }
+    return axios.post(`/get-all-name-tb-of-db`, input)
 }
 
 const testConnection = (input) => {
@@ -75,15 +70,30 @@ const createConnection = (input) => {
     })
 }
 
-const getCountRecordTables = (input) => {
-    return axios.get(`/count-record-tables`, {
-        params: input
-    })
+const getCountRecordTables = (nameDB, infoJDBC) => {
+    const input = { nameDB, infoJDBC }
+    return axios.post(`/count-record-tables`, input)
 }
 
 // jdbc
+const getInfoJDBC = (id) => {
+    return axios.get(`/jdbc/get-jdbc-connections/${id}`)
+}
+
 const bulkCreateJDBCConnections = (arrayInfoJDBC) => {
     return axios.post(`/jdbc/bulk-create-jdbc-connections`, arrayInfoJDBC)
+}
+
+const compareDescribe = (infoSourceSink) => {
+    return axios.post(`/compare-describe`, infoSourceSink)
+}
+
+const compareCountRecords = (infoSourceSink) => {
+    return axios.post(`/compare-count-records`, infoSourceSink)
+}
+
+const compareGroupRecords = (infoSourceSink) => {
+    return axios.post(`/compare-group-records`, infoSourceSink)
 }
 
 export {
@@ -106,5 +116,11 @@ export {
     getCountRecordTables,
 
     //jdbc
-    bulkCreateJDBCConnections
+    getInfoJDBC,
+    bulkCreateJDBCConnections,
+
+    //compare
+    compareDescribe,
+    compareCountRecords,
+    compareGroupRecords
 }

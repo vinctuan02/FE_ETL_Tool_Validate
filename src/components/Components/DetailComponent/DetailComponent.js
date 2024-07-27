@@ -4,37 +4,11 @@ import { Button } from 'react-bootstrap';
 import './DetailComponent.scss'
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-
-import { getReportDetailsBy_report_id } from '../../../services/ReportService'
-import SplineChart from "../../Chart/SplineChart/SplineChart";
 import TableCompare from "../../Tables/TableCompare/TableCompare";
-import TableData from "../../Tables/TableData/TableData";
 
 const DetailComponent = () => {
 
-    const { currentSelectTB, setCurrentSelectTB, currentSelect, isShowModalReport,
-        setReportDetailsCurrent, tableSource, tableSink,
-        arrDataSelectInput
-    } = useContext(AppContext)
-
-    const fetchReportDetails = async () => {
-        if (currentSelect && currentSelect.report_id) {
-            const res = await getReportDetailsBy_report_id(currentSelect?.report_id)
-            setReportDetailsCurrent(res.data)
-        }
-    }
-
-    // useEffect(() => {
-    // if (arrDataSelectInput && arrDataSelectInput[0]?.value) {
-    // setCurrentSelectTB(arrDataSelectInput[0].value);
-    // }
-
-    // }, [currentSelect])
-
-    useEffect(() => {
-        fetchReportDetails()
-    }, [currentSelect, isShowModalReport])
-
+    const { currentSelectTB, tableSource, tableSink } = useContext(AppContext)
 
     const exportToExcel = async (data, fileName) => {
         try {

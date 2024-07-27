@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './OverviewComponent.scss'
-import { countRecordsTB, getReportDetailsBy_report_id } from '../../../services/ReportService'
+import { countRecordsTB, getInfoJDBC, getReportDetailsBy_report_id } from '../../../services/ReportService'
 import { AppContext } from '../../../context/AppContext'
 import ColumnChart from '../../Chart/ColumnChart/ColumnChart'
 import OptionChartPopper from '../../Popper/OptionChartPopper/OptionChartPopper'
@@ -10,23 +10,18 @@ const OverviewComponent = (props) => {
 
     const [dataColumnChart, setDataColumnChart] = useState({})
 
-    const [arrSourceName, setArrSourceName] = useState([])
-    const [arrSchemaSource, setArrSchemaSource] = useState([])
-    const [arrSchemaSink, setArrSchemaSink] = useState([])
+    const [arrSourceNameToNameColumnChart, setArrSourceNameToNameColumnChart] = useState([])
+    // const [arrSchemaSource, setArrSchemaSource] = useState([])
+    // const [arrSchemaSink, setArrSchemaSink] = useState([])
 
     const {
-        currentSelect, isShowModalReport,
-        reportDetailsCurrent, setReportDetailsCurrent,
+        currentSelect, reportDetailsCurrent,
         arrSourceSinkToCount, setCurrentSelectTB,
     } = useContext(AppContext)
 
     const {
         setSelectedButton
     } = props
-
-    useEffect(() => {
-        fetchReportDetails()
-    }, [currentSelect])
 
 
     useEffect(() => {
@@ -38,36 +33,38 @@ const OverviewComponent = (props) => {
         fetchDataColumnChart(arrSourceSinkToCount)
     }, [arrSourceSinkToCount])
 
-    const fetchReportDetails = async () => {
-        if (currentSelect && currentSelect.report_id) {
-            const res = await getReportDetailsBy_report_id(currentSelect?.report_id)
-            setReportDetailsCurrent(res.data)
-        }
-    }
 
     const fetchDataColumnChart = async (arr) => {
         if (arr && arr.length > 0) {
-            let arrSourceName = []
-            let arrSchemaSource = []
-            let arrSchemaSink = []
+
+            // get infoJDBC
+            const resJDBCSource = await getInfoJDBC(arr[0].source_connection_id)
+            const resJDBCSink = await getInfoJDBC(arr[0].sink_connection_id)
+
+            const infoJDBCSource = resJDBCSource.data
+            const infoJDBCSink = resJDBCSink.data
+
+            let arrSourceNameToNameColumnChart = []
 
             const sourcePromises = arr.map((item) => {
-                arrSourceName.push(item.dataSourceName)
-                arrSchemaSource.push(item.schemaSourceName)
-                return countRecord(item.schemaSourceName, item.dataSourceName)
+                arrSourceNameToNameColumnChart.push(item.dataSourceName)
+                return countRecord(item.schemaSourceName, item.dataSourceName, infoJDBCSource)
             });
             const sinkPromises = arr.map((item) => {
-                arrSchemaSink.push(item.schemaSinkName)
-                return countRecord(item.schemaSinkName, item.dataSinkName)
+                return countRecord(item.schemaSinkName, item.dataSinkName, infoJDBCSink)
             });
 
             const sourceResults = await Promise.all(sourcePromises);
             const sinkResults = await Promise.all(sinkPromises);
 
 
-            setArrSourceName(arrSourceName)
-            setArrSchemaSource(arrSchemaSource)
-            setArrSchemaSink(arrSchemaSink)
+            setArrSourceNameToNameColumnChart(arrSourceNameToNameColumnChart)
+            // setArrSchemaSource(arrSchemaSource)
+            // setArrSchemaSink(arrSchemaSink)
+
+            // console.log("arrSourceNameToNameColumnChart: ", arrSourceNameToNameColumnChart);
+            // console.log("arrSchemaSource: ", arrSchemaSource);
+            // console.log("arrSchemaSink: ", arrSchemaSink);
 
             setDataColumnChart(
                 [
@@ -85,9 +82,8 @@ const OverviewComponent = (props) => {
     };
 
 
-    let countRecord = async (nameDB, nameTB) => {
-        let input = { nameDB, nameTB }
-        let response = await countRecordsTB(input)
+    let countRecord = async (nameDB, nameTB, infoJDBC) => {
+        let response = await countRecordsTB(nameDB, nameTB, infoJDBC)
         let count = response.data[0].countRecords
         return count
     }
@@ -110,9 +106,9 @@ const OverviewComponent = (props) => {
                     <div className='chart'>
                         <ColumnChart
                             dataInput={dataColumnChart}
-                            categories={arrSourceName}
-                            arrSchemaSource={arrSchemaSource}
-                            arrSchemaSink={arrSchemaSink}
+                            categories={arrSourceNameToNameColumnChart}
+                        // arrSchemaSource={arrSchemaSource}
+                        // arrSchemaSink={arrSchemaSink}
                         />
                     </div>
                 </div>
@@ -130,8 +126,9 @@ const OverviewComponent = (props) => {
                     <div className='table'>
                         <TableComponent
                             data={reportDetailsCurrent}
-                            hiddenFields={['detail_id', 'report_id']}
+                            hiddenFields={['detail_id', 'report_id', 'source_connection_id', 'sink_connection_id']}
                             hasDetail={true}
+                            hasIndex={true}
                             actionDetail={actionDetail}
                         />
                     </div>

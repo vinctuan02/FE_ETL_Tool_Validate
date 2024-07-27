@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getNameTablesOfSchema, getReportsAxios, getTable } from "../services/ReportService";
+import { getInfoJDBC, getNameTablesOfSchema, getReportDetailsBy_report_id, getReportsAxios, getTable } from "../services/ReportService";
 
 export const AppContext = createContext({})
 
@@ -25,6 +25,8 @@ export const AppProvider = ({ children }) => {
     const [listReports, setListReports] = useState([])
     const [keySearch, setKeySearch] = useState('')
 
+
+    // report
     const [currentSelect, setCurrentSelect] = useState({}) // report
     const [reportDetailsCurrent, setReportDetailsCurrent] = useState() // report detail
     const [arrDataSelectInput, setArrDataSelectInput] = useState() // arr schema-tb
@@ -35,7 +37,7 @@ export const AppProvider = ({ children }) => {
     const [tableSink, setTableSink] = useState()
 
     const [isASC, setIsASC] = useState(true);
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(200);
 
     const [fieldName, setFieldName] = useState('')
     const [fieldValue, setFieldValue] = useState('')
@@ -75,13 +77,24 @@ export const AppProvider = ({ children }) => {
     //
     const getTB = async () => {
         if (currentSelectTB) {
-            const inputSource = { nameDB: currentSelectTB.schemaSourceName, nameTB: currentSelectTB.dataSourceName }
-            const resSource = await getTable(inputSource, filter)
+
+            //get tb source
+            const nameDBSource = currentSelectTB.schemaSourceName
+            const nameTBSource = currentSelectTB.dataSourceName
+            const resInfoJDBCSource = await getInfoJDBC(currentSelectTB.source_connection_id)
+            const infoJDBCSource = resInfoJDBCSource.data
+
+            const resSource = await getTable(nameDBSource, nameTBSource, filter, infoJDBCSource)
 
             setTableSource(resSource.data)
 
-            const inputSink = { nameDB: currentSelectTB.schemaSinkName, nameTB: currentSelectTB.dataSinkName }
-            const resSink = await getTable(inputSink, filter)
+            //get tb sink
+            const nameDBSink = currentSelectTB.schemaSinkName
+            const nameTBSink = currentSelectTB.dataSinkName
+            const resInfoJDBCSink = await getInfoJDBC(currentSelectTB.sink_connection_id)
+            const infoJDBCSink = resInfoJDBCSink.data
+
+            const resSink = await getTable(nameDBSink, nameTBSink, filter, infoJDBCSink)
 
             setTableSink(resSink.data)
         }
@@ -197,6 +210,18 @@ export const AppProvider = ({ children }) => {
     }, [reportDetailsCurrent])
 
 
+    // report
+    const fetchReportDetails = async () => {
+        if (currentSelect && currentSelect.report_id) {
+            const res = await getReportDetailsBy_report_id(currentSelect?.report_id)
+            setReportDetailsCurrent(res.data)
+        }
+    }
+
+    useEffect(() => {
+        fetchReportDetails()
+    }, [currentSelect, isShowModalReport])
+
     // create input page
     const renderArrObjecstReport = () => {
         let arrObjects = []
@@ -245,8 +270,8 @@ export const AppProvider = ({ children }) => {
 
     const getAllTBSource = async () => {
         let res
-        if (nameSchemaSource) {
-            res = await getNameTablesOfSchema({ nameDB: nameSchemaSource })
+        if (nameSchemaSource && JDBCSource) {
+            res = await getNameTablesOfSchema(nameSchemaSource, JDBCSource)
         }
 
         if (res && res.data) {
@@ -260,8 +285,8 @@ export const AppProvider = ({ children }) => {
 
     const getAllTBSink = async () => {
         let res
-        if (nameSchemaSink) {
-            res = await getNameTablesOfSchema({ nameDB: nameSchemaSink })
+        if (nameSchemaSink && JDBCSink) {
+            res = await getNameTablesOfSchema(nameSchemaSink, JDBCSink)
         }
 
         if (res && res.data) {

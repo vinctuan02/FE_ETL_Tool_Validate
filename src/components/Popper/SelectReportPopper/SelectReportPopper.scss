@@ -1,6 +1,14 @@
-.popper{
-    .r1{
+.popper {
+    .r1 {
         display: flex;
         justify-content: flex-end;
+        max-height: 70vh;
+        overflow: auto;
+    }
+
+    .r2 {
+        display: flex;
+        justify-content: flex-end;
+        padding: 5px;
     }
 }

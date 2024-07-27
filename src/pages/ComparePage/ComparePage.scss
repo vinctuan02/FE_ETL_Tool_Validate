@@ -1,0 +1,12 @@
+.container-compare-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .r1 {
+        display: flex;
+        justify-content: end;
+    }
+
+    .r2 {}
+}

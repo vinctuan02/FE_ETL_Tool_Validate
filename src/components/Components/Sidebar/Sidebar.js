@@ -5,34 +5,35 @@ import './Sidebar.scss';
 const sidebarNavItems = [
     {
         display: 'Open Report',
-        icon: <i className="fa-regular fa-folder"></i>, // Icon để nhập dữ liệu
+        icon: <i className="bx bx-folder-open"></i>,
         to: '/',
         section: 'input'
     },
     {
         display: 'Create Report',
-        icon: <i className="fa-regular fa-pen-to-square"></i>, // Icon để nhập dữ liệu
+        icon: <i className='bx bx-edit' ></i>,
         to: '/create-input',
         section: 'create-input'
     },
     {
         display: 'Report Info',
-        icon: <i className="fa-regular fa-chart-bar"></i>, // Icon để so sánh dữ liệu
+        icon: <i className="bx bx-bar-chart-alt-2"></i>,
         to: '/report-info',
         section: 'report-info'
     },
-    // {
-    //     display: 'Result',
-    //     icon: <i className="fa-solid fa-square-poll-vertical"></i>, // Icon để so sánh dữ liệu
-    //     to: '/result',
-    //     section: 'result'
-    // },
+    {
+        display: 'Compare',
+        icon: <i className='bx bx-transfer-alt'></i>,
+        to: '/compare-page',
+        section: 'compare-page'
+    },
     {
         display: 'Other',
-        icon: <i className="fa-solid fa-gears"></i>, // Icon khác
+        icon: <i className="bx bx-cog"></i>,
         to: '/other',
         section: 'other'
     }
+
 ]
 
 const Sidebar = () => {

@@ -55,6 +55,8 @@ const ReportComponent = (props) => {
         }
     };
 
+    const hiddenFields = ['report_id']
+
     return (
         <div className='container-input-page'>
             <div className='title'>
@@ -103,6 +105,8 @@ const ReportComponent = (props) => {
                     data={listReports} hasAction={hasAction}
                     hasSelectRow={true}
                     hasShowRowInfo={hasShowRowInfo}
+                    hiddenFields={hiddenFields}
+                    hasIndex={true}
                 />
             </div>
         </div>

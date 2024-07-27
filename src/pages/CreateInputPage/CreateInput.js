@@ -10,7 +10,7 @@ const CreateInput = () => {
     const { setArrTBSoureToCreateReport, setArrTBSinkToCreateReport,
         setNameSchemaSource, setNameSchemaSink, isBlockBtn,
         arrToCreateReport, handleShowModalPreviewInput,
-        setJDBCSource, setJDBCSink
+        JDBCSource, setJDBCSource, JDBCSink, setJDBCSink
     } = useContext(AppContext)
 
     const handleSelectSchemaSource = (name) => {
@@ -52,6 +52,7 @@ const CreateInput = () => {
                         changeSelectSchema={handleSelectSchemaSource}
                         handleSelect={handleSelectTBSource}
                         saveJDBC={handleSaveJDBCSource}
+                        infoJDBC={JDBCSource}
                     />
                 </div>
                 <div className='sink'>
@@ -60,6 +61,7 @@ const CreateInput = () => {
                         changeSelectSchema={handleSelectSchemaSink}
                         handleSelect={handleSelectTBSink}
                         saveJDBC={handleSaveJDBCSink}
+                        infoJDBC={JDBCSink}
                     />
                 </div>
             </div>

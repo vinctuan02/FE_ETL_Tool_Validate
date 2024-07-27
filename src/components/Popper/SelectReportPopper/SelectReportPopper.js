@@ -93,7 +93,7 @@ const SelectReportPopper = () => {
                             <ReportComponent hasShowRowInfo={false} />
                         </div>
 
-                        <div className="r1">
+                        <div className="r2">
                             <Button variant="contained" onClick={handleClick}>
                                 Choose
                             </Button>

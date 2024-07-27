@@ -11,7 +11,7 @@ const { Modal, Button } = require("react-bootstrap")
 const ModalPreviewReportDetails = (props) => {
     const navigate = useNavigate()
 
-    const { handleCloseModal, dataPreviewReportDetails, isShowModalPreviewReportDetails,setCurrentSelect } = useContext(AppContext)
+    const { handleCloseModal, dataPreviewReportDetails, isShowModalPreviewReportDetails, setCurrentSelect } = useContext(AppContext)
 
     const [reportName, setReportName] = useState('')
     const [dataReportDetails, setDataReportDetails] = useState({})
@@ -37,6 +37,8 @@ const ModalPreviewReportDetails = (props) => {
         // window.location.href = 'http://10.10.12.15:3000/report-info';
     }
 
+    const hiddenFields = ['detail_id', 'report_id', 'source_connection_id', 'sink_connection_id']
+
     return (
         <>
             <Modal className='container-preview-report-details' show={isShowModalPreviewReportDetails} onHide={handleCloseModal}>
@@ -45,7 +47,10 @@ const ModalPreviewReportDetails = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <TableComponent
-                        data={dataReportDetails} hasBorder={true}
+                        data={dataReportDetails}
+                        hasBorder={true}
+                        hiddenFields={hiddenFields}
+                        hasIndex={true}
                     />
                 </Modal.Body>
                 <Modal.Footer>
