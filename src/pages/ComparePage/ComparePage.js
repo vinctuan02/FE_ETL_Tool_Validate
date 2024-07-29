@@ -15,6 +15,7 @@ const ComparePage = () => {
     // Lấy thông tin JDBC
     const fetchInfoJDBC = async () => {
         try {
+            console.log("dgagda");
             const resJDBCSource = await getInfoJDBC(reportDetailsCurrent[0].source_connection_id)
             const resJDBCSink = await getInfoJDBC(reportDetailsCurrent[0].sink_connection_id)
 
@@ -65,12 +66,15 @@ const ComparePage = () => {
             <div className='r1'>
                 <SelectReportPopper />
             </div>
-            <div className='r2'>
-                <ProgressBarColumn
-                    arrNameTables={arrNameTables}
-                    arrInfoSourceSink={arrInfoSourceSink}
-                />
-            </div>
+            {
+                // reportDetailsCurrent &&
+                <div className='r2'>
+                    <ProgressBarColumn
+                        arrNameTables={arrNameTables}
+                        arrInfoSourceSink={arrInfoSourceSink}
+                    />
+                </div>
+            }
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Stepper, Step, StepLabel } from '@mui/material';
+import { Stepper, Step, StepLabel, Button, CircularProgress } from '@mui/material';
 import './ProgressBarRow.scss';
 import ContentProgressRow from '../ContentProgressRow/ContentProgressRow';
 import { compareDescribe, compareCountRecords, compareGroupRecords } from '../../../services/ReportService';
@@ -11,33 +11,25 @@ const ProgressBarRow = (props) => {
   const [activeStep, setActiveStep] = useState(0);
   const [dataSource, setDataSource] = useState();
   const [dataSink, setDataSink] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (currentTable) {
-      compareTable();
+      handleStep();
     }
   }, [currentTable]);
 
-  const compareTable = async () => {
-    for (let i = 0; i <= steps.length; i++) {
-      setActiveStep(i);
-      setProcessingDone(false); // Đặt lại trạng thái trước khi xử lý từng bước
-
-      if (steps[i] === 'Describe') {
-        console.log('Describe');
-        await handleDescribe();
-      } else if (steps[i] === 'Count Records') {
-        console.log('Count Records');
-        await handleCountRecords();
-      } else if (steps[i] === 'Group Records') {
-        console.log('Group Records');
-        await handleGroupRecords();
-      }
-
-      // Đặt trạng thái hoàn tất sau khi xử lý từng bước
-      setProcessingDone(true);
-      console.log('setProcessingDone(true);', currentTable.tableSource);
+  const handleStep = async () => {
+    setLoading(true);
+    if (steps[activeStep] === 'Describe') {
+      await handleDescribe();
+    } else if (steps[activeStep] === 'Count Records') {
+      await handleCountRecords();
+    } else if (steps[activeStep] === 'Group Records') {
+      await handleGroupRecords();
     }
+    setProcessingDone(true);
+    setLoading(false);
   };
 
   const handleDescribe = async () => {
@@ -58,19 +50,60 @@ const ProgressBarRow = (props) => {
     setDataSink(res.arrGroupRecordsSourceSink[0].groupRecordsSourceByColumn);
   };
 
+  const handleNext = () => {
+    if (activeStep < steps.length - 1) {
+      setActiveStep(prevStep => prevStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (activeStep > 0) {
+      setActiveStep(prevStep => prevStep - 1);
+    }
+  };
+
+  useEffect(() => {
+    if (currentTable) {
+      handleStep();
+    }
+  }, [activeStep]);
+
+  const handleStepClick = (index) => {
+    setActiveStep(index);
+  };
+
   return (
     <div className='container-progress-bar-row'>
       <div className='progress-bar-row'>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((label, index) => (
-            <Step key={index}>
-              <StepLabel>{label}</StepLabel>
+            <Step key={index} onClick={() => handleStepClick(index)}>
+              <StepLabel>
+                {label}
+                {loading && activeStep === index && (
+                  <CircularProgress size={15} className="step-loading-spinner" />
+                )}
+              </StepLabel>
             </Step>
           ))}
         </Stepper>
       </div>
       <div className='content-progress-bar-row'>
         <ContentProgressRow dataSource={dataSource} dataSink={dataSink} />
+      </div>
+      <div className='button-group'>
+        <Button
+          disabled={activeStep === 0}
+          onClick={handleBack}
+        >
+          Back
+        </Button>
+        <Button
+          disabled={activeStep === steps.length - 1}
+          onClick={handleNext}
+        >
+          Next
+        </Button>
       </div>
     </div>
   );

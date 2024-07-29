@@ -1,8 +1,8 @@
-import React from 'react'
-import ProgressBarRow from '../ProgressBarRow/ProgressBarRow'
+import React from 'react';
+import ProgressBarRow from '../ProgressBarRow/ProgressBarRow';
 
 const ContentProgressColumn = (props) => {
-    const { currentTable, setProcessingDone } = props
+    const { currentTable, setProcessingDone } = props;
     return (
         <div>
             <ProgressBarRow
@@ -10,7 +10,7 @@ const ContentProgressColumn = (props) => {
                 setProcessingDone={setProcessingDone}
             />
         </div>
-    )
-}
+    );
+};
 
-export default ContentProgressColumn
+export default ContentProgressColumn;

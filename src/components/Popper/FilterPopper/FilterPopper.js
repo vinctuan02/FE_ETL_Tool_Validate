@@ -72,7 +72,7 @@ const FilterPopper = () => {
     return (
         <div className='popper' style={{ position: 'relative' }}>
             <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-                Filter
+                Filter <i className='bx bxs-chevron-down'></i>
             </Button>
             <Popper
                 id={id}

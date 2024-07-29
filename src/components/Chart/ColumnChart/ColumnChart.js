@@ -34,13 +34,23 @@ const ColumnChart = (props) => {
                 },
             },
             dataLabels: {
-                enabled: true,
+                enabled: false,
             },
             stroke: {
                 show: true, width: 2, colors: ['transparent'],
             },
             xaxis: {
                 categories: categories,
+                labels: {
+                    style: {
+                        fontSize: '12px',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        maxWidth: 100, // Adjust this value as needed
+                    },
+                    rotate: 0,
+                },
             },
             yaxis: {
                 // title: { text: title },

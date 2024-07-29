@@ -33,7 +33,7 @@ const ModalPreviewReportDetails = (props) => {
 
     const handleCompare = async () => {
         handleCloseModal()
-        navigate('/report-info');
+        navigate('/compare-page');
         // window.location.href = 'http://10.10.12.15:3000/report-info';
     }
 

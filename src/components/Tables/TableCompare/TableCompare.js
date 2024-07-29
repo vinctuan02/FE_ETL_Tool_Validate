@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './TableCompare.scss';
-import { Button } from '@mui/material';
+import { Button, Paper, Popper, Typography } from '@mui/material';
 import { AppContext } from '../../../context/AppContext';
 
 const TableCompare = (props) => {
@@ -94,30 +94,35 @@ const TableCompare = (props) => {
                 </tbody>
             </table>
             {/* Popper */}
-            {/* <Popper
+            <Popper
                 open={Boolean(anchorEl)}
                 anchorEl={anchorEl}
                 placement="bottom"
                 onClose={handleClosePopper}
-                modifiers={{
-                    offset: {
-                        enabled: true,
-                        offset: '0, 10',
+                modifiers={[
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [0, 10],
+                        },
                     },
-                    flip: {
+                    {
+                        name: 'flip',
                         enabled: true,
                     },
-                    preventOverflow: {
-                        enabled: true,
-                        boundariesElement: 'scrollParent',
+                    {
+                        name: 'preventOverflow',
+                        options: {
+                            boundary: 'scrollParent',
+                        },
                     },
-                }}
+                ]}
                 style={{ maxWidth: '60%', zIndex: 9999 }}
             >
                 <Paper elevation={3} style={{ padding: '10px' }}>
                     <Typography variant="body2">{selectedCellData}</Typography>
                 </Paper>
-            </Popper> */}
+            </Popper>
         </div>
     );
 };

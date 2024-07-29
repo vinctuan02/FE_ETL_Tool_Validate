@@ -12,7 +12,7 @@ const Table = () => {
         setArrSourceSinkToCount(items)
     }
 
-    const hiddenFields = ['detail_id', 'report_id', 'schemaSourceName', 'schemaSinkName']
+    const hiddenFields = ['detail_id', 'report_id', 'schemaSourceName', 'schemaSinkName', 'source_connection_id', 'sink_connection_id']
 
     return (
         <div className='container-table'>

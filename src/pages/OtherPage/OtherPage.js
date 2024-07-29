@@ -11,7 +11,7 @@ import ProgressBarColumn from '../ComparePage/ProgressBarColumn/ProgressBarColum
 const OtherPage = () => {
   return (
     <div>
-      <ProgressBarColumn />
+      {/* <ProgressBarColumn /> */}
     </div>
   )
 }

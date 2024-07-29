@@ -34,9 +34,9 @@ const SelectReportPopper = () => {
         <div className="popper" style={{ position: 'relative' }}>
             <Button aria-describedby={id} variant="contained" onClick={handleClick}>
                 {currentSelect && currentSelect.reportName ? (
-                    <span>Report: {currentSelect.reportName} </span>
+                    <span>Report: {currentSelect.reportName} <i className='bx bxs-chevron-down'></i></span>
                 ) : (
-                    <span>List Reports</span>
+                    <span>List Reports <i className='bx bxs-chevron-down'></i></span>
                 )}
             </Button>
             <Popper

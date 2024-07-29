@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Stepper, Step, StepLabel } from '@mui/material';
+import { Stepper, Step, StepLabel, Button } from '@mui/material';
 import ContentProgressColumn from '../ContentProgressColumn/ContentProgressColumn';
 import './ProgressBarColumn.scss';
-import { toast } from 'react-toastify';
 
 const ProgressBarColumn = (props) => {
     const { arrNameTables, arrInfoSourceSink } = props;
@@ -14,54 +13,56 @@ const ProgressBarColumn = (props) => {
 
     useEffect(() => {
         if (arrInfoSourceSink.length > 0) {
-            compareTables();
+            setCurrentTable(arrInfoSourceSink[activeStep]);
         }
-    }, [arrInfoSourceSink]);
+    }, [arrInfoSourceSink, activeStep]);
 
-    useEffect(() => {
-        if (processingDone && activeStep < steps.length - 1) {
-            // Move to the next step
+    const handleNext = () => {
+        if (activeStep < steps.length - 1) {
             setActiveStep(prevStep => prevStep + 1);
-            setProcessingDone(false); // Reset processingDone for the next step
-            toast.success(`Compare ${steps[activeStep]} success`);
         }
-    }, [processingDone]);
+    };
 
-    const compareTables = async () => {
-        for (let i = 0; i < arrInfoSourceSink.length; i++) {
-            setCurrentTable(arrInfoSourceSink[i]);
-            setProcessingDone(false);
-
-            // Wait for the table processing to complete
-            await new Promise(resolve => {
-                const checkProcessing = () => {
-                    if (processingDone) {
-                        resolve();
-                    } else {
-                        setTimeout(checkProcessing, 100); // check every 100ms
-                    }
-                };
-                checkProcessing();
-            });
+    const handleBack = () => {
+        if (activeStep > 0) {
+            setActiveStep(prevStep => prevStep - 1);
         }
     };
 
     return (
         <div className='container-progress-bar-column'>
-            <div className='progress-bar-column'>
-                <Stepper activeStep={activeStep} orientation="vertical">
-                    {steps.map((label, index) => (
-                        <Step key={index}>
-                            <StepLabel>{label}</StepLabel>
-                        </Step>
-                    ))}
-                </Stepper>
+            <div className='row1-progress-bar-column'>
+                <div className='progress-bar-column'>
+                    <Stepper activeStep={activeStep} orientation="vertical">
+                        {steps.map((label, index) => (
+                            <Step key={index}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                        ))}
+                    </Stepper>
+                </div>
+                <div className='content-progress-bar-column'>
+                    <ContentProgressColumn
+                        currentTable={currentTable}
+                        setProcessingDone={setProcessingDone}
+                    />
+                </div>
             </div>
-            <div className='content-progress-bar-column'>
-                <ContentProgressColumn 
-                    currentTable={currentTable} 
-                    setProcessingDone={setProcessingDone} 
-                />
+            <div className='row2-progress-bar-column'>
+                <div className='button-group'>
+                    <Button
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                    >
+                        Back
+                    </Button>
+                    <Button
+                        disabled={activeStep === steps.length - 1}
+                        onClick={handleNext}
+                    >
+                        Next
+                    </Button>
+                </div>
             </div>
         </div>
     );

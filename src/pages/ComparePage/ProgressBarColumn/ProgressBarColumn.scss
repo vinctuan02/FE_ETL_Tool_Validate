@@ -1,34 +1,46 @@
 .container-progress-bar-column {
-    display: flex;
-    flex-direction: row;
-    // border: 1px solid;
-    width: 100%;
+    .row1-progress-bar-column {
 
-    gap: 20px;
 
-    padding: 10px;
+        display: flex;
+        flex-direction: row;
+        // border: 1px solid;
+        width: 100%;
 
-    .progress-bar-column {
-        // border: 1px solid #ccc;
-        // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        // padding-top: 10px;
-        // padding-left: 30px;
-        width: 26%;
-        border-radius: 10px;
+        gap: 20px;
+
         // padding: 10px;
-        padding-left: 10px;
-        max-height: 70vh;
-        overflow: auto;
 
-        // height: 100%;
+        .progress-bar-column {
+            // border: 1px solid #ccc;
+            // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            // padding-top: 10px;
+            // padding-left: 30px;
+            width: 26%;
+            // max-width: 250px;
+            border-radius: 10px;
+            // padding: 10px;
+            padding-left: 30px;
+            max-height: 70vh;
+            overflow: auto;
+
+            // height: 100%;
+        }
+
+        .progress-bar-column::-webkit-scrollbar {
+            display: none;
+        }
+
+        .content-progress-bar-column {
+            // border: 1px solid red;
+            width: 75%;
+        }
     }
 
-    .progress-bar-column::-webkit-scrollbar {
-        display: none;
-    }
+    .row1-progress-bar-column {
 
-    .content-progress-bar-column {
-        // border: 1px solid red;
-        width: 75%;
+        .button-group {
+            flex: 1;
+        }
     }
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './InputPage.scss'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import ReportComponent from '../../components/Components/ReportComponent/ReportComponent';
+import './InputPage.scss'
 
 const InputPage = () => {
     return (

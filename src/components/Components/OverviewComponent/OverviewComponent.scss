@@ -4,10 +4,10 @@
     gap: 10px;
 
     .r1 {
-        // border: 1px solid #ccc;
+        border: 1px solid #ddd;
         padding: 10px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
         .container-chart {
             .title-btn {
@@ -34,7 +34,8 @@
         // border: 1px solid #ccc;
         padding: 10px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        border: solid 1px #ddd;
+        // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 
         .container-table {
             max-height: 500px;

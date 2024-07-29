@@ -1,9 +1,9 @@
-import React from 'react'
-import './ContentProgressRow.scss'
+import React from 'react';
+import './ContentProgressRow.scss';
 import TableCompare from '../../../components/Tables/TableCompare/TableCompare';
 
 const ContentProgressRow = (props) => {
-    const { dataSource, dataSink } = props
+    const { dataSource, dataSink } = props;
 
     return (
         <div className='container-content-progress-column'>
@@ -16,10 +16,9 @@ const ContentProgressRow = (props) => {
                 <TableCompare
                     data={dataSink} dataCompare={dataSource}
                 />
-
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ContentProgressRow
+export default ContentProgressRow;

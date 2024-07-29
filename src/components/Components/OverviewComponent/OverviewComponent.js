@@ -94,48 +94,53 @@ const OverviewComponent = (props) => {
     }
 
     return (
-        <div className='container-compare-component'>
-            <div className='r1'>
-                <div className='container-chart'>
-                    <div className='title-btn'>
-                        <div className='title'>Record Count</div>
-                        <OptionChartPopper
-                            isDisabled={!reportDetailsCurrent || !reportDetailsCurrent.length ? true : false}
-                        />
-                    </div>
-                    <div className='chart'>
-                        <ColumnChart
-                            dataInput={dataColumnChart}
-                            categories={arrSourceNameToNameColumnChart}
-                        // arrSchemaSource={arrSchemaSource}
-                        // arrSchemaSink={arrSchemaSink}
-                        />
-                    </div>
-                </div>
+        <>
+            {
+                reportDetailsCurrent &&
+                <div className='container-compare-component'>
+                    < div className='r1' >
+                        <div className='container-chart'>
+                            <div className='title-btn'>
+                                <div className='title'>Record Count</div>
+                                <OptionChartPopper
+                                    isDisabled={!reportDetailsCurrent || !reportDetailsCurrent.length ? true : false}
+                                />
+                            </div>
+                            <div className='chart'>
+                                <ColumnChart
+                                    dataInput={dataColumnChart}
+                                    categories={arrSourceNameToNameColumnChart}
+                                // arrSchemaSource={arrSchemaSource}
+                                // arrSchemaSink={arrSchemaSink}
+                                />
+                            </div>
+                        </div>
 
-            </div>
-            <div className='ovr2'>
-                <div className='container-table'>
-                    <div className='title-btn'>
-                        {currentSelect && currentSelect.reportName ? (
-                            <span className='title'>Report: {currentSelect.reportName} </span>
-                        ) : (
-                            <span className='title'>Report</span>
-                        )}
-                    </div>
-                    <div className='table'>
-                        <TableComponent
-                            data={reportDetailsCurrent}
-                            hiddenFields={['detail_id', 'report_id', 'source_connection_id', 'sink_connection_id']}
-                            hasDetail={true}
-                            hasIndex={true}
-                            actionDetail={actionDetail}
-                        />
-                    </div>
-                </div>
+                    </div >
+                    <div className='ovr2'>
+                        <div className='container-table'>
+                            <div className='title-btn'>
+                                {currentSelect && currentSelect.reportName ? (
+                                    <span className='title'>Report: {currentSelect.reportName} </span>
+                                ) : (
+                                    <span className='title'>Report</span>
+                                )}
+                            </div>
+                            <div className='table'>
+                                <TableComponent
+                                    data={reportDetailsCurrent}
+                                    hiddenFields={['detail_id', 'report_id', 'source_connection_id', 'sink_connection_id']}
+                                    hasDetail={true}
+                                    hasIndex={true}
+                                    actionDetail={actionDetail}
+                                />
+                            </div>
+                        </div>
 
-            </div>
-        </div >
+                    </div>
+                </div >
+            }
+        </>
     )
 }
 

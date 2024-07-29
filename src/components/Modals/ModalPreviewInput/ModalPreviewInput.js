@@ -84,7 +84,7 @@ const ModalPreviewInput = (props) => {
             getReports()
         }
 
-        navigate('/report-info')
+        navigate('/compare-page')
         handleCloseModal()
     }
 

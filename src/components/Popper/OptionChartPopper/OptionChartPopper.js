@@ -65,11 +65,14 @@ const OptionChartPopper = (props) => {
 
     return (
         <div className='popper' style={{ position: 'relative' }}>
-            <Button aria-describedby={id} variant="contained"
+            <Button
+                aria-describedby={id}
+                variant="contained"
                 onClick={handleClick}
                 disabled={isDisabled}
             >
                 More
+                <i className='bx bxs-chevron-down'></i>
             </Button>
             <Popper
                 id={id}
@@ -106,11 +109,11 @@ const OptionChartPopper = (props) => {
                             }
                         </Button>
 
-                        <div className='r'>
+                        {/* <div className='r'>
                             <h5>
                                 More
                             </h5>
-                        </div>
+                        </div> */}
 
                         <div className='r2'>
                             <div className='tabs'>
