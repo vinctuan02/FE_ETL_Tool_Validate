@@ -82,9 +82,12 @@ export const AppProvider = ({ children }) => {
             const nameDBSource = currentSelectTB.schemaSourceName
             const nameTBSource = currentSelectTB.dataSourceName
             const resInfoJDBCSource = await getInfoJDBC(currentSelectTB.source_connection_id)
+            console.log(resInfoJDBCSource);
             const infoJDBCSource = resInfoJDBCSource.data
 
             const resSource = await getTable(nameDBSource, nameTBSource, filter, infoJDBCSource)
+
+            // console.log(resSource);
 
             setTableSource(resSource.data)
 
@@ -118,7 +121,7 @@ export const AppProvider = ({ children }) => {
     useEffect(() => {
         getTB()
         // console.log(currentSelectTB);
-    }, [currentSelectTB, filter])
+    }, [currentSelectTB])
 
     useEffect(() => {
         getReports()
@@ -191,12 +194,17 @@ export const AppProvider = ({ children }) => {
             // const arr = [{ value: {}, label: 'Select an option' }]
             const arr = []
             data.forEach((item, index) => {
+                // console.log(item);
+                // console.log('setArrData');
                 arr.push({
                     value: {
                         schemaSourceName: item.schemaSourceName,
                         schemaSinkName: item.schemaSinkName,
+                        source_connection_id: item.source_connection_id,
+
                         dataSourceName: item.dataSourceName,
-                        dataSinkName: item.dataSinkName
+                        dataSinkName: item.dataSinkName,
+                        sink_connection_id: item.sink_connection_id
                     },
                     label: `Table: ${item.dataSourceName} - ${item.dataSinkName}`
                 })

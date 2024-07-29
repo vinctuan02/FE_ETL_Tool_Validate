@@ -97,12 +97,15 @@ const FilterPopper = () => {
                 }}
             >
                 <ClickAwayListener onClickAway={handleClickAway}>
-                    <Box sx={{
-                        p: 2, bgcolor: 'background.paper',
-                        border: 1, borderColor: 'grey.300',
-                        borderRadius: 2,
-                        position: 'relative', // Ensure relative positioning for children
-                    }}>
+                    <Box
+                        sx={{
+                            p: 2,
+                            bgcolor: 'background.paper',
+                            borderRadius: 2,
+                            position: 'relative', // Ensure relative positioning for children
+                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', // Custom box shadow
+                        }}
+                    >
                         {/* Pin button */}
                         <Button
                             // variant="contained"
@@ -122,14 +125,14 @@ const FilterPopper = () => {
                                 Filter
                             </h5>
 
-                            <div className='r' style={{}}>
+                            <div className='row1' style={{}}>
                                 <SelectComponent
                                     data={arrDataSelectInput}
                                     handleChangeSelect={handleChangeSelect}
                                 />
                             </div>
-                            <div className='r'>
-                                <div className='button'>
+                            <div className='row2'>
+                                <div className='asc-desc'>
                                     <Button
                                         className={isASC ? 'active' : ''}
                                         // color="success"
@@ -147,45 +150,16 @@ const FilterPopper = () => {
                                     />
                                 </div>
                             </div>
-                            <div className='r'>
-                                {/* 
-                                <div className='field-name'>
-                                    <label>{`Field: `}</label>
-                                    <input type="text"
-                                        onChange={handleOnChangeFiledName}
-                                        value={fieldName}
-                                    />
-                                </div>
-                                */}
-                            </div>
-                            <div className='r'>
-                                {/* 
-                                <div className='field-value'>
-                                    <label>{`Value: `}</label>
-                                    <input type="text"
-                                        onChange={handleOnChangeFieldValue}
-                                        value={fieldValue}
-                                    />
-                                </div>
-                                */}
-                            </div>
-                            <div className='r'>
+                            <div className='row3'>
                                 <FindRangeComponent />
                             </div>
-                            <div className='r'>
+                            <div className='row4'>
                                 <Button
                                     // color="success"
                                     // variant="contained"
                                     onClick={handleFind}
                                 >
-                                    All Reports
-                                </Button>
-                                <Button
-                                    // color="success"
-                                    // variant="contained"
-                                    onClick={handleFind}
-                                >
-                                    Error Report
+                                    Find
                                 </Button>
                             </div>
                         </div>
