@@ -5,6 +5,7 @@ import './DetailComponent.scss'
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import TableCompare from "../../Tables/TableCompare/TableCompare";
+import SplineChart from "../../Chart/SplineChart/SplineChart";
 
 const DetailComponent = () => {
 
@@ -45,7 +46,7 @@ const DetailComponent = () => {
 
     return (
         <div className='container-data'>
-            {/* <div className='row1'>
+            <div className='row1'>
                 <div className='left title-body'>
                     <div className="title">
                         <div className="title">Table: {currentSelectTB?.dataSourceName}</div>
@@ -68,7 +69,7 @@ const DetailComponent = () => {
                         />
                     </div>
                 </div>
-            </div> */}
+            </div>
             <div className='row2'>
                 <div className="left">
                     <div className='title-table'>

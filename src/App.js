@@ -28,9 +28,9 @@ function App() {
 
                 <Routes>
                     <Route path='/' element={<AppLayout />}>
-                        <Route index element={<InputPage />} />
-                        <Route path='/input' element={<InputPage />} />
+                        <Route index element={<CreateInput />} />
                         <Route path='/create-input' element={<CreateInput />} />
+                        <Route path='/open-report' element={<InputPage />} />
                         <Route path='/report-info' element={<ReportInfoPage />} />
                         <Route path='/compare-page' element={<ComparePage />} />
                         <Route path='/other' element={<OtherPage />} />
@@ -46,7 +46,7 @@ function App() {
 
 
                 <ToastContainer
-                    position="top-right"
+                    position="bottom-right"
                     autoClose={3000}
                     hideProgressBar={false}
                     newestOnTop={false}

@@ -10,7 +10,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        gap: 15px;
+        gap: 10px;
 
         .title {
             font-size: 16px;
@@ -19,6 +19,17 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 10px;
+        }
+
+        .source {
+            width: 50%;
+            // border: 1px solid red;
+        }
+
+        .sink {
+            width: 50%;
+            // border: 1px solid red;
+            // text-align: right;
         }
     }
 

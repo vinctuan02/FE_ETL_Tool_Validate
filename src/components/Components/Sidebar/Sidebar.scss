@@ -6,7 +6,7 @@
     width: 17vw;
     background-color: #fff;
     margin: 20px;
-    border-radius: 10px;
+    border-radius: 20px;
 
     &__logo {
         display: grid;
@@ -49,7 +49,7 @@
             top: 0;
             left: 50%;
             width: calc(100% - 40px);
-            border-radius: 10px;
+            border-radius: 20px;
             // background-color: #308efe;
             background-color: #0a83fb;;
             z-index: -1;

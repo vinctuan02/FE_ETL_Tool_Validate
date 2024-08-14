@@ -58,7 +58,7 @@ const SelectReportPopper = () => {
                     },
                 ]}
                 style={{
-                    zIndex: 9999, // Directly setting z-index in Popper's style
+                    zIndex: 1000, // Directly setting z-index in Popper's style
                 }}
             >
                 <ClickAwayListener onClickAway={handleClickAway}>
@@ -66,10 +66,9 @@ const SelectReportPopper = () => {
                         sx={{
                             p: 2,
                             bgcolor: 'background.paper',
-                            border: 1,
-                            borderColor: 'grey.300',
                             borderRadius: 2,
                             position: 'relative', // Ensure relative positioning for children
+                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', // Custom box shadow
                         }}
                     >
                         {/* Pin button */}

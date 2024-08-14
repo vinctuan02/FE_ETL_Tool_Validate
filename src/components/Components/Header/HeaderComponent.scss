@@ -1,34 +1,82 @@
 .container-header-component {
     // height: 70px;
-    // // border: 1px solid red !important;
+    // border: 1px solid red !important;
     // background: #fff;
     // border-radius: 10px;
     // padding: 5px;
     height: 100%;
+
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 3px;
+
+    // margin-right: 5px;
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: space-between;
 
-    .search {
-        // border: solid 1px #333;
-        border: none;
-        width: 60vw;
-        padding: 15px;
-        border-radius: 60px;
-        outline: none;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+    .header-left {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+        padding-left: 15px;
+        gap: 10px;
 
-    .container-header-icon {
-        font-size: 20px;
-        color: #333;
-        cursor: pointer;
-        // background-color: #fff;
-        padding: 10px;
-        border-radius: 30px;
+        .button-custom {
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
 
         i {
-            margin: 5px;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+    }
+
+    .header-right {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 10px;
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .search-icon {
+                position: absolute;
+                left: 10px;
+                color: #aaa;
+                font-size: 20px;
+            }
+
+            .search {
+                border: solid 1px #eee;
+                width: 200px;
+                height: 40px;
+                background-color: #fcfcfc;
+                padding: 5px 5px 5px 40px;
+                border-radius: 20px;
+                outline: none;
+                box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);
+                font-size: 16px;
+            }
+        }
+
+        .container-header-icon {
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 30px;
+
+            i {
+                margin: 5px;
+            }
         }
     }
 }
