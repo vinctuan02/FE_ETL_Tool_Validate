@@ -1,1 +1,5 @@
+![Alt text](./public/ImageCapture/CreateReport.png)
 ![Alt text](./public/ImageCapture/OpenReport.png)
+![Alt text](./public/ImageCapture/ReportInfor1.png)
+![Alt text](./public/ImageCapture/ReportInfor2.png)
+![Alt text](./public/ImageCapture/Compare.png)
